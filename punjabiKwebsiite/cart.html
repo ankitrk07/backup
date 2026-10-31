@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Punjabi Kitchen | Dish Booking Cart</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root{
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#8a6d2f;
+  --charcoal:#0d0d0d;--charcoal2:#171717;--charcoal3:#222;
+  --glass:rgba(255,255,255,0.06);--glass-border:rgba(201,168,76,0.25);
+  --text:#f5f0e8;--text-dim:#b0a898;--ok:#2d7a3a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;color:var(--text);background:
+radial-gradient(900px 520px at 8% -10%,rgba(201,168,76,0.16),transparent 70%),
+radial-gradient(900px 520px at 95% 0%,rgba(201,168,76,0.1),transparent 70%),
+linear-gradient(180deg,var(--charcoal),var(--charcoal2));min-height:100vh;padding:20px}
+html{scrollbar-width:thin;scrollbar-color:#c9a84c #000}
+*::-webkit-scrollbar{width:12px;height:12px}
+*::-webkit-scrollbar-track{background:#000;border-radius:999px;box-shadow:inset 0 0 10px rgba(0,0,0,0.85)}
+*::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#e8c97a 0%,#c9a84c 55%,#8a6d2f 100%);border-radius:999px;border:3px solid #000;box-shadow:0 0 12px rgba(201,168,76,0.35), inset 0 0 4px rgba(255,255,255,0.18)}
+*::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#f4d98f 0%,#d8b95e 55%,#a07b2c 100%)}
+.page{max-width:1280px;margin:0 auto}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
+.brand{font-family:'Playfair Display',serif;font-size:1.35rem;color:var(--gold-light)}
+.back{padding:9px 14px;border:0.5px solid var(--glass-border);border-radius:10px;color:var(--text-dim);text-decoration:none;font-size:0.76rem;letter-spacing:1px;text-transform:uppercase;transition:all 0.25s}
+.back:hover{border-color:var(--gold);color:var(--gold-light);background:rgba(201,168,76,0.1)}
+.layout{display:grid;grid-template-columns:1.2fr 0.8fr;gap:16px}
+.card{background:var(--glass);backdrop-filter:blur(18px);border:0.5px solid var(--glass-border);border-radius:18px}
+.main{padding:24px}
+.side{padding:24px;position:sticky;top:18px;height:fit-content}
+.headline{display:flex;align-items:end;justify-content:space-between;margin-bottom:12px}
+.title{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3.2vw,2rem)}
+.title em{font-style:italic;color:var(--gold-light)}
+.badge{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.cart-list{display:grid;gap:12px;margin-top:14px}
+.cart-item{display:grid;grid-template-columns:92px 1fr auto;gap:12px;padding:12px;border:0.5px solid var(--glass-border);background:rgba(255,255,255,0.02);border-radius:14px}
+.cart-item img{width:100%;height:82px;border-radius:10px;object-fit:cover;border:0.5px solid rgba(255,255,255,0.08)}
+.item-name{font-family:'Playfair Display',serif;font-size:1.05rem}
+.item-desc{font-size:0.82rem;color:var(--text-dim);line-height:1.45;margin:4px 0 10px}
+.item-meta{display:flex;gap:10px;align-items:center;font-size:0.78rem;color:var(--text-dim)}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;border:1px solid}
+.dot.veg{background:#2d7a3a;border-color:#2d7a3a}
+.dot.nonveg{background:#c0392b;border-color:#c0392b}
+.qty-wrap{display:flex;align-items:center;gap:7px}
+.qty-btn{width:28px;height:28px;border-radius:7px;border:0.5px solid var(--glass-border);background:rgba(255,255,255,0.03);color:var(--gold);cursor:pointer}
+.qty-val{min-width:22px;text-align:center;font-weight:600}
+.price{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold-light)}
+.remove{margin-top:10px;display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.12);border:0.5px solid rgba(201,168,76,0.45);color:var(--gold-light);font-size:0.72rem;cursor:pointer;border-radius:999px;padding:8px 12px;letter-spacing:1px;text-transform:uppercase;font-weight:700;transition:all 0.25s}
+.remove:hover{background:rgba(201,168,76,0.2);border-color:var(--gold);color:#fff;transform:translateY(-1px)}
+.empty{padding:26px;border:0.5px dashed var(--glass-border);border-radius:14px;text-align:center;color:var(--text-dim)}
+.empty i{font-size:2rem;color:var(--gold);margin-bottom:10px;display:block}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btn{border:none;border-radius:10px;padding:10px 14px;font-size:0.74rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-weight:700}
+.btn-clear{background:rgba(255,255,255,0.06);color:var(--text-dim);border:0.5px solid var(--glass-border)}
+.btn-menu{background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:#1a1a1a;text-decoration:none;display:inline-flex;align-items:center}
+.module{padding:14px;border:0.5px solid var(--glass-border);border-radius:12px;background:rgba(255,255,255,0.02);margin-bottom:12px}
+.module h3{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.bill-row{display:flex;justify-content:space-between;margin-bottom:8px;color:var(--text-dim);font-size:0.86rem}
+.bill-row strong{color:var(--text)}
+.total{display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:0.5px solid var(--glass-border);margin-top:8px}
+.total strong{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--gold-light)}
+.coupon-row{display:flex;gap:8px}
+.coupon-row input{flex:1;background:rgba(255,255,255,0.05);border:0.5px solid var(--glass-border);border-radius:8px;padding:10px;color:var(--text)}
+.coupon-row button{background:rgba(201,168,76,0.16);border:0.5px solid rgba(201,168,76,0.5);color:var(--gold-light);border-radius:8px;padding:0 12px;cursor:pointer}
+.tag{display:inline-block;padding:5px 9px;border-radius:999px;background:rgba(201,168,76,0.12);border:0.5px solid rgba(201,168,76,0.3);font-size:0.72rem;margin-right:6px;color:var(--gold-light);cursor:pointer}
+.reco{display:grid;gap:8px}
+.reco button{display:flex;justify-content:space-between;gap:8px;background:rgba(255,255,255,0.03);border:0.5px solid var(--glass-border);border-radius:8px;color:var(--text-dim);padding:9px 10px;cursor:pointer}
+.checkout{width:100%;padding:13px;border:none;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:#171717;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;margin-top:10px}
+.timeline{display:grid;gap:8px;color:var(--text-dim);font-size:0.8rem}
+.timeline div{display:flex;align-items:center;gap:8px}
+.timeline i{color:var(--gold)}
+.ok{color:var(--ok)}
+@media(max-width:980px){.layout{grid-template-columns:1fr}.side{position:static}}
+@media(max-width:620px){body{padding:12px}.main,.side{padding:16px}.cart-item{grid-template-columns:1fr}.cart-item img{height:190px}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <div class="brand">Punjabi Kitchen</div>
+    <a class="back" href="index.html#menu"><i class="fas fa-arrow-left"></i> Continue Dish Selection</a>
+  </div>
+
+  <div class="layout">
+    <section class="card main">
+      <div class="headline">
+        <h1 class="title">Your <em>Dish Booking Cart</em></h1>
+        <span class="badge" id="itemCount">0 Items</span>
+      </div>
+      <div id="cartList" class="cart-list"></div>
+      <div class="actions">
+        <button class="btn btn-clear" onclick="clearCart()">Clear Cart</button>
+        <a class="btn btn-menu" href="index.html#menu">Add More Dishes</a>
+      </div>
+    </section>
+
+    <aside class="card side">
+      <div class="module">
+        <h3>Promo Lab</h3>
+        <div class="coupon-row">
+          <input id="couponInput" placeholder="Try PK10 or FEAST20"/>
+          <button onclick="applyCoupon()">Apply</button>
+        </div>
+        <p id="couponMsg" style="font-size:0.78rem;margin-top:8px;color:var(--text-dim)">No coupon applied</p>
+      </div>
+
+      <div class="module">
+        <h3>Chef Add-ons</h3>
+        <span class="tag" onclick="setTip(0)">No Tip</span>
+        <span class="tag" onclick="setTip(39)">Chef Tip INR 39</span>
+        <span class="tag" onclick="setTip(79)">Chef Tip INR 79</span>
+      </div>
+
+      <div class="module">
+        <h3>Quick Add Picks</h3>
+        <div class="reco" id="recoList"></div>
+      </div>
+
+      <div class="module">
+        <h3>Bill Summary</h3>
+        <div class="bill-row"><span>Subtotal</span><strong id="subtotal">INR 0</strong></div>
+        <div class="bill-row"><span>Service Fee</span><strong id="serviceFee">INR 0</strong></div>
+        <div class="bill-row"><span>Tax (5%)</span><strong id="tax">INR 0</strong></div>
+        <div class="bill-row"><span>Coupon</span><strong id="discount">- INR 0</strong></div>
+        <div class="bill-row"><span>Chef Tip</span><strong id="tipAmount">INR 0</strong></div>
+        <div class="total"><span>Total</span><strong id="grandTotal">INR 0</strong></div>
+        <button class="checkout" onclick="goToPayment()">Continue to Seat Reservation</button>
+      </div>
+
+      <div class="module">
+        <h3>Booking Journey</h3>
+        <div class="timeline">
+          <div><i class="fas fa-bag-shopping"></i><span class="ok">Dish cart ready</span></div>
+          <div><i class="fas fa-chair"></i><span>Select your preferred table slot</span></div>
+          <div><i class="fas fa-fire-burner"></i><span>Kitchen preps after booking confirmation</span></div>
+          <div><i class="fas fa-bell-concierge"></i><span>Arrive and dine with priority seating</span></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script src="assets/reset-state.js"></script>
+<script>
+const CART_KEY = 'pk_cart_v1';
+let couponCode = '';
+let tip = 0;
+
+const CART_IMAGE_MAP = {
+  'Veg Roll': 'assets/cinematic-ultra-realistic-food-photography-of-veg-.jpeg',
+  'Paneer Roll': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Mushroom Roll': 'assets/cinematic-ultra-realistic-food-photography-of-a-re.jpeg',
+  'French Fries': 'assets/cinematic-ultra-realistic-food-photography-of-a-re (1).jpeg',
+  'Paneer Pakora': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Egg Pakora': 'assets/cinematic-ultra-realistic-food-photography-of-a-re (1).jpeg',
+  'Omelette': 'assets/cinematic-ultra-realistic-food-photography-of-a-re.jpeg',
+  'Chicken Roll': 'assets/cinematic-ultra-realistic-food-photography-of-chic.jpeg',
+  'Soya Afghani Chap': 'assets/cinematic-ultra-realistic-food-photography-of-soya.jpeg',
+  'Soya Malai Chap': 'assets/cinematic-ultra-realistic-food-photography-of-soya (1).jpeg',
+  'Soya Achari Chap': 'assets/cinematic-ultra-realistic-food-photography-of-soya (1).jpeg',
+  'Soya Butter Masala': 'assets/cinematic-ultra-realistic-food-photography-of-soya.jpeg',
+  'Soya Do Pyaza': 'assets/cinematic-ultra-realistic-food-photography-of-soya (1).jpeg',
+  'Soya Masala': 'assets/cinematic-ultra-realistic-food-photography-of-soya.jpeg',
+  'Veg Navratan Korma': 'assets/cinematic-ultra-realistic-food-photography-of-veg-.jpeg',
+  'Paneer Butter Masala': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Paneer Tikka Butter Masala': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Shahi Paneer': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Paneer Korma': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Paneer Keema': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Palak Paneer': 'assets/cinematic-ultra-realistic-food-photography-of-veg-.jpeg',
+  'Matar Paneer': 'assets/cinematic-ultra-realistic-food-photography-of-veg-.jpeg',
+  'Kaju Curry': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Chicken Curry': 'assets/cinematic-ultra-realistic-food-photography-of-chic.jpeg',
+  'Chicken Butter Masala': 'assets/cinematic-ultra-realistic-food-photography-of-chic (1).jpeg',
+  'Chicken Handi': 'assets/cinematic-ultra-realistic-food-photography-of-chic (2).jpeg',
+  'Makhani Chicken': 'assets/cinematic-ultra-realistic-food-photography-of-chic.jpeg',
+  'Punjabi Kitchen Special': 'assets/cinematic-ultra-realistic-food-photography-of-chic (2).jpeg',
+  'Mutton Rogan Josh': 'assets/cinematic-ultra-realistic-food-photography-of-chic.jpeg',
+  'Dal Tadka': 'assets/cinematic-ultra-realistic-food-photography-of-dal- (1).jpeg',
+  'Dal Makhani': 'assets/cinematic-ultra-realistic-food-photography-of-dal-.jpeg',
+  'Dal Amritsari': 'assets/cinematic-ultra-realistic-food-photography-of-dal- (1).jpeg',
+  'Steamed Rice': 'assets/cinematic-ultra-realistic-food-photography-of-basm.jpeg',
+  'Veg Biryani': 'assets/cinematic-ultra-realistic-food-photography-of-biry.jpeg',
+  'Chicken Dum Biryani': 'assets/cinematic-ultra-realistic-food-photography-of-biry.jpeg',
+  'Double Leg Biryani': 'assets/cinematic-ultra-realistic-food-photography-of-biry.jpeg',
+  'Veg Chilly': 'assets/cinematic-ultra-realistic-food-photography-of-chil.jpeg',
+  'Paneer Chilly': 'assets/cinematic-ultra-realistic-food-photography-of-chil.jpeg',
+  'Honey Potato Chilly': 'assets/cinematic-ultra-realistic-food-photography-of-veg-.jpeg',
+  'Veg Manchurian': 'assets/cinematic-ultra-realistic-food-photography-of-veg-.jpeg',
+  'Chicken Chilly (Boneless)': 'assets/cinematic-ultra-realistic-food-photography-of-chic.jpeg',
+  'Dragon Chicken': 'assets/cinematic-ultra-realistic-food-photography-of-chic (1).jpeg',
+  'Veg Hakka Noodles': 'assets/cinematic-ultra-realistic-food-photography-of-veg-.jpeg',
+  'Chicken Hakka Noodles': 'assets/cinematic-ultra-realistic-food-photography-of-chic (2).jpeg',
+  'Tandoori Roti': 'assets/cinematic-ultra-realistic-food-photography-of-plai.jpeg',
+  'Butter Naan': 'assets/cinematic-ultra-realistic-food-photography-of-butt.jpeg',
+  'Stuffed Kulcha': 'assets/cinematic-ultra-realistic-food-photography-of-kulc.jpeg',
+  'Aloo Paratha': 'assets/cinematic-ultra-realistic-food-photography-of-plai.jpeg',
+  'Shahi Naan': 'assets/cinematic-ultra-realistic-food-photography-of-butt.jpeg',
+  'Garlic Naan': 'assets/cinematic-ultra-realistic-food-photography-of-roti.jpeg',
+  'Veg Hara Bhara Kabab': 'assets/cinematic-ultra-realistic-food-photography-of-a-re.jpeg',
+  'Hara Bhara Kabab': 'assets/cinematic-ultra-realistic-food-photography-of-a-re.jpeg',
+  'Malai Paneer Tikka': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Hariyali Paneer Tikka': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Paneer Tikka': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Chilli Paneer': 'assets/cinematic-ultra-realistic-food-photography-of-chil.jpeg',
+  'Pav Bhaji': 'assets/cinematic-ultra-realistic-food-photography-of-veg-.jpeg',
+};
+
+function getCartImage(item){
+  if(item?.img && !item.img.includes('images.unsplash.com')) return item.img;
+  return CART_IMAGE_MAP[item.name] || item.img || 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=420&fit=crop';
+}
+
+const RECOMMENDATIONS = [
+  {name:'Butter Naan', price:39, veg:true, desc:'Freshly baked naan', img:'assets/cinematic-ultra-realistic-food-photography-of-butt.jpeg'},
+  {name:'Dal Makhani', price:179, veg:true, desc:'Creamy black lentils', img:'assets/cinematic-ultra-realistic-food-photography-of-dal-.jpeg'},
+  {name:'Paneer Tikka', price:239, veg:true, desc:'Tandoor-grilled paneer', img:'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg'}
+];
+
+function loadCart(){
+  try{ return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); }
+  catch{ return []; }
+}
+
+function saveCart(items){
+  localStorage.setItem(CART_KEY, JSON.stringify(items));
+}
+
+function formatINR(n){
+  return `INR ${Math.max(0, Math.round(n))}`;
+}
+
+function renderRecommendations(){
+  const root = document.getElementById('recoList');
+  root.innerHTML = RECOMMENDATIONS.map(item => `<button onclick='quickAdd(${JSON.stringify(item.name)},${item.price},${item.veg})'><span>${item.name}</span><strong>${formatINR(item.price)}</strong></button>`).join('');
+}
+
+function quickAdd(name, price, veg){
+  const cart = loadCart();
+  const row = cart.find(i => i.name === name);
+  if(row) row.qty += 1;
+  else cart.push({name, price, qty:1, veg, desc:'Chef recommendation', img:'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=420&fit=crop'});
+  saveCart(cart);
+  renderCart();
+}
+
+function setTip(value){
+  tip = value;
+  renderTotals(loadCart());
+}
+
+function applyCoupon(){
+  const val = document.getElementById('couponInput').value.trim().toUpperCase();
+  const msg = document.getElementById('couponMsg');
+  if(!val){ couponCode = ''; msg.textContent = 'No coupon applied'; renderTotals(loadCart()); return; }
+  if(val === 'PK10' || val === 'FEAST20'){
+    couponCode = val;
+    msg.textContent = `${val} applied successfully`;
+    msg.style.color = '#8dd59a';
+  }else{
+    couponCode = '';
+    msg.textContent = 'Invalid coupon code';
+    msg.style.color = '#d8917c';
+  }
+  renderTotals(loadCart());
+}
+
+function changeQty(name, delta){
+  const cart = loadCart();
+  const row = cart.find(i => i.name === name);
+  if(!row) return;
+  row.qty += delta;
+  const next = cart.filter(i => i.qty > 0);
+  saveCart(next);
+  renderCart();
+}
+
+function removeItem(name){
+  const next = loadCart().filter(i => i.name !== name);
+  saveCart(next);
+  renderCart();
+}
+
+function clearCart(){
+  saveCart([]);
+  couponCode = '';
+  tip = 0;
+  document.getElementById('couponInput').value = '';
+  document.getElementById('couponMsg').textContent = 'No coupon applied';
+  renderCart();
+}
+
+function renderTotals(cart){
+  const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+  const serviceFee = subtotal ? 25 : 0;
+  const tax = subtotal * 0.05;
+  let discount = 0;
+  if(couponCode === 'PK10') discount = subtotal * 0.10;
+  if(couponCode === 'FEAST20') discount = Math.min(subtotal * 0.20, 250);
+  const total = subtotal + serviceFee + tax + tip - discount;
+
+  document.getElementById('subtotal').textContent = formatINR(subtotal);
+  document.getElementById('serviceFee').textContent = formatINR(serviceFee);
+  document.getElementById('tax').textContent = formatINR(tax);
+  document.getElementById('discount').textContent = `- ${formatINR(discount)}`;
+  document.getElementById('tipAmount').textContent = formatINR(tip);
+  document.getElementById('grandTotal').textContent = formatINR(total);
+}
+
+function renderCart(){
+  const cart = loadCart();
+  const list = document.getElementById('cartList');
+  const itemCount = cart.reduce((sum, i) => sum + i.qty, 0);
+  document.getElementById('itemCount').textContent = `${itemCount} Item${itemCount === 1 ? '' : 's'}`;
+
+  if(!cart.length){
+    list.innerHTML = `<div class='empty'><i class='fas fa-basket-shopping'></i>Your booking cart is empty. Add dishes to pre-book your meal.</div>`;
+    renderTotals(cart);
+    return;
+  }
+
+  list.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <img src="${getCartImage(item)}" alt="${item.name}">
+      <div>
+        <div class="item-name">${item.name}</div>
+        <div class="item-desc">${item.desc || 'Freshly prepared by our kitchen.'}</div>
+        <div class="item-meta">
+          <span class="dot ${item.veg ? 'veg' : 'nonveg'}"></span>
+          <span>${item.veg ? 'Veg' : 'Non Veg'}</span>
+        </div>
+      </div>
+      <div>
+        <div class="price">${formatINR(item.price * item.qty)}</div>
+        <div class="qty-wrap">
+          <button class="qty-btn" onclick='changeQty(${JSON.stringify(item.name)},-1)'>-</button>
+          <span class="qty-val">${item.qty}</span>
+          <button class="qty-btn" onclick='changeQty(${JSON.stringify(item.name)},1)'>+</button>
+        </div>
+        <button class="remove" onclick='removeItem(${JSON.stringify(item.name)})'><i class="fas fa-trash-can"></i><span>Remove item</span></button>
+      </div>
+    </div>`).join('');
+
+  renderTotals(cart);
+}
+
+function goToPayment(){
+  const cart = loadCart();
+  if(!cart.length){
+    alert('Your cart is empty.');
+    return;
+  }
+  window.location.href = 'index.html#reserve';
+}
+
+renderRecommendations();
+renderCart();
+</script>
+</body>
+</html>

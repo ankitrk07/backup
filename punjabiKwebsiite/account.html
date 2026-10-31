@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>My Account | Punjabi Kitchen</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root{
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#8a6d2f;
+  --charcoal:#0d0d0d;--charcoal2:#161616;--glass:rgba(255,255,255,0.06);
+  --glass-border:rgba(201,168,76,0.25);--text:#f5f0e8;--text-dim:#b0a898;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;color:var(--text);min-height:100vh;padding:20px;background:radial-gradient(1000px 560px at 10% -10%,rgba(201,168,76,0.17),transparent 65%),linear-gradient(180deg,var(--charcoal),var(--charcoal2));}
+.page{max-width:1180px;margin:0 auto}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.brand{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--gold-light)}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{border:0.5px solid var(--glass-border);background:rgba(255,255,255,0.03);color:var(--text-dim);padding:10px 14px;border-radius:10px;text-decoration:none;font-size:0.76rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer}
+.btn:hover{border-color:var(--gold);color:var(--gold-light);background:rgba(201,168,76,0.1)}
+.hero{border:0.5px solid var(--glass-border);background:var(--glass);border-radius:16px;padding:18px 20px;margin-bottom:12px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:8px}
+.hero p{color:var(--text-dim);line-height:1.7}
+.grid{display:grid;grid-template-columns:1fr 2fr;gap:12px}
+.card{border:0.5px solid var(--glass-border);background:var(--glass);border-radius:14px;padding:16px}
+.meta{display:grid;gap:12px}
+.meta-row{padding:10px;border:0.5px solid var(--glass-border);border-radius:10px;background:rgba(255,255,255,0.02)}
+.meta-row small{display:block;color:var(--text-dim);font-size:0.7rem;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:5px}
+.meta-row strong{font-size:0.95rem;color:var(--gold-light)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.tab{border:0.5px solid var(--glass-border);background:rgba(255,255,255,0.03);color:var(--text-dim);padding:9px 12px;border-radius:999px;cursor:pointer;font-size:0.72rem;letter-spacing:1px;text-transform:uppercase}
+.tab.active,.tab:hover{border-color:rgba(201,168,76,0.65);background:rgba(201,168,76,0.14);color:var(--gold-light)}
+.panel{display:none}
+.panel.active{display:block}
+.list{display:grid;gap:10px}
+.item{border:0.5px solid var(--glass-border);border-radius:12px;padding:12px;background:rgba(255,255,255,0.02)}
+.item-head{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.item-title{font-weight:600}
+.badge{padding:4px 8px;border-radius:999px;font-size:0.68rem;border:0.5px solid rgba(201,168,76,0.45);background:rgba(201,168,76,0.12);color:var(--gold-light)}
+.item-sub{font-size:0.85rem;color:var(--text-dim);line-height:1.5}
+.empty{border:0.5px dashed var(--glass-border);border-radius:12px;padding:20px;text-align:center;color:var(--text-dim)}
+.empty i{font-size:1.6rem;color:var(--gold);display:block;margin-bottom:8px}
+.login-gate{border:0.5px solid var(--glass-border);background:var(--glass);border-radius:16px;padding:24px;text-align:center;max-width:560px;margin:90px auto 0}
+.login-gate h2{font-family:'Playfair Display',serif;margin-bottom:10px}
+.login-gate p{color:var(--text-dim);line-height:1.6;margin-bottom:14px}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="page" id="app" style="display:none">
+  <div class="topbar">
+    <div class="brand">Punjabi Kitchen</div>
+    <div class="actions">
+      <a class="btn" href="index.html"><i class="fas fa-house"></i> Home</a>
+      <a class="btn" href="menu.html"><i class="fas fa-book-open"></i> Menu</a>
+      <button class="btn" onclick="logout()"><i class="fas fa-right-from-bracket"></i> Logout</button>
+    </div>
+  </div>
+
+  <section class="hero">
+    <h1 id="hello">My Account</h1>
+    <p>Track all your table bookings, pre-booked dish orders, and full activity history in one place.</p>
+  </section>
+
+  <section class="grid">
+    <aside class="card meta" id="profileMeta"></aside>
+
+    <main class="card">
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab('bookings', this)">Bookings</button>
+        <button class="tab" onclick="switchTab('orders', this)">Orders</button>
+        <button class="tab" onclick="switchTab('history', this)">History</button>
+      </div>
+
+      <div class="panel active" id="panel-bookings"><div class="list" id="bookingsList"></div></div>
+      <div class="panel" id="panel-orders"><div class="list" id="ordersList"></div></div>
+      <div class="panel" id="panel-history"><div class="list" id="historyList"></div></div>
+    </main>
+  </section>
+</div>
+
+<div class="login-gate" id="loginGate" style="display:none">
+  <h2>Login Required</h2>
+  <p>Please login/signup from the homepage to access your bookings, orders, and history dashboard.</p>
+  <a class="btn" href="index.html"><i class="fas fa-arrow-left"></i> Go To Homepage</a>
+</div>
+
+<script src="assets/auth.js"></script>
+<script>
+function formatDate(raw){
+  const d = new Date(raw);
+  return Number.isNaN(d.getTime()) ? '-' : d.toLocaleString();
+}
+
+function switchTab(tab, btn){
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + tab).classList.add('active');
+}
+
+function emptyState(msg){
+  return `<div class="empty"><i class="fas fa-folder-open"></i>${msg}</div>`;
+}
+
+function render(){
+  const user = window.PK_AUTH?.getCurrentUser();
+  if(!user){
+    document.getElementById('loginGate').style.display = 'block';
+    return;
+  }
+
+  document.getElementById('app').style.display = 'block';
+  document.getElementById('hello').textContent = `Hi, ${user.name || 'Guest'}`;
+
+  const activity = window.PK_AUTH.getMyActivity();
+  const bookings = activity.bookings || [];
+  const orders = activity.orders || [];
+  const history = activity.history || [];
+
+  document.getElementById('profileMeta').innerHTML = `
+    <div class="meta-row"><small>Name</small><strong>${user.name || '-'}</strong></div>
+    <div class="meta-row"><small>Email</small><strong>${user.email || '-'}</strong></div>
+    <div class="meta-row"><small>Phone</small><strong>${user.phone || '-'}</strong></div>
+    <div class="meta-row"><small>Total Bookings</small><strong>${bookings.length}</strong></div>
+    <div class="meta-row"><small>Total Orders</small><strong>${orders.length}</strong></div>
+  `;
+
+  document.getElementById('bookingsList').innerHTML = bookings.length ? bookings.map(b => `
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">${b.date || '-'} at ${b.time || '-'}</div>
+        <span class="badge">${b.status || 'Confirmed'}</span>
+      </div>
+      <div class="item-sub">Booking ID: ${b.id}<br/>Guests: ${b.guests || '-'} | Advance: INR ${b.amount || 0}<br/>Created: ${formatDate(b.createdAt)}</div>
+    </div>
+  `).join('') : emptyState('No bookings yet.');
+
+  document.getElementById('ordersList').innerHTML = orders.length ? orders.map(o => `
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">Order ${o.id}</div>
+        <span class="badge">${o.status || 'Confirmed'}</span>
+      </div>
+      <div class="item-sub">Items: ${(o.items || []).map(i => `${i.name} x${i.qty}`).join(', ') || '-'}<br/>Total: INR ${o.total || 0}<br/>Created: ${formatDate(o.createdAt)}</div>
+    </div>
+  `).join('') : emptyState('No orders yet.');
+
+  document.getElementById('historyList').innerHTML = history.length ? history.map(h => `
+    <div class="item">
+      <div class="item-head">
+        <div class="item-title">${h.type === 'booking' ? 'Booking Event' : 'Order Event'}</div>
+        <span class="badge">${formatDate(h.createdAt)}</span>
+      </div>
+      <div class="item-sub">${h.summary || '-'}</div>
+    </div>
+  `).join('') : emptyState('No activity history yet.');
+}
+
+function logout(){
+  window.PK_AUTH.logout();
+  window.location.href = 'index.html';
+}
+
+render();
+</script>
+</body>
+</html>

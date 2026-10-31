@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx next *)",
+      "Bash(npx tsc *)",
+      "Bash(node -e ' *)",
+      "Bash(npm run *)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(pkill -f \"next-server\")",
+      "PowerShell(Get-CimInstance *)",
+      "Bash(node *)",
+      "Bash(npx --yes playwright screenshot --viewport-size=1440,1200 --full-page http://localhost:3000 \"C:\\\\Users\\\\sudip\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-sudip-Documents-Fineverse\\\\5a8c035c-fd2c-4f8a-8926-efafa3b58188\\\\scratchpad\\\\home-desktop.png\")",
+      "Bash(npx --yes playwright screenshot --viewport-size=1440,1000 http://localhost:3000 \"C:\\\\Users\\\\sudip\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-sudip-Documents-Fineverse\\\\5a8c035c-fd2c-4f8a-8926-efafa3b58188\\\\scratchpad\\\\home-top.png\")",
+      "Bash(npm install *)"
+    ]
+  }
+}

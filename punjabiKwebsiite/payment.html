@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Punjabi Kitchen | Payment</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root{
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#8a6d2f;
+  --charcoal:#0d0d0d;--charcoal2:#141414;--charcoal3:#1c1c1c;
+  --glass:rgba(255,255,255,0.06);--glass-border:rgba(201,168,76,0.25);
+  --text:#f5f0e8;--text-dim:#b0a898;--text-muted:#6b6460;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:radial-gradient(1200px 600px at 12% 0%,rgba(201,168,76,0.12),transparent 60%),linear-gradient(180deg,var(--charcoal) 0%,var(--charcoal2) 100%);color:var(--text);min-height:100vh;padding:24px}
+html{scrollbar-width:thin;scrollbar-color:#c9a84c #000}
+*::-webkit-scrollbar{width:12px;height:12px}
+*::-webkit-scrollbar-track{background:#000;border-radius:999px;box-shadow:inset 0 0 10px rgba(0,0,0,0.85)}
+*::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#e8c97a 0%,#c9a84c 55%,#8a6d2f 100%);border-radius:999px;border:3px solid #000;box-shadow:0 0 12px rgba(201,168,76,0.35), inset 0 0 4px rgba(255,255,255,0.18)}
+*::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#f4d98f 0%,#d8b95e 55%,#a07b2c 100%)}
+.page{max-width:1200px;margin:0 auto}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+.brand{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--gold-light)}
+.back-link{color:var(--text-dim);text-decoration:none;border:0.5px solid var(--glass-border);padding:9px 14px;border-radius:10px;font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;transition:all 0.25s}
+.back-link:hover{border-color:var(--gold);color:var(--gold-light);background:rgba(201,168,76,0.1)}
+.checkout-wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:20px}
+.card{background:var(--glass);backdrop-filter:blur(16px);border:0.5px solid var(--glass-border);border-radius:18px}
+.summary{padding:26px}
+.eyebrow{font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.title{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.8vw,2.2rem);line-height:1.2;margin-bottom:14px}
+.title em{font-style:italic;color:var(--gold-light)}
+.summary-grid{display:grid;gap:10px;margin:16px 0 22px}
+.summary-row{display:flex;justify-content:space-between;gap:10px;padding-bottom:8px;border-bottom:0.5px dashed rgba(201,168,76,0.25)}
+.summary-row span:first-child{color:var(--text-dim);font-size:0.85rem}
+.summary-row span:last-child{font-size:0.88rem}
+.price-box{margin-top:18px;background:rgba(201,168,76,0.08);border:0.5px solid rgba(201,168,76,0.3);border-radius:12px;padding:14px}
+.price-box small{display:block;color:var(--text-dim);font-size:0.75rem;margin-bottom:4px}
+.price-box strong{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--gold-light)}
+.secure-list{margin-top:18px;display:grid;gap:10px}
+.secure-item{display:flex;gap:10px;align-items:flex-start;color:var(--text-dim);font-size:0.85rem;line-height:1.5}
+.secure-item i{color:var(--gold);margin-top:3px}
+.payment{padding:26px}
+.payment-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.payment-tab{border:0.5px solid var(--glass-border);background:rgba(255,255,255,0.03);color:var(--text-dim);border-radius:999px;padding:9px 14px;font-size:0.72rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.25s}
+.payment-tab.active,.payment-tab:hover{background:rgba(201,168,76,0.12);border-color:rgba(201,168,76,0.55);color:var(--gold-light)}
+.panel{display:none}
+.panel.active{display:block}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field.full{grid-column:1/-1}
+.field label{font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted)}
+.field input,.field select{background:rgba(255,255,255,0.04);border:0.5px solid rgba(201,168,76,0.25);border-radius:10px;padding:12px 14px;color:var(--text);font-family:'Inter',sans-serif;font-size:0.9rem;outline:none}
+.field input:focus,.field select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.12)}
+.upi-apps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
+.upi-app{border:0.5px solid var(--glass-border);background:rgba(255,255,255,0.03);border-radius:10px;padding:12px 8px;text-align:center;font-size:0.75rem;color:var(--text-dim);cursor:pointer;transition:all 0.25s}
+.upi-app.active,.upi-app:hover{border-color:rgba(201,168,76,0.65);background:rgba(201,168,76,0.12);color:var(--gold-light)}
+.upi-scan{display:grid;grid-template-columns:230px 1fr;gap:14px;align-items:stretch;margin-bottom:14px}
+.upi-qr-box{display:flex;align-items:center;justify-content:center;padding:10px;border-radius:16px;border:0.5px solid rgba(201,168,76,0.28);background:radial-gradient(circle at 50% 30%,rgba(201,168,76,0.16),transparent 42%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))}
+.upi-qr{width:100%;max-width:210px;aspect-ratio:1/1;border-radius:12px;border:1px solid rgba(255,255,255,0.2);background:#fff;object-fit:cover}
+.upi-scan-side{display:flex;flex-direction:column;gap:10px}
+.upi-scan-status{font-size:0.78rem;color:var(--text-dim);line-height:1.45;padding:12px;border-radius:12px;background:rgba(255,255,255,0.03);border:0.5px solid var(--glass-border)}
+.upi-scan-status strong{display:block;color:var(--gold-light);margin-bottom:4px;font-size:0.82rem}
+.upi-link{font-size:0.72rem;color:var(--gold-light);background:rgba(201,168,76,0.08);border:0.5px solid rgba(201,168,76,0.35);padding:10px;border-radius:10px;word-break:break-all}
+.wallet-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wallet-item{display:flex;justify-content:space-between;align-items:center;padding:12px;border:0.5px solid var(--glass-border);border-radius:10px;color:var(--text-dim);cursor:pointer;transition:all 0.25s}
+.wallet-item.active,.wallet-item:hover{border-color:rgba(201,168,76,0.65);background:rgba(201,168,76,0.12);color:var(--gold-light)}
+.wallet-item i{color:var(--gold)}
+.pay-actions{margin-top:18px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.pay-note{font-size:0.72rem;color:var(--text-muted)}
+.btn-pay{background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:var(--charcoal);border:none;border-radius:10px;padding:13px 22px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;font-size:0.76rem;cursor:pointer;transition:all 0.25s}
+.btn-pay:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(201,168,76,0.35)}
+.toast{position:fixed;bottom:24px;right:24px;background:rgba(13,13,13,0.95);border:0.5px solid rgba(201,168,76,0.45);border-radius:12px;padding:12px 16px;color:var(--text);font-size:0.86rem;transform:translateY(120px);opacity:0;transition:all 0.3s}
+.toast.show{transform:translateY(0);opacity:1}
+@media(max-width:900px){
+  .checkout-wrap{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  body{padding:14px}
+  .summary,.payment{padding:18px}
+  .form-grid{grid-template-columns:1fr}
+  .upi-scan{grid-template-columns:1fr}
+  .upi-qr{max-width:220px}
+  .upi-apps{grid-template-columns:repeat(2,1fr)}
+  .wallet-list{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div class="brand">Punjabi Kitchen</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="back-link" href="account.html"><i class="fas fa-id-card"></i> My Account</a>
+        <a class="back-link" href="index.html#reserve"><i class="fas fa-arrow-left"></i> Back to Reservation</a>
+      </div>
+    </div>
+
+    <div class="checkout-wrap">
+      <section class="card summary">
+        <div class="eyebrow">Reservation Checkout</div>
+        <h1 class="title">Complete Your <em>Payment</em></h1>
+        <div class="summary-grid">
+          <div class="summary-row"><span>Name</span><span id="resName">Guest</span></div>
+          <div class="summary-row"><span>Phone</span><span id="resPhone">-</span></div>
+          <div class="summary-row"><span>Date</span><span id="resDate">-</span></div>
+          <div class="summary-row"><span>Time</span><span id="resTime">-</span></div>
+          <div class="summary-row"><span>Guests</span><span id="resGuests">-</span></div>
+        </div>
+        <div class="price-box">
+          <small>Reservation Advance</small>
+          <strong>INR 1,249</strong>
+        </div>
+        <div class="secure-list">
+          <div class="secure-item"><i class="fas fa-lock"></i><span>Encrypted checkout flow for secure transactions.</span></div>
+          <div class="secure-item"><i class="fas fa-receipt"></i><span>Instant confirmation after payment success.</span></div>
+          <div class="secure-item"><i class="fas fa-shield-alt"></i><span>Demo UI ready to connect with live gateway APIs.</span></div>
+        </div>
+      </section>
+
+      <section class="card payment">
+        <div class="payment-tabs" id="paymentTabs">
+          <button class="payment-tab active" data-mode="card">Card</button>
+          <button class="payment-tab" data-mode="upi">UPI</button>
+          <button class="payment-tab" data-mode="bank">Net Banking</button>
+          <button class="payment-tab" data-mode="wallet">Wallet</button>
+        </div>
+
+        <div class="panel active" data-panel="card">
+          <div class="form-grid">
+            <div class="field full"><label>Card Number</label><input id="cardNumber" type="text" placeholder="1234 5678 9012 3456"></div>
+            <div class="field"><label>Card Holder</label><input id="cardHolder" type="text" placeholder="Full Name"></div>
+            <div class="field"><label>Expiry</label><input id="cardExpiry" type="text" placeholder="MM/YY"></div>
+            <div class="field"><label>CVV</label><input id="cardCvv" type="password" placeholder="***"></div>
+            <div class="field"><label>Zip Code</label><input id="cardZip" type="text" placeholder="834001"></div>
+          </div>
+        </div>
+
+        <div class="panel" data-panel="upi">
+          <div class="upi-scan">
+            <div class="upi-qr-box">
+              <img id="upiQrImage" class="upi-qr" alt="UPI payment QR code"/>
+            </div>
+            <div class="upi-scan-side">
+              <div class="upi-scan-status" id="upiScanStatus"><strong>Scan With Your Phone</strong>Open any UPI app and scan this QR to pay INR 1,249.</div>
+              <div class="upi-link" id="upiLinkText"></div>
+            </div>
+          </div>
+          <div class="upi-apps" id="upiApps">
+            <button class="upi-app active">GPay</button>
+            <button class="upi-app">PhonePe</button>
+            <button class="upi-app">Paytm</button>
+            <button class="upi-app">BHIM</button>
+          </div>
+          <div class="field"><label>UPI ID</label><input id="upiId" type="text" placeholder="name@bank"></div>
+        </div>
+
+        <div class="panel" data-panel="bank">
+          <div class="form-grid">
+            <div class="field"><label>Select Bank</label><select id="bankName"><option value="">Select bank</option><option>HDFC Bank</option><option>ICICI Bank</option><option>SBI</option><option>Axis Bank</option></select></div>
+            <div class="field"><label>Account Type</label><select id="bankType"><option value="">Select account type</option><option>Savings</option><option>Current</option></select></div>
+          </div>
+        </div>
+
+        <div class="panel" data-panel="wallet">
+          <div class="wallet-list">
+            <div class="wallet-item active" data-wallet="Amazon Pay"><span>Amazon Pay</span><i class="fas fa-wallet"></i></div>
+            <div class="wallet-item" data-wallet="Mobikwik"><span>Mobikwik</span><i class="fas fa-wallet"></i></div>
+            <div class="wallet-item" data-wallet="Freecharge"><span>Freecharge</span><i class="fas fa-wallet"></i></div>
+            <div class="wallet-item" data-wallet="Ola Money"><span>Ola Money</span><i class="fas fa-wallet"></i></div>
+          </div>
+        </div>
+
+        <div class="pay-actions">
+          <span class="pay-note">Test mode only. Connect Razorpay/Stripe/PayU for production.</span>
+          <button class="btn-pay" onclick="processPayment()">Pay Securely</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Payment successful. Reservation confirmed.</div>
+
+  <script src="assets/reset-state.js"></script>
+<script src="assets/auth.js"></script>
+<script>
+const q = new URLSearchParams(window.location.search);
+const CART_KEY = 'pk_cart_v1';
+const ADVANCE_AMOUNT = 1249;
+document.getElementById('resName').textContent = q.get('name') || 'Guest';
+document.getElementById('resPhone').textContent = q.get('phone') || '-';
+document.getElementById('resDate').textContent = q.get('date') || '-';
+document.getElementById('resTime').textContent = q.get('time') || '-';
+document.getElementById('resGuests').textContent = q.get('guests') || '-';
+
+function loadCart(){
+  try{ return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); }
+  catch{ return []; }
+}
+
+function persistUserHistory(){
+  const user = window.PK_AUTH?.getCurrentUser();
+  if(!user) return;
+
+  const cart = loadCart();
+  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+  const tax = subtotal * 0.05;
+  const orderTotal = subtotal + tax + 25;
+
+  window.PK_AUTH.addBooking({
+    id: 'BK-' + Date.now(),
+    createdAt: new Date().toISOString(),
+    name: q.get('name') || user.name,
+    phone: q.get('phone') || user.phone || '-',
+    date: q.get('date') || '-',
+    time: q.get('time') || '-',
+    guests: q.get('guests') || '-',
+    status: 'Confirmed',
+    amount: ADVANCE_AMOUNT,
+    summary: `Table for ${q.get('guests') || '-'} guests on ${q.get('date') || '-'}`
+  });
+
+  if(cart.length){
+    window.PK_AUTH.addOrder({
+      id: 'OD-' + Date.now(),
+      createdAt: new Date().toISOString(),
+      items: cart,
+      itemCount: cart.reduce((sum, item) => sum + item.qty, 0),
+      subtotal,
+      tax,
+      total: Math.max(0, Math.round(orderTotal)),
+      status: 'Confirmed',
+      summary: `${cart.reduce((sum, item) => sum + item.qty, 0)} dishes pre-booked`
+    });
+  }
+}
+
+const payTabs = document.getElementById('paymentTabs');
+const toast = document.getElementById('toast');
+const reservationFields = ['resName','resPhone','resDate','resTime','resGuests'];
+let selectedWallet = document.querySelector('.wallet-item.active')?.dataset.wallet || '';
+payTabs.addEventListener('click', e => {
+  const tab = e.target.closest('.payment-tab');
+  if(!tab) return;
+  const mode = tab.dataset.mode;
+  payTabs.querySelectorAll('.payment-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  document.querySelectorAll('.panel').forEach(panel => {
+    panel.classList.toggle('active', panel.dataset.panel === mode);
+  });
+});
+
+const upiApps = document.getElementById('upiApps');
+upiApps.addEventListener('click', e => {
+  const app = e.target.closest('.upi-app');
+  if(!app) return;
+  upiApps.querySelectorAll('.upi-app').forEach(a => a.classList.remove('active'));
+  app.classList.add('active');
+});
+
+const upiQrImage = document.getElementById('upiQrImage');
+const upiLinkText = document.getElementById('upiLinkText');
+const upiScanStatus = document.getElementById('upiScanStatus');
+function buildUpiQr(){
+  const upiId = 'punjabikitchen@upi';
+  const amount = '1249.00';
+  const name = 'Punjabi Kitchen';
+  const note = 'Seat Reservation Advance';
+  const upiUri = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(name)}&am=${encodeURIComponent(amount)}&cu=INR&tn=${encodeURIComponent(note)}`;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=${encodeURIComponent(upiUri)}`;
+  upiQrImage.src = qrUrl;
+  upiLinkText.textContent = upiUri;
+  document.getElementById('upiId').value = upiId;
+  upiScanStatus.innerHTML = '<strong>Scan With Your Phone</strong>Open any UPI app and scan this QR to pay INR 1,249.';
+}
+
+buildUpiQr();
+
+document.querySelectorAll('.wallet-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.wallet-item').forEach(w => w.classList.remove('active'));
+    item.classList.add('active');
+    selectedWallet = item.dataset.wallet || '';
+  });
+});
+
+function showPaymentError(message){
+  clearTimeout(toastTimer);
+  toast.textContent = message;
+  toast.classList.add('show');
+  toast.style.borderColor = 'rgba(216,145,124,0.7)';
+  toast.style.background = 'rgba(68,25,25,0.96)';
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+    toast.style.borderColor = 'rgba(201,168,76,0.45)';
+    toast.style.background = 'rgba(13,13,13,0.95)';
+    toast.textContent = 'Payment successful. Reservation confirmed.';
+  }, 2200);
+}
+
+function hasValue(id){
+  const el = document.getElementById(id);
+  return !!(el && String(el.value || '').trim());
+}
+
+function validateReservation(){
+  const missing = reservationFields.filter(id => {
+    const value = document.getElementById(id)?.textContent?.trim();
+    return !value || value === '-';
+  });
+  return missing;
+}
+
+function validateActivePaymentMode(){
+  const activeTab = document.querySelector('.payment-tab.active')?.dataset.mode || 'card';
+  if(activeTab === 'card'){
+    const ids = ['cardNumber','cardHolder','cardExpiry','cardCvv','cardZip'];
+    return ids.every(hasValue) ? '' : 'Please fill all card details.';
+  }
+  if(activeTab === 'upi'){
+    return hasValue('upiId') ? '' : 'Please enter a UPI ID.';
+  }
+  if(activeTab === 'bank'){
+    return hasValue('bankName') && hasValue('bankType') ? '' : 'Please select your bank and account type.';
+  }
+  if(activeTab === 'wallet'){
+    return selectedWallet ? '' : 'Please choose a wallet.';
+  }
+  return 'Please select a payment method.';
+}
+
+let toastTimer;
+function processPayment(){
+  const missingReservation = validateReservation();
+  if(missingReservation.length){
+    showPaymentError('Reservation details are incomplete. Please go back and fill name, phone, date, time, and guests.');
+    return;
+  }
+
+  const paymentError = validateActivePaymentMode();
+  if(paymentError){
+    showPaymentError(paymentError);
+    return;
+  }
+
+  clearTimeout(toastTimer);
+  toast.textContent = 'Payment successful. Reservation confirmed.';
+  toast.style.borderColor = 'rgba(201,168,76,0.45)';
+  toast.style.background = 'rgba(13,13,13,0.95)';
+  toast.classList.add('show');
+  persistUserHistory();
+  localStorage.removeItem(CART_KEY);
+  toastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+    window.location.href = 'index.html#reserve';
+  }, 1800);
+}
+</script>
+</body>
+</html>

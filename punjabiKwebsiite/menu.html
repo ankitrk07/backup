@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Full Menu | Punjabi Kitchen</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root{
+  --gold:#c9a84c;
+  --gold-light:#e8c97a;
+  --gold-dim:#8a6d2f;
+  --bg:#0f0f10;
+  --bg-2:#171719;
+  --card:rgba(255,255,255,0.06);
+  --card-border:rgba(201,168,76,0.23);
+  --text:#f5f0e8;
+  --text-dim:#b8b0a2;
+  --red:#c0392b;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:'Inter',sans-serif;
+  color:var(--text);
+  min-height:100vh;
+  background:
+    radial-gradient(1000px 560px at 8% -8%,rgba(201,168,76,0.16),transparent 70%),
+    radial-gradient(800px 460px at 100% 0%,rgba(201,168,76,0.1),transparent 70%),
+    linear-gradient(180deg,var(--bg),var(--bg-2));
+  overflow-x:hidden;
+}
+  html{scrollbar-width:thin;scrollbar-color:#c9a84c #000}
+  *::-webkit-scrollbar{width:12px;height:12px}
+  *::-webkit-scrollbar-track{background:#000;border-radius:999px;box-shadow:inset 0 0 10px rgba(0,0,0,0.85)}
+  *::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#e8c97a 0%,#c9a84c 55%,#8a6d2f 100%);border-radius:999px;border:3px solid #000;box-shadow:0 0 12px rgba(201,168,76,0.35), inset 0 0 4px rgba(255,255,255,0.18)}
+  *::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#f4d98f 0%,#d8b95e 55%,#a07b2c 100%)}
+
+.page{max-width:1320px;margin:0 auto;padding:22px 18px 130px}
+
+.topbar{
+  position:sticky;
+  top:16px;
+  z-index:100;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:14px;
+  padding:14px;
+  margin-bottom:34px;
+  border:1px solid var(--card-border);
+  border-radius:16px;
+  background:rgba(17,17,18,0.76);
+  backdrop-filter:blur(10px);
+  box-shadow:0 8px 30px rgba(0,0,0,.28), inset 0 0 0 1px rgba(255,255,255,.03);
+}
+
+.back-btn,
+.search-input{
+  border:1px solid var(--card-border);
+  border-radius:12px;
+  background:rgba(255,255,255,0.04);
+  color:var(--text);
+}
+
+.back-btn{
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:11px 14px;
+  font-weight:600;
+  transition:all .25s ease;
+}
+
+.back-btn:hover{border-color:var(--gold);color:var(--gold-light);transform:translateX(-2px)}
+
+.brand{
+  text-align:center;
+  font-family:'Playfair Display',serif;
+  font-size:1.35rem;
+  font-weight:700;
+  letter-spacing:.2px;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.search-input{
+  width:280px;
+  padding:11px 14px;
+  font-size:.92rem;
+  justify-self:end;
+}
+
+.search-input::placeholder{color:var(--text-dim)}
+.search-input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,.15)}
+
+.hero{
+  text-align:center;
+  padding:36px 12px 24px;
+  margin-bottom:22px;
+}
+
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.1rem,4.2vw,3.3rem);
+  line-height:1.1;
+  margin-bottom:12px;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+.hero p{
+  max-width:720px;
+  margin:0 auto;
+  font-size:1rem;
+  color:var(--text-dim);
+  line-height:1.72;
+}
+
+.filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+  margin:14px 0 34px;
+}
+
+.filter-btn{
+  border:1px solid var(--card-border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:999px;
+  padding:10px 17px;
+  font-size:.86rem;
+  font-weight:600;
+  letter-spacing:.4px;
+  cursor:pointer;
+  transition:all .22s ease;
+}
+
+.filter-btn:hover{border-color:var(--gold);color:var(--gold-light);transform:translateY(-1px)}
+
+.filter-btn.active{
+  color:#101010;
+  border-color:var(--gold);
+  background:linear-gradient(135deg,var(--gold-light),var(--gold-dim));
+  box-shadow:0 8px 22px rgba(201,168,76,.25);
+}
+
+.category-section{margin-bottom:42px}
+
+.category-header{
+  border:1px solid var(--card-border);
+  border-left:4px solid var(--gold);
+  border-radius:12px;
+  background:linear-gradient(135deg,rgba(201,168,76,.12),rgba(201,168,76,.03));
+  padding:20px 18px;
+  margin-bottom:18px;
+  position:relative;
+  overflow:hidden;
+}
+
+.category-header::after{
+  content:'';
+  position:absolute;
+  right:-60px;
+  top:-40px;
+  width:170px;
+  height:170px;
+  background:radial-gradient(circle,rgba(232,201,122,.16),transparent 66%);
+  pointer-events:none;
+}
+
+.category-name{
+  font-family:'Playfair Display',serif;
+  font-size:1.6rem;
+  margin-bottom:4px;
+}
+
+.category-count{font-size:.84rem;color:var(--text-dim)}
+
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+
+.dish-card{
+  border:1px solid var(--card-border);
+  border-radius:14px;
+  overflow:hidden;
+  background:var(--card);
+  transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease;
+  position:relative;
+}
+
+.dish-card::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(130deg,transparent 30%,rgba(232,201,122,.09) 50%,transparent 70%);
+  opacity:0;
+  transition:opacity .25s ease;
+  pointer-events:none;
+}
+
+.dish-card:hover{transform:translateY(-6px);border-color:rgba(201,168,76,.6);box-shadow:0 16px 34px rgba(0,0,0,.35)}
+.dish-card:hover::after{opacity:1}
+
+.dish-img{width:100%;height:220px;object-fit:cover;display:block;transition:transform .3s ease,filter .3s ease;filter:saturate(.95) contrast(1.02)}
+.dish-card:hover .dish-img{transform:scale(1.04);filter:saturate(1.05)}
+
+.dish-body{padding:15px 15px 16px}
+.dish-tag{font-size:.7rem;letter-spacing:1.7px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px}
+.dish-name{font-family:'Playfair Display',serif;font-size:1.22rem;margin-bottom:6px}
+.dish-desc{font-size:.9rem;line-height:1.6;color:var(--text-dim);margin-bottom:14px;min-height:48px}
+
+.dish-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1px solid rgba(201,168,76,.18);padding-top:12px}
+.dish-price{font-family:'Playfair Display',serif;color:var(--gold-light);font-size:1.22rem;font-weight:700}
+
+.dish-btn{
+  border:0;
+  border-radius:9px;
+  padding:9px 12px;
+  font-size:.78rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.9px;
+  cursor:pointer;
+  color:#111;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dim));
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+
+.dish-btn:hover{transform:scale(1.06);box-shadow:0 8px 20px rgba(201,168,76,.32)}
+
+.empty-state{text-align:center;padding:80px 12px;color:var(--text-dim)}
+.empty-state i{font-size:3.2rem;color:var(--gold);opacity:.55;margin-bottom:12px}
+
+.sticky-cart-wrap{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:40;
+  padding:28px 16px 34px;
+  text-align:center;
+  pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(15,15,16,.95) 42%,rgba(15,15,16,.98));
+}
+
+.sticky-cart{
+  pointer-events:all;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  color:#111;
+  font-weight:800;
+  letter-spacing:1.1px;
+  text-transform:uppercase;
+  border-radius:12px;
+  padding:14px 28px;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold-dim));
+  box-shadow:0 10px 26px rgba(201,168,76,.34);
+  transition:transform .22s ease,box-shadow .22s ease;
+}
+
+.sticky-cart:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 14px 32px rgba(201,168,76,.42)}
+
+.cart-badge{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:55;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#111;
+  background:linear-gradient(135deg,var(--gold-light),var(--gold-dim));
+  box-shadow:0 8px 22px rgba(201,168,76,.32);
+}
+
+.cart-badge span{
+  position:absolute;
+  top:-8px;
+  right:-7px;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:var(--red);
+  color:#fff;
+  font-size:.72rem;
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:2px solid #111;
+}
+
+@media (max-width:980px){
+  .topbar{grid-template-columns:1fr;gap:10px;padding:12px}
+  .brand{text-align:left}
+  .search-input{width:100%;justify-self:stretch}
+}
+
+@media (max-width:640px){
+  .page{padding:12px 12px 120px}
+  .hero{padding:22px 4px 12px}
+  .hero h1{font-size:1.92rem}
+  .hero p{font-size:.94rem}
+  .filters{justify-content:flex-start}
+  .menu-grid{grid-template-columns:1fr;gap:14px}
+  .dish-img{height:188px}
+  .sticky-cart{padding:12px 20px;font-size:.86rem}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar">
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back Home</a>
+    <div class="brand">Punjabi Kitchen Full Menu</div>
+    <input type="text" class="search-input" id="searchInput" placeholder="Search dishes..."/>
+  </div>
+
+  <div class="hero">
+    <h1>Explore The Complete Menu</h1>
+    <p>Balanced flavors, premium ingredients, and authentic preparations from starter plates to hearty mains, tandoor, desserts, and beverages.</p>
+  </div>
+
+  <div class="filters" id="filters">
+    <button class="filter-btn active" onclick="filterCategory('all', event)">All Dishes</button>
+    <button class="filter-btn" onclick="filterCategory('starters', event)">Starters</button>
+    <button class="filter-btn" onclick="filterCategory('soya', event)">Soya Chap</button>
+    <button class="filter-btn" onclick="filterCategory('main', event)">Main Course</button>
+    <button class="filter-btn" onclick="filterCategory('dal', event)">Dal and Rice</button>
+    <button class="filter-btn" onclick="filterCategory('chinese', event)">Chinese</button>
+    <button class="filter-btn" onclick="filterCategory('breads', event)">Breads</button>
+    <button class="filter-btn" onclick="filterCategory('tandoor', event)">Tandoor</button>
+    <button class="filter-btn" onclick="filterCategory('desserts', event)">Desserts</button>
+    <button class="filter-btn" onclick="filterCategory('beverages', event)">Beverages</button>
+  </div>
+
+  <div id="menuContainer"></div>
+</div>
+
+<div class="sticky-cart-wrap">
+  <a href="cart.html" class="sticky-cart"><i class="fas fa-shopping-cart"></i> View Booking Cart</a>
+</div>
+
+<a href="cart.html" class="cart-badge" id="cartBadge" title="View Cart"><i class="fas fa-shopping-cart"></i></a>
+
+<script src="assets/menu-data.js"></script>
+<script src="assets/reset-state.js"></script>
+<script>
+const CART_KEY = 'pk_cart_v1';
+let currentFilter = 'all';
+
+const LEGACY_DISH_IMAGES = {
+  'Paneer Tikka':'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Hara Bhara Kabab':'assets/cinematic-ultra-realistic-food-photography-of-a-re.jpeg',
+  'Chicken Tikka':'assets/cinematic-ultra-realistic-food-photography-of-chic.jpeg',
+  'Samosa Bread':'assets/cinematic-ultra-realistic-food-photography-of-samo.jpeg',
+  'Soya Chap Tikka':'assets/cinematic-ultra-realistic-food-photography-of-soya.jpeg',
+  'Soya Chap Masala':'assets/cinematic-ultra-realistic-food-photography-of-soya (1).jpeg',
+  'Dal Makhani':'assets/cinematic-ultra-realistic-food-photography-of-dal-.jpeg',
+  'Paneer Butter Masala':'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Chicken Butter Masala':'assets/cinematic-ultra-realistic-food-photography-of-chic (1).jpeg',
+  'Rajma Chawal':'assets/cinematic-ultra-realistic-food-photography-of-rajm.jpeg',
+  'Dal Tadka':'assets/cinematic-ultra-realistic-food-photography-of-dal- (1).jpeg',
+  'Basmati Rice':'assets/cinematic-ultra-realistic-food-photography-of-basm.jpeg',
+  'Biryani Rice':'assets/cinematic-ultra-realistic-food-photography-of-biry.jpeg',
+  'Chilli Paneer':'assets/cinematic-ultra-realistic-food-photography-of-chil.jpeg',
+  'Veg Hakka Noodles':'assets/cinematic-ultra-realistic-food-photography-of-veg-.jpeg',
+  'Chicken Hakka Noodles':'assets/cinematic-ultra-realistic-food-photography-of-chic (2).jpeg',
+  'Butter Naan':'assets/cinematic-ultra-realistic-food-photography-of-butt.jpeg',
+  'Garlic Naan':'assets/cinematic-ultra-realistic-food-photography-of-roti.jpeg',
+  'Kulcha':'assets/cinematic-ultra-realistic-food-photography-of-kulc.jpeg',
+  'Roti':'assets/cinematic-ultra-realistic-food-photography-of-plai.jpeg',
+  'Tandoori Chicken':'assets/cinematic-ultra-realistic-food-photography-of-tand.jpeg',
+  'Tandoori Mix':'assets/cinematic-ultra-realistic-food-photography-of-tand (1).jpeg',
+  'Gulab Jamun':'assets/cinematic-ultra-realistic-food-photography-of-gula.jpeg',
+  'Kheer':'assets/cinematic-ultra-realistic-food-photography-of-khee.jpeg',
+  'Jalebi':'assets/cinematic-ultra-realistic-food-photography-of-jale.jpeg',
+  'Lassi':'assets/cinematic-ultra-realistic-food-photography-of-lass.jpeg',
+  'Mango Shake':'assets/cinematic-ultra-realistic-food-photography-of-mang.jpeg',
+  'Chai':'assets/cinematic-ultra-realistic-food-photography-of-chai.jpeg'
+};
+
+const dishImages = window.PK_MENU_IMAGE_MAP || LEGACY_DISH_IMAGES;
+
+const fullMenu_LEGACY = [
+  {cat:'starters',name:'Paneer Tikka',desc:'Marinated paneer grilled in tandoor',price:239,veg:true},
+  {cat:'starters',name:'Hara Bhara Kabab',desc:'Spinach and peas patties with mint chutney',price:239,veg:true},
+  {cat:'starters',name:'Chicken Tikka',desc:'Tender chicken pieces marinated and grilled',price:279,veg:false},
+  {cat:'starters',name:'Samosa Bread',desc:'Crispy pastry with spiced potato filling',price:119,veg:true},
+  {cat:'soya',name:'Soya Chap Tikka',desc:'Marinated soya chap with traditional spices',price:189,veg:true},
+  {cat:'soya',name:'Soya Chap Masala',desc:'Soya chap in creamy tomato gravy',price:199,veg:true},
+  {cat:'main',name:'Dal Makhani',desc:'Black lentils simmered in creamy tomato gravy',price:179,veg:true},
+  {cat:'main',name:'Paneer Butter Masala',desc:'Cottage cheese in rich buttery tomato sauce',price:249,veg:true},
+  {cat:'main',name:'Chicken Butter Masala',desc:'Chicken in luscious butter sauce',price:349,veg:false},
+  {cat:'main',name:'Rajma Chawal',desc:'Kidney beans served with rice',price:159,veg:true},
+  {cat:'dal',name:'Dal Tadka',desc:'Tempered lentils with ghee and cumin',price:149,veg:true},
+  {cat:'dal',name:'Basmati Rice',desc:'Fragrant long grain basmati',price:99,veg:true},
+  {cat:'dal',name:'Biryani Rice',desc:'Spiced biryani rice preparation',price:199,veg:false},
+  {cat:'chinese',name:'Chilli Paneer',desc:'Crispy paneer in spicy soy ginger sauce',price:199,veg:true},
+  {cat:'chinese',name:'Veg Hakka Noodles',desc:'Stir-fried noodles with vegetables',price:169,veg:true},
+  {cat:'chinese',name:'Chicken Hakka Noodles',desc:'Chicken and noodles in wok sauce',price:219,veg:false},
+  {cat:'breads',name:'Butter Naan',desc:'Soft tandoor-baked naan with butter',price:39,veg:true},
+  {cat:'breads',name:'Garlic Naan',desc:'Aromatic naan with garlic',price:49,veg:true},
+  {cat:'breads',name:'Kulcha',desc:'Flaky bread with onion herb filling',price:59,veg:true},
+  {cat:'breads',name:'Roti',desc:'Thin wheat flatbread',price:19,veg:true},
+  {cat:'tandoor',name:'Tandoori Chicken',desc:'Chicken marinated in yogurt and spices',price:449,veg:false},
+  {cat:'tandoor',name:'Tandoori Mix',desc:'Assorted tandoor-grilled proteins',price:399,veg:false},
+  {cat:'desserts',name:'Gulab Jamun',desc:'Soft milk solids in sugar syrup',price:89,veg:true},
+  {cat:'desserts',name:'Kheer',desc:'Rice pudding with nuts and cardamom',price:99,veg:true},
+  {cat:'desserts',name:'Jalebi',desc:'Spiral sweet soaked in syrup',price:59,veg:true},
+  {cat:'beverages',name:'Lassi',desc:'Yogurt-based refreshing drink',price:79,veg:true},
+  {cat:'beverages',name:'Mango Shake',desc:'Fresh mango blended with milk',price:99,veg:true},
+  {cat:'beverages',name:'Chai',desc:'Traditional Indian tea',price:29,veg:true}
+];
+
+const fullMenu = window.PK_MENU_ITEMS || fullMenu_LEGACY;
+
+function getImage(name){
+  return dishImages[name] || 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg';
+}
+
+function readCart(){
+  try{return JSON.parse(localStorage.getItem(CART_KEY)||'[]');}
+  catch{return [];}
+}
+
+function saveCart(cart){localStorage.setItem(CART_KEY, JSON.stringify(cart));}
+
+function updateCartBadge(){
+  const badge = document.getElementById('cartBadge');
+  const count = readCart().length;
+  badge.innerHTML = count > 0
+    ? `<i class="fas fa-shopping-cart"></i><span>${count}</span>`
+    : '<i class="fas fa-shopping-cart"></i>';
+}
+
+function addToCartByName(name){
+  const cart = readCart();
+  const existing = cart.find(item => item.name === name);
+  if(existing){
+    existing.qty = (existing.qty || 1) + 1;
+  }else{
+    const dish = fullMenu.find(d => d.name === name);
+    if(dish){cart.push({...dish, qty:1});}
+  }
+  saveCart(cart);
+  updateCartBadge();
+  window.dispatchEvent(new Event('storage'));
+}
+
+function filterCategory(cat, eventObj){
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+  if(eventObj && eventObj.target){eventObj.target.classList.add('active');}
+  renderMenu();
+}
+
+function renderMenu(){
+  let filtered = fullMenu;
+  if(currentFilter !== 'all') filtered = filtered.filter(d => d.cat === currentFilter);
+
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  if(q){
+    filtered = filtered.filter(d => d.name.toLowerCase().includes(q));
+  }
+
+  const container = document.getElementById('menuContainer');
+  if(!filtered.length){
+    container.innerHTML = '<div class="empty-state"><i class="fas fa-search"></i><p>No dishes found for this search.</p></div>';
+    return;
+  }
+
+  const labels = {
+    starters:'Starters',soya:'Soya Chap',main:'Main Course',dal:'Dal and Rice',
+    chinese:'Chinese',breads:'Breads',tandoor:'Tandoor',desserts:'Desserts',beverages:'Beverages'
+  };
+
+  const grouped = {};
+  filtered.forEach(d => {
+    if(!grouped[d.cat]) grouped[d.cat] = [];
+    grouped[d.cat].push(d);
+  });
+
+  container.innerHTML = Object.keys(grouped).map(cat => `
+    <section class="category-section">
+      <div class="category-header">
+        <div class="category-name">${labels[cat] || cat}</div>
+        <div class="category-count">${grouped[cat].length} items</div>
+      </div>
+      <div class="menu-grid">
+        ${grouped[cat].map(dish => `
+          <article class="dish-card">
+            <img class="dish-img" src="${getImage(dish.name)}" alt="${dish.name}" onerror="this.src='assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg'"/>
+            <div class="dish-body">
+              <div class="dish-tag">${dish.veg ? 'Vegetarian' : 'Non Vegetarian'}</div>
+              <div class="dish-name">${dish.name}</div>
+              <div class="dish-desc">${dish.desc}</div>
+              <div class="dish-meta">
+                <div class="dish-price">INR ${dish.price}</div>
+                <button class="dish-btn" onclick="addToCartByName('${dish.name.replace(/'/g, "\\'")}')"><i class="fas fa-plus"></i> Add</button>
+              </div>
+            </div>
+          </article>
+        `).join('')}
+      </div>
+    </section>
+  `).join('');
+}
+
+document.getElementById('searchInput').addEventListener('input', renderMenu);
+window.addEventListener('storage', updateCartBadge);
+
+renderMenu();
+updateCartBadge();
+</script>
+</body>
+</html>

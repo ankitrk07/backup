@@ -1,0 +1,7 @@
+.next
+node_modules
+package-lock.json
+public/images/**/*.jpg
+public/images/**/*.png
+public/images/**/*.webp
+public/images/**/*.avif

@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Punjabi Kitchen | Fine Dining</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root{
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#8a6d2f;
+  --charcoal:#0d0d0d;--charcoal2:#141414;--charcoal3:#1c1c1c;--charcoal4:#242424;
+  --glass:rgba(255,255,255,0.06);--glass-border:rgba(201,168,76,0.25);
+  --glass-hover:rgba(255,255,255,0.10);
+  --text:#f5f0e8;--text-dim:#b0a898;--text-muted:#6b6460;
+  --green:#2d7a3a;--red-label:#c0392b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--charcoal);color:var(--text);overflow-x:hidden}
+html{scrollbar-width:thin;scrollbar-color:#c9a84c #000}
+*::-webkit-scrollbar{width:12px;height:12px}
+*::-webkit-scrollbar-track{background:#000;border-radius:999px;box-shadow:inset 0 0 10px rgba(0,0,0,0.85)}
+*::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#e8c97a 0%,#c9a84c 55%,#8a6d2f 100%);border-radius:999px;border:3px solid #000;box-shadow:0 0 12px rgba(201,168,76,0.35), inset 0 0 4px rgba(255,255,255,0.18)}
+*::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#f4d98f 0%,#d8b95e 55%,#a07b2c 100%)}
+
+/* PARTICLES */
+.particles{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+
+/* VIDEO BG */
+.video-bg{position:fixed;inset:0;z-index:0;overflow:hidden}
+.video-bg video{width:100%;height:100%;object-fit:cover;opacity:0.15;filter:blur(2px) saturate(0.3)}
+.video-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(201,168,76,0.06) 0%,transparent 60%),linear-gradient(180deg,rgba(13,13,13,0.6) 0%,rgba(13,13,13,0.3) 50%,rgba(13,13,13,0.85) 100%)}
+
+/* NAVBAR */
+.navbar{position:fixed;top:16px;left:50%;transform:translateX(-50%);width:calc(100% - 40px);max-width:1200px;background:rgba(13,13,13,0.55);backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);border:0.5px solid var(--glass-border);border-radius:16px;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;z-index:1000;transition:background 0.4s,box-shadow 0.4s}
+.navbar.scrolled{background:rgba(13,13,13,0.88);box-shadow:0 8px 40px rgba(0,0,0,0.6),0 0 0 0.5px rgba(201,168,76,0.3)}
+.nav-logo{display:flex;align-items:center;gap:12px}
+.nav-logo .logo-mark{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--gold);background:rgba(201,168,76,0.08)}
+.nav-logo .logo-text span{display:block;font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--gold-light);line-height:1}
+.nav-logo .logo-text small{font-size:0.62rem;letter-spacing:3px;color:var(--text-dim);text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{font-size:0.78rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);text-decoration:none;position:relative;transition:color 0.3s;font-weight:500}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width 0.35s cubic-bezier(.4,0,.2,1)}
+.nav-links a:hover{color:var(--gold-light)}
+.nav-links a:hover::after{width:100%}
+.nav-cart{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.12);border:0.5px solid rgba(201,168,76,0.4);color:var(--gold-light);padding:8px 12px;border-radius:999px;font-size:0.72rem;text-transform:uppercase;letter-spacing:1px;text-decoration:none;transition:all 0.25s}
+.nav-cart:hover{background:rgba(201,168,76,0.2);border-color:var(--gold)}
+.cart-count{min-width:22px;height:22px;padding:0 6px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:var(--charcoal);font-weight:700;font-size:0.72rem}
+.nav-reserve{background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:var(--charcoal);border:none;border-radius:8px;padding:10px 22px;font-size:0.75rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all 0.3s;font-family:'Inter',sans-serif;text-decoration:none;display:inline-block;animation:navPulse 2.5s ease-in-out infinite}
+.nav-reserve:hover{background:linear-gradient(135deg,var(--gold-light),var(--gold));transform:translateY(-1px);box-shadow:0 4px 20px rgba(201,168,76,0.4);animation-play-state:paused}
+.nav-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.nav-auth-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:0.5px solid rgba(201,168,76,0.5);background:rgba(201,168,76,0.08);color:var(--gold-light);text-decoration:none;font-size:0.68rem;letter-spacing:0.9px;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .25s;white-space:nowrap}
+.nav-auth-btn:hover{background:rgba(201,168,76,0.18);border-color:var(--gold)}
+.nav-auth-btn.ghost{background:rgba(255,255,255,0.04);color:var(--text-dim);border-color:var(--glass-border)}
+.nav-auth-btn.ghost:hover{color:var(--text);border-color:var(--gold)}
+.nav-user-wrap{display:none;align-items:center}
+
+.auth-modal{position:fixed;inset:0;z-index:1200;background:rgba(7,7,8,0.76);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:16px}
+.auth-modal.show{display:flex}
+.auth-dialog{width:min(470px,95vw);border:0.5px solid var(--glass-border);border-radius:18px;background:linear-gradient(160deg,rgba(30,30,32,0.95),rgba(16,16,17,0.95));box-shadow:0 20px 60px rgba(0,0,0,0.45);padding:22px}
+.auth-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.auth-title{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--gold-light)}
+.auth-close{border:none;background:transparent;color:var(--text-dim);font-size:1.1rem;cursor:pointer}
+.auth-switch{display:flex;gap:8px;margin-bottom:14px}
+.auth-switch button{flex:1;border:0.5px solid var(--glass-border);background:rgba(255,255,255,0.04);color:var(--text-dim);padding:10px 12px;border-radius:10px;cursor:pointer;font-size:0.74rem;letter-spacing:1px;text-transform:uppercase;font-weight:600}
+.auth-switch button.active{background:rgba(201,168,76,0.18);color:var(--gold-light);border-color:rgba(201,168,76,0.65)}
+.auth-grid{display:grid;gap:10px}
+.auth-field{display:grid;gap:6px}
+.auth-field label{font-size:0.68rem;letter-spacing:1.8px;color:var(--text-muted);text-transform:uppercase}
+.auth-field input{width:100%;padding:11px 12px;border-radius:10px;border:0.5px solid var(--glass-border);background:rgba(255,255,255,0.04);color:var(--text);outline:none}
+.auth-field input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,168,76,0.11)}
+.auth-submit{margin-top:8px;border:none;border-radius:10px;padding:12px 14px;font-size:0.78rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#141414;background:linear-gradient(135deg,var(--gold),var(--gold-dim));cursor:pointer}
+.auth-msg{min-height:20px;font-size:0.78rem;color:#d8917c;margin-top:8px}
+@keyframes navPulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,0.4)}50%{box-shadow:0 0 0 8px rgba(201,168,76,0)}}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hamburger span{width:22px;height:1.5px;background:var(--gold);display:block;transition:0.3s}
+
+/* HERO */
+.hero{position:relative;z-index:2;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:120px 24px 60px}
+.hero-label{font-size:0.72rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:28px;opacity:0;animation:fadeUp 0.8s 0.3s forwards}
+.hero-label::before,.hero-label::after{content:'—';margin:0 12px;color:var(--gold-dim)}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,7.5rem);font-weight:900;line-height:0.95;letter-spacing:-1px;margin-bottom:16px;opacity:0;animation:fadeUp 0.9s 0.5s forwards}
+.hero-title .line1{display:block;color:var(--text)}
+.hero-title .line2{display:block;color:var(--gold-light);font-style:italic;text-shadow:0 2px 10px rgba(0,0,0,0.55),0 0 24px rgba(201,168,76,0.2)}
+.hero-title .liquid-word{display:inline-block;color:#f7d98a;animation:liquidFloat 4s ease-in-out infinite;text-shadow:0 2px 10px rgba(0,0,0,0.6),0 0 24px rgba(201,168,76,0.3)}
+@keyframes liquidFloat{0%,100%{transform:translateY(0) skewX(0deg)}25%{transform:translateY(-6px) skewX(-1deg)}75%{transform:translateY(4px) skewX(1deg)}}
+.hero-sub{font-size:clamp(0.9rem,1.5vw,1.1rem);color:var(--text-dim);max-width:480px;line-height:1.8;margin-bottom:48px;font-weight:300;opacity:0;animation:fadeUp 0.9s 0.7s forwards}
+.hero-cta{display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp 0.9s 0.9s forwards}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:var(--charcoal);padding:16px 40px;border-radius:8px;font-size:0.82rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;border:none;cursor:pointer;transition:all 0.4s;text-decoration:none;display:inline-block;position:relative;overflow:hidden}
+.btn-primary::before{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,0.15);border-radius:50%;transform:translate(-50%,-50%);transition:width 0.6s,height 0.6s}
+.btn-primary:hover::before{width:300px;height:300px}
+.btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 12px 40px rgba(201,168,76,0.45)}
+.btn-ghost{background:transparent;color:var(--text);padding:16px 36px;border-radius:8px;font-size:0.82rem;letter-spacing:2px;text-transform:uppercase;font-weight:500;border:0.5px solid rgba(201,168,76,0.4);cursor:pointer;transition:all 0.4s;text-decoration:none;display:inline-block}
+.btn-ghost:hover{background:rgba(201,168,76,0.1);border-color:var(--gold);color:var(--gold-light);transform:translateY(-2px)}
+.hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--text-muted);font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;animation:bounce 2s ease-in-out infinite}
+.hero-scroll i{color:var(--gold);font-size:1rem}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* STATS WRAPPER */
+.stats-wrapper{position:relative;z-index:2;background:rgba(13,13,13,0.7);backdrop-filter:blur(20px);border-top:0.5px solid var(--glass-border);border-bottom:0.5px solid var(--glass-border);padding:0 40px 50px;overflow:visible}
+.road-strip{position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+#exhaustCanvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+#dv-boy{position:absolute;bottom:0;left:-170px;width:clamp(165px,18vw,260px);height:auto;z-index:30;transform-origin:bottom center;mix-blend-mode:screen;filter:drop-shadow(4px 3px 8px rgba(201,168,76,0.5)) drop-shadow(0 5px 14px rgba(0,0,0,0.6))}
+.stats-bar{display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap;padding-top:16px;padding-bottom:60px}
+.stat-item{opacity:0;transform:translateY(26px) scale(0.93);display:flex;align-items:center;gap:16px;background:var(--glass);backdrop-filter:blur(12px);border:0.5px solid var(--glass-border);padding:20px 28px;border-radius:12px;margin:8px;box-shadow:0 8px 32px rgba(0,0,0,0.3);min-width:165px;flex:1 1 145px;max-width:230px;transition:transform 0.3s,box-shadow 0.3s,background 0.3s}
+.stat-item:hover{transform:translateY(-6px) scale(1.03)!important;background:var(--glass-hover);box-shadow:0 16px 48px rgba(0,0,0,0.4),0 0 0 0.5px rgba(201,168,76,0.3)}
+.stat-item.visible{animation:statPop 0.55s cubic-bezier(0.34,1.56,0.64,1) forwards}
+.stat-item.visible:nth-child(1){animation-delay:0s}
+.stat-item.visible:nth-child(2){animation-delay:0.15s}
+.stat-item.visible:nth-child(3){animation-delay:0.30s}
+.stat-item.visible:nth-child(4){animation-delay:0.45s}
+@keyframes statPop{to{opacity:1;transform:translateY(0) scale(1)}}
+.stat-icon{width:54px;height:54px;border-radius:50%;background:rgba(201,168,76,0.1);border:0.5px solid var(--glass-border);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
+.stat-icon img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.stat-text strong{display:block;font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;color:var(--gold-light)}
+.stat-text span{font-size:0.78rem;color:var(--text-dim);letter-spacing:0.5px}
+
+/* SECTION COMMONS */
+.section-eyebrow{font-size:0.72rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:16px;text-align:center}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.4rem);font-weight:700;text-align:center;margin-bottom:12px;color:var(--text)}
+.section-title em{font-style:italic;color:var(--gold-light)}
+.section-desc{text-align:center;color:var(--text-dim);font-size:1rem;max-width:560px;margin:0 auto 60px;line-height:1.8;font-weight:300}
+
+/* ABOUT BENTO */
+.about-section{position:relative;z-index:2;padding:100px 40px 60px;background:rgba(255,255,255,0.02);border-top:0.5px solid var(--glass-border)}
+.about-inner{max-width:1200px;margin:0 auto;text-align:center}
+.bento-section{position:relative;z-index:2;padding:0 40px 80px;max-width:1200px;margin:0 auto}
+.welcome-bento{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:20px}
+.bento-card{background:var(--glass);backdrop-filter:blur(16px);border:0.5px solid var(--glass-border);border-radius:20px;padding:40px;transition:all 0.4s cubic-bezier(.4,0,.2,1);overflow:hidden;position:relative}
+.bento-card:hover{background:var(--glass-hover);border-color:rgba(201,168,76,0.5);transform:translateY(-4px);box-shadow:0 24px 64px rgba(0,0,0,0.4),0 0 0 0.5px rgba(201,168,76,0.2)}
+.bento-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.5),transparent)}
+.bento-main{grid-column:1;grid-row:1/3;min-height:380px;display:flex;flex-direction:column;justify-content:center}
+.bento-top{grid-column:2;grid-row:1}
+.bento-bottom{grid-column:2;grid-row:2}
+.bento-gold-tag{font-family:'Dancing Script',cursive;font-size:1.6rem;color:var(--gold);margin-bottom:16px;display:block}
+.bento-main-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,3vw,2.8rem);font-weight:900;letter-spacing:-0.5px;margin-bottom:20px;line-height:1.1}
+.bento-main-title span{color:var(--gold-light);font-style:italic;display:block}
+.bento-text{color:var(--text-dim);line-height:1.85;font-weight:300;font-size:0.95rem}
+.bento-stat-large{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:900;color:var(--gold-light);line-height:1;margin-bottom:8px}
+.bento-stat-label{font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim)}
+.bento-icon-row{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
+.bento-tag{background:rgba(201,168,76,0.1);border:0.5px solid rgba(201,168,76,0.3);color:var(--gold);border-radius:6px;padding:6px 14px;font-size:0.75rem;letter-spacing:1px;text-transform:uppercase;font-weight:500}
+
+/* ══════════════════════════════════════════
+   FULL MENU SECTION — with carousel nav
+══════════════════════════════════════════ */
+.menu-section{position:relative;z-index:2;padding:72px 0 88px}
+.menu-section-inner{max-width:1200px;margin:0 auto;padding:0 36px}
+
+/* Category tabs */
+.menu-tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:22px auto 28px;max-width:1080px}
+.menu-tab{background:var(--glass);border:0.5px solid var(--glass-border);color:var(--text-dim);border-radius:999px;padding:7px 16px;font-size:0.68rem;letter-spacing:1.15px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Inter',sans-serif;font-weight:500;line-height:1}
+.menu-tab:hover{border-color:rgba(201,168,76,0.5);color:var(--gold)}
+.menu-tab.active{background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:var(--charcoal);border-color:transparent;font-weight:700}
+
+/* Carousel wrapper */
+.menu-carousel-wrap{position:relative;overflow:hidden}
+.menu-carousel-track{display:flex;gap:16px;transition:transform 0.55s cubic-bezier(.4,0,.2,1);padding:6px 2px 10px}
+
+/* Menu card */
+.menu-card{
+  min-width:calc((100% - 48px)/4);
+  flex-shrink:0;
+  position:relative;border-radius:18px;overflow:hidden;
+  background:var(--charcoal3);border:0.5px solid var(--glass-border);
+  cursor:pointer;transition:box-shadow 0.4s,transform 0.4s;
+  transform-style:preserve-3d;
+}
+.menu-card:hover{box-shadow:0 32px 64px rgba(0,0,0,0.6),0 0 0 1px rgba(201,168,76,0.4);transform:translateY(-6px)}
+.menu-card-img{width:100%;aspect-ratio:4/3;max-height:180px;object-fit:cover;display:block;transition:transform 0.6s cubic-bezier(.4,0,.2,1),filter 0.6s;filter:saturate(0.8) brightness(0.85)}
+.menu-card:hover .menu-card-img{transform:scale(1.09);filter:saturate(1.05) brightness(0.95)}
+.menu-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,13,0.97) 0%,rgba(13,13,13,0.45) 50%,transparent 100%);transition:opacity 0.4s}
+.menu-card-body{position:absolute;bottom:0;left:0;right:0;padding:14px}
+.menu-card-cat{font-size:0.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:6px}
+.menu-card-name{font-family:'Playfair Display',serif;font-size:0.98rem;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.15}
+.menu-card-desc{font-size:0.7rem;color:var(--text-dim);line-height:1.4;margin-bottom:10px;max-height:0;overflow:hidden;transition:max-height 0.4s ease,opacity 0.4s;opacity:0}
+.menu-card:hover .menu-card-desc{max-height:54px;opacity:1}
+.menu-card-footer{display:flex;align-items:center;justify-content:space-between}
+.menu-card-price{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--gold-light)}
+.veg-dot{width:10px;height:10px;border-radius:50%;border:1.5px solid;margin-right:6px;display:inline-block;vertical-align:middle;flex-shrink:0}
+.veg-dot.veg{border-color:#2d7a3a;background:#2d7a3a}
+.veg-dot.nonveg{border-color:#c0392b;background:#c0392b}
+.menu-card-btn{background:rgba(201,168,76,0.15);border:0.5px solid rgba(201,168,76,0.5);color:var(--gold);border-radius:6px;padding:7px 12px;font-size:0.65rem;letter-spacing:1.3px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Inter',sans-serif;font-weight:500;text-decoration:none;display:inline-block}
+.menu-card-btn:hover{background:var(--gold);color:var(--charcoal);border-color:var(--gold)}
+.menu-badge{position:absolute;top:14px;right:14px;background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:var(--charcoal);border-radius:6px;padding:4px 10px;font-size:0.62rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.menu-badge.veg-badge{background:linear-gradient(135deg,#2d7a3a,#1a5228);color:#fff}
+
+/* Carousel nav */
+.menu-nav-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;padding:0 36px}
+.menu-nav-row .nav-left{display:flex;flex-direction:column}
+.carousel-nav{display:flex;gap:10px}
+.carousel-btn{width:40px;height:40px;border-radius:50%;background:var(--glass);border:0.5px solid var(--glass-border);color:var(--gold);font-size:0.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s}
+.carousel-btn:hover{background:rgba(201,168,76,0.2);border-color:var(--gold);transform:scale(1.08)}
+.carousel-btn:disabled{opacity:0.3;cursor:not-allowed;transform:none}
+.menu-page-indicator{display:flex;gap:5px;margin-top:14px;justify-content:center}
+.menu-dot{width:5px;height:5px;border-radius:50%;background:var(--glass-border);transition:all 0.3s;cursor:pointer}
+.menu-dot.active{width:16px;border-radius:3px;background:var(--gold)}
+
+/* CHEF'S CAROUSEL */
+.carousel-section{position:relative;z-index:2;padding:72px 0;background:linear-gradient(135deg,rgba(201,168,76,0.04) 0%,transparent 50%,rgba(201,168,76,0.04) 100%);border-top:0.5px solid var(--glass-border);border-bottom:0.5px solid var(--glass-border);overflow:hidden}
+.carousel-header{padding:0 36px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between}
+.carousel-track{display:flex;gap:18px;padding:0 40px;transition:transform 0.6s cubic-bezier(.4,0,.2,1)}
+.carousel-slide{min-width:280px;background:var(--glass);backdrop-filter:blur(12px);border:0.5px solid var(--glass-border);border-radius:16px;overflow:hidden;flex-shrink:0;transition:all 0.4s}
+.carousel-slide:hover{border-color:rgba(201,168,76,0.5);transform:translateY(-4px)}
+.carousel-img{width:100%;height:170px;object-fit:cover;filter:saturate(0.85)}
+.carousel-content{padding:16px}
+.carousel-special{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.carousel-name{font-family:'Playfair Display',serif;font-size:1.02rem;font-weight:700;margin-bottom:5px}
+.carousel-desc{font-size:0.74rem;color:var(--text-dim);line-height:1.5;margin-bottom:12px}
+.carousel-footer{display:flex;align-items:center;justify-content:space-between}
+.carousel-price{font-family:'Playfair Display',serif;color:var(--gold-light);font-size:1.1rem;font-weight:700}
+.carousel-order{background:transparent;border:0.5px solid var(--glass-border);color:var(--text-dim);border-radius:6px;padding:7px 16px;font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;font-family:'Inter',sans-serif}
+.carousel-order:hover{background:rgba(201,168,76,0.1);color:var(--gold);border-color:rgba(201,168,76,0.4)}
+
+/* FOOD ORDER GRID */
+.food-grid-section{position:relative;z-index:2;padding:0 36px 88px;background:rgba(255,255,255,0.02)}
+.food-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1080px;margin:0 auto}
+.food-card{background:var(--charcoal3);border-radius:16px;overflow:hidden;border:0.5px solid var(--glass-border);transition:all 0.4s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.food-card:hover{transform:translateY(-8px);box-shadow:0 32px 64px rgba(0,0,0,0.5),0 0 0 0.5px rgba(201,168,76,0.3);border-color:rgba(201,168,76,0.4)}
+.food-card-img{width:100%;aspect-ratio:4/3;max-height:210px;object-fit:cover;display:block;filter:saturate(0.85) brightness(0.9);transition:filter 0.4s}
+.food-card:hover .food-card-img{filter:saturate(1) brightness(0.95)}
+.food-card-body{padding:14px;display:flex;flex-direction:column;align-items:center;gap:10px;flex:1}
+.food-card-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--text);text-align:center}
+.food-order-wrap{background:rgba(201,168,76,0.08);border:0.5px solid rgba(201,168,76,0.25);border-radius:10px;padding:8px 18px;width:100%;display:flex;justify-content:center}
+.food-order-btn{background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:var(--charcoal);border:none;border-radius:8px;padding:9px 26px;font-family:'Inter',sans-serif;font-weight:700;font-size:0.74rem;letter-spacing:1px;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block}
+.food-order-btn:hover{transform:scale(1.04);box-shadow:0 6px 20px rgba(201,168,76,0.35)}
+
+/* BOOKING */
+.booking-section{position:relative;z-index:2;padding:100px 40px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.booking-info-tag{font-size:0.72rem;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block}
+.booking-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:700;margin-bottom:20px;line-height:1.2}
+.booking-title em{font-style:italic;color:var(--gold-light)}
+.booking-desc{color:var(--text-dim);line-height:1.85;font-weight:300;margin-bottom:32px}
+.booking-features{display:flex;flex-direction:column;gap:16px}
+.booking-feat{display:flex;align-items:center;gap:14px}
+.booking-feat i{color:var(--gold);font-size:0.9rem;width:20px;text-align:center}
+.booking-feat span{font-size:0.9rem;color:var(--text-dim)}
+.booking-widget{background:var(--glass);backdrop-filter:blur(20px);border:0.5px solid var(--glass-border);border-radius:20px;padding:40px;position:relative;overflow:hidden}
+.booking-widget::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.6),transparent)}
+.widget-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:28px;color:var(--text)}
+.widget-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.widget-field{display:flex;flex-direction:column;gap:8px}
+.widget-field label{font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted)}
+.widget-field input,.widget-field select{background:rgba(255,255,255,0.04);border:0.5px solid rgba(201,168,76,0.25);border-radius:8px;padding:12px 16px;color:var(--text);font-family:'Inter',sans-serif;font-size:0.9rem;transition:all 0.3s;outline:none;appearance:none;-webkit-appearance:none}
+.widget-field input:focus,.widget-field select:focus{border-color:var(--gold);background:rgba(201,168,76,0.06);box-shadow:0 0 0 3px rgba(201,168,76,0.1)}
+.widget-field select option{background:var(--charcoal3);color:var(--text)}
+.widget-time-label{font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px}
+.time-slots{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.time-slot{background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 14px;font-size:0.78rem;color:var(--text-dim);cursor:pointer;transition:all 0.25s}
+.time-slot:hover:not(.unavailable){border-color:rgba(201,168,76,0.4);color:var(--gold);background:rgba(201,168,76,0.06)}
+.time-slot.selected{background:rgba(201,168,76,0.15);border-color:var(--gold);color:var(--gold-light);font-weight:500}
+.time-slot.unavailable{opacity:0.32;cursor:not-allowed;text-decoration:line-through;pointer-events:none}
+.time-slot-hint{font-size:0.75rem;color:var(--text-muted);margin-bottom:16px;font-style:italic}
+.btn-book{width:100%;padding:16px;background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:var(--charcoal);border:none;border-radius:10px;font-size:0.82rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all 0.4s;font-family:'Inter',sans-serif;margin-top:8px}
+.btn-book:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(201,168,76,0.4)}
+.book-note{font-size:0.72rem;color:var(--text-muted);text-align:center;margin-top:12px;letter-spacing:0.5px}
+
+
+/* MAP */
+.map-section{position:relative;z-index:2;padding:0 40px 100px;max-width:1200px;margin:0 auto}
+.map-wrapper{display:grid;grid-template-columns:1fr 2fr;gap:32px;align-items:start}
+.map-info{background:var(--glass);backdrop-filter:blur(16px);border:0.5px solid var(--glass-border);border-radius:20px;padding:36px}
+.map-place-name{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;margin-bottom:6px}
+.map-place-tag{font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:block}
+.map-detail{display:flex;align-items:flex-start;gap:12px;margin-bottom:16px}
+.map-detail i{color:var(--gold);font-size:0.85rem;margin-top:3px;width:16px}
+.map-detail-text{font-size:0.88rem;color:var(--text-dim);line-height:1.6}
+.map-divider{border:none;border-top:0.5px solid var(--glass-border);margin:24px 0}
+.map-hours-title{font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.map-hours-row{display:flex;justify-content:space-between;margin-bottom:10px;font-size:0.85rem}
+.map-hours-row span:first-child{color:var(--text-dim)}
+.map-hours-row span:last-child{color:var(--text)}
+.map-hours-row.today span{color:var(--gold-light)}
+#restaurant-map{border-radius:20px;overflow:hidden;border:0.5px solid var(--glass-border);height:440px;width:100%;display:block}
+
+/* SOCIAL WALL */
+.social-section{position:relative;z-index:2;padding:80px 0;overflow:hidden;border-top:0.5px solid var(--glass-border)}
+.social-header{padding:0 40px;margin-bottom:40px;text-align:center}
+.reviews-track-wrap{overflow:hidden}
+.reviews-track{display:flex;gap:20px;animation:scrollLeft 30s linear infinite;width:max-content}
+.reviews-track:hover{animation-play-state:paused}
+@keyframes scrollLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.review-card{background:var(--glass);backdrop-filter:blur(12px);border:0.5px solid var(--glass-border);border-radius:14px;padding:24px;min-width:300px;max-width:300px;flex-shrink:0}
+.review-stars{display:flex;gap:3px;margin-bottom:12px}
+.review-stars i{color:var(--gold);font-size:0.75rem}
+.review-text{font-size:0.85rem;color:var(--text-dim);line-height:1.7;margin-bottom:16px;font-style:italic}
+.review-author{display:flex;align-items:center;gap:10px}
+.review-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold-dim),var(--gold));display:flex;align-items:center;justify-content:center;font-size:0.8rem;font-weight:700;color:var(--charcoal);flex-shrink:0}
+.review-name{font-size:0.85rem;font-weight:500;color:var(--text)}
+.review-via{font-size:0.72rem;color:var(--text-muted)}
+
+/* WAVE DIVIDER */
+.wave-divider{display:block;width:100%;overflow:hidden;line-height:0;background:transparent}
+.wave-divider svg{display:block;width:100%;height:80px}
+
+/* FOOTER */
+footer{position:relative;z-index:2;background:rgba(0,0,0,0.62);backdrop-filter:blur(20px);border-top:0.5px solid var(--glass-border);padding:60px 40px 30px}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.8),transparent)}
+.footer-inner{max-width:1200px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1.7fr 1fr 1fr 1.3fr;gap:30px;margin-bottom:48px}
+.footer-brand .brand-name{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--gold-light);margin-bottom:12px}
+.footer-brand p{font-size:0.85rem;color:var(--text-dim);line-height:1.8;max-width:320px;margin-bottom:18px}
+.footer-brand .footer-note{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,0.1);border:0.5px solid rgba(201,168,76,0.35);padding:8px 12px;border-radius:999px;font-size:0.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--gold-light);margin-bottom:20px}
+.footer-social{display:flex;gap:12px}
+.footer-social a{width:38px;height:38px;border-radius:50%;background:var(--glass);border:0.5px solid var(--glass-border);color:var(--text-dim);display:flex;align-items:center;justify-content:center;font-size:0.85rem;text-decoration:none;transition:all 0.3s}
+.footer-social a:hover{background:rgba(201,168,76,0.15);border-color:var(--gold);color:var(--gold)}
+.footer-col h4{font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;font-weight:500}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:12px}
+.footer-col ul li a{font-size:0.85rem;color:var(--text-dim);text-decoration:none;transition:color 0.3s}
+.footer-col ul li a:hover{color:var(--text)}
+.footer-col.footer-contact{background:rgba(255,255,255,0.02);border:0.5px solid var(--glass-border);border-radius:14px;padding:16px}
+.footer-col.footer-contact ul li{margin-bottom:10px}
+.footer-col.footer-contact ul li a{display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.footer-col.footer-contact i{color:var(--gold);margin-top:2px;width:14px;text-align:center}
+.footer-divider{border:none;border-top:0.5px solid var(--glass-border);margin-bottom:24px}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;font-size:0.75rem;color:var(--text-muted)}
+
+/* TOAST */
+.toast{position:fixed;bottom:32px;right:32px;z-index:9999;background:rgba(13,13,13,0.9);backdrop-filter:blur(20px);border:0.5px solid rgba(201,168,76,0.5);border-radius:12px;padding:16px 24px;display:flex;align-items:center;gap:12px;transform:translateY(100px);opacity:0;transition:all 0.4s cubic-bezier(.4,0,.2,1);max-width:360px}
+.toast.show{transform:translateY(0);opacity:1}
+.toast i{color:var(--gold);font-size:1.1rem}
+.toast span{font-size:0.88rem;color:var(--text)}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.7s cubic-bezier(.4,0,.2,1),transform 0.7s cubic-bezier(.4,0,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:0.1s}
+.reveal-delay-2{transition-delay:0.2s}
+.reveal-delay-3{transition-delay:0.3s}
+a[href="menu.html"]{transition:all 0.3s ease !important}
+a[href="menu.html"]:hover{transform:scale(1.06);box-shadow:0 12px 28px rgba(201,168,76,0.3) !important}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:rgba(13,13,13,0.96);border-radius:0 0 16px 16px;border:0.5px solid var(--glass-border);border-top:none;padding:20px 0}
+  .nav-links.open{display:flex}
+  .nav-links li{padding:12px 32px}
+  .nav-actions{margin-left:auto;gap:6px}
+  .nav-reserve{display:none}
+  .nav-auth-btn{padding:7px 10px;font-size:0.62rem}
+  .hamburger{display:flex}
+  .welcome-bento{grid-template-columns:1fr}
+  .bento-main,.bento-top,.bento-bottom{grid-column:1;grid-row:auto}
+  .menu-card{min-width:calc((100% - 18px)/2)}
+  .booking-section{grid-template-columns:1fr}
+  .map-wrapper{grid-template-columns:1fr}
+  .food-grid{grid-template-columns:1fr 1fr}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .navbar{width:calc(100% - 20px);padding:12px 20px}
+  .about-section,.bento-section,.menu-section-inner,.booking-section,.map-section,.food-grid-section{padding-left:16px;padding-right:16px}
+  .menu-card{min-width:calc(100% - 4px)}
+  .food-grid{grid-template-columns:1fr;max-width:400px;margin-inline:auto}
+  .widget-row{grid-template-columns:1fr}
+  .booking-section{padding:60px 16px}
+  #restaurant-map{height:300px}
+  .footer-top{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;gap:8px;text-align:center}
+  #dv-boy{width:138px;bottom:6px;left:-88px}
+  .menu-nav-row{padding:0 16px}
+  .carousel-header{padding:0 16px}
+  .carousel-track{padding:0 16px}
+  .wallet-list{grid-template-columns:1fr}
+  .upi-apps{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<canvas class="particles" id="particleCanvas"></canvas>
+<div class="video-bg">
+  <video autoplay muted loop playsinline>
+    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4"/>
+  </video>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">
+    <div class="logo-mark">PK</div>
+    <div class="logo-text"><span>Punjabi Kitchen</span><small>Fine Dining · Ranchi</small></div>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#specials">Specials</a></li>
+    <li><a href="#reserve">Reserve</a></li>
+    <li><a href="#location">Location</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="nav-auth-btn ghost" id="authLoginBtn" onclick="openAuthModal('login')"><i class="fas fa-user"></i> Login / Signup</button>
+    <div class="nav-user-wrap" id="authUserWrap">
+      <a href="account.html" class="nav-auth-btn"><i class="fas fa-id-card"></i> <span id="authUserName">My Account</span></a>
+    </div>
+    <a href="cart.html" class="nav-cart" aria-label="Open cart"><i class="fas fa-basket-shopping"></i> Cart <span class="cart-count" id="cartCount">0</span></a>
+    <a href="#reserve" class="nav-reserve">Reserve a Table</a>
+  </div>
+</nav>
+
+<div class="auth-modal" id="authModal" aria-hidden="true">
+  <div class="auth-dialog">
+    <div class="auth-head">
+      <div class="auth-title">Welcome Back</div>
+      <button class="auth-close" onclick="closeAuthModal()" aria-label="Close"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="auth-switch">
+      <button id="switchLogin" class="active" type="button" onclick="switchAuthMode('login')">Login</button>
+      <button id="switchSignup" type="button" onclick="switchAuthMode('signup')">Signup</button>
+    </div>
+    <div class="auth-grid" id="authLoginPanel">
+      <div class="auth-field"><label>Email</label><input id="loginEmail" type="email" placeholder="you@example.com"></div>
+      <div class="auth-field"><label>Password</label><input id="loginPassword" type="password" placeholder="Enter password"></div>
+      <button class="auth-submit" type="button" onclick="handleLogin()">Login</button>
+    </div>
+    <div class="auth-grid" id="authSignupPanel" style="display:none">
+      <div class="auth-field"><label>Full Name</label><input id="signupName" type="text" placeholder="Your name"></div>
+      <div class="auth-field"><label>Email</label><input id="signupEmail" type="email" placeholder="you@example.com"></div>
+      <div class="auth-field"><label>Phone</label><input id="signupPhone" type="tel" maxlength="10" placeholder="10-digit phone"></div>
+      <div class="auth-field"><label>Password</label><input id="signupPassword" type="password" placeholder="At least 6 characters"></div>
+      <button class="auth-submit" type="button" onclick="handleSignup()">Create Account</button>
+    </div>
+    <div class="auth-msg" id="authMsg"></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label">Est. 2009 · Ranchi, Jharkhand</div>
+  <h1 class="hero-title">
+    <span class="line1">A Culinary</span>
+    <span class="line2"><span class="liquid-word">Journey</span> Awaits</span>
+  </h1>
+  <p class="hero-sub">Where the warmth of Punjab meets the art of modern cuisine. Every plate tells a story of heritage, passion, and love.</p>
+  <div class="hero-cta">
+    <a href="#menu" class="btn-primary">Explore Menu</a>
+    <a href="#reserve" class="btn-ghost">Reserve Table</a>
+  </div>
+  <div class="hero-scroll"><i class="fas fa-chevron-down"></i><span>Scroll</span></div>
+</section>
+
+<!-- STATS + SCOOTER -->
+<div class="stats-wrapper" id="statsSection">
+  <canvas id="exhaustCanvas"></canvas>
+  <div class="road-strip"></div>
+  <img id="dv-boy" src="dv_boy.png" alt="Kitchen Ride"/>
+  <div class="stats-bar" id="statsBar">
+    <div class="stat-item">
+      <div class="stat-icon"><img src="https://images.unsplash.com/photo-1526367790999-0150786686a2?w=120&h=120&fit=crop" alt=""/></div>
+      <div class="stat-text"><strong>1</strong><span>Punjabi Kitchen</span></div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-icon"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=120&h=120&fit=crop" alt=""/></div>
+      <div class="stat-text"><strong>51K+</strong><span>Customers Served</span></div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-icon"><img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=120&h=120&fit=crop" alt=""/></div>
+      <div class="stat-text"><strong>40K</strong><span>Happy Customers</span></div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-icon"><img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=120&h=120&fit=crop" alt=""/></div>
+      <div class="stat-text"><strong>250</strong><span>Regular Customers</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- WAVE -->
+<div class="wave-divider" aria-hidden="true" style="background:transparent;margin-top:-1px">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,80 C30,80 30,10 60,10 C90,10 90,80 120,80 C150,80 150,10 180,10 C210,10 210,80 240,80 C270,80 270,10 300,10 C330,10 330,80 360,80 C390,80 390,10 420,10 C450,10 450,80 480,80 C510,80 510,10 540,10 C570,10 570,80 600,80 C630,80 630,10 660,10 C690,10 690,80 720,80 C750,80 750,10 780,10 C810,10 810,80 840,80 C870,80 870,10 900,10 C930,10 930,80 960,80 C990,80 990,10 1020,10 C1050,10 1050,80 1080,80 C1110,80 1110,10 1140,10 C1170,10 1170,80 1200,80 C1230,80 1230,10 1260,10 C1290,10 1290,80 1320,80 C1350,80 1350,10 1380,10 C1410,10 1410,80 1440,80 L1440,80 L0,80 Z" fill="#141414"/>
+  </svg>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="section-eyebrow reveal">Welcome To</div>
+    <h2 class="section-title reveal reveal-delay-1">Punjabi <em>Kitchen</em></h2>
+    <p class="section-desc reveal reveal-delay-2">Established 15 years ago, the food journey of Punjabi Kitchen is nothing short of a joy ride. With a humble beginning of mainly catering to the needs of students, we have always served our food with simplicity and love.</p>
+  </div>
+  <div class="bento-section">
+    <div class="welcome-bento reveal">
+      <div class="bento-card bento-main">
+        <span class="bento-gold-tag">Our Story</span>
+        <h3 class="bento-main-title">Rooted in Tradition,<span>Refined with Passion</span></h3>
+        <p class="bento-text">From a humble kitchen serving college students to becoming Ranchi's most beloved dining destination — our journey is seasoned with love, spiced with dedication, and served with an uncompromising commitment to authentic flavour.</p>
+        <div class="bento-icon-row">
+          <span class="bento-tag">Multi Cuisine</span>
+          <span class="bento-tag">Family Dining</span>
+          <span class="bento-tag">Table Reservations</span>
+        </div>
+      </div>
+      <div class="bento-card bento-top">
+        <div class="bento-stat-large">15+</div>
+        <div class="bento-stat-label">Years of Culinary Excellence</div>
+      </div>
+      <div class="bento-card bento-bottom">
+        <div class="bento-stat-large">98%</div>
+        <div class="bento-stat-label">Customer Satisfaction Rate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════
+     FULL MENU with Carousel Nav + Category Tabs
+════════════════════════════════════════════ -->
+<section class="menu-section" id="menu">
+  <div class="menu-section-inner">
+    <div class="section-eyebrow reveal">Our Menu</div>
+    <h2 class="section-title reveal reveal-delay-1">Explore Our <em>Full Menu</em></h2>
+    <p class="section-desc reveal reveal-delay-2">Crafted with the finest ingredients — from soya chap to biryani, tandoor to Chinese, desserts to beverages.</p>
+    <div style="display:flex;flex-direction:column;align-items:flex-start;gap:16px;margin-top:10px;margin-bottom:28px">
+      <a href="menu.html" class="reveal reveal-delay-3" style="display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:var(--charcoal);border:none;border-radius:12px;padding:16px 48px;font-family:'Inter',sans-serif;font-weight:800;font-size:0.95rem;letter-spacing:1.8px;cursor:pointer;transition:all 0.35s cubic-bezier(0.34,1.56,0.64,1);text-decoration:none;text-transform:uppercase;box-shadow:0 10px 30px rgba(201,168,76,0.3);position:relative;overflow:hidden;align-self:flex-start"><i class="fas fa-book" style="margin-right:0"></i>Open Full Menu<i class="fas fa-arrow-right" style="margin-left:8px;font-size:0.8rem"></i></a>
+    </div>
+  </div>
+
+  <!-- Category tabs -->
+  <div class="menu-tabs" id="menuTabs">
+    <button class="menu-tab active" data-cat="all">All</button>
+    <button class="menu-tab" data-cat="starters">Starters</button>
+    <button class="menu-tab" data-cat="soya">Soya Chap</button>
+    <button class="menu-tab" data-cat="main">Main Course</button>
+    <button class="menu-tab" data-cat="dal">Dal & Rice</button>
+    <button class="menu-tab" data-cat="chinese">Chinese</button>
+    <button class="menu-tab" data-cat="breads">Breads</button>
+    <button class="menu-tab" data-cat="tandoor">Tandoor</button>
+    <button class="menu-tab" data-cat="desserts">Desserts</button>
+    <button class="menu-tab" data-cat="beverages">Beverages</button>
+  </div>
+
+  <!-- Nav row with left/right arrows -->
+  <div class="menu-nav-row">
+    <div class="nav-left">
+      <div style="font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:4px">Browse</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700" id="menuCatLabel">All Dishes</div>
+    </div>
+    <div class="carousel-nav">
+      <button class="carousel-btn" id="menuPrev" onclick="slideMenu(-1)"><i class="fas fa-chevron-left"></i></button>
+      <button class="carousel-btn" id="menuNext" onclick="slideMenu(1)"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+
+  <div style="padding:0 40px;overflow:hidden" id="menuCarouselOuter">
+    <div class="menu-carousel-track" id="menuTrack"></div>
+  </div>
+  <div class="menu-page-indicator" id="menuDots"></div>
+</section>
+
+<!-- CHEF'S CAROUSEL -->
+<section class="carousel-section" id="specials">
+  <div class="carousel-header">
+    <div>
+      <div class="section-eyebrow" style="text-align:left;margin-bottom:8px">Today's Selection</div>
+      <h2 class="section-title" style="text-align:left;font-size:clamp(1.6rem,3vw,2.4rem)">Chef's <em>Specials</em></h2>
+    </div>
+    <div class="carousel-nav">
+      <button class="carousel-btn" id="chefPrev" onclick="slideChef(-1)"><i class="fas fa-chevron-left"></i></button>
+      <button class="carousel-btn" id="chefNext" onclick="slideChef(1)"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+  <div style="overflow:hidden" id="chefViewport">
+    <div class="carousel-track" id="chefTrack">
+      <div class="carousel-slide"><img class="carousel-img" src="assets/cinematic-ultra-realistic-food-photography-of-dal-.jpeg" alt="Dal Makhani"/><div class="carousel-content"><div class="carousel-special">Today's Special</div><div class="carousel-name">Dal Makhani</div><div class="carousel-desc">Slow-cooked black lentils simmered overnight in buttery tomato gravy</div><div class="carousel-footer"><span class="carousel-price">₹ 179</span><button class="carousel-order" onclick="addToCartByName('Dal Makhani')">Book Dish</button></div></div></div>
+      <div class="carousel-slide"><img class="carousel-img" src="assets/cinematic-ultra-realistic-food-photography-of-roti.jpeg" alt="Garlic Naan"/><div class="carousel-content"><div class="carousel-special">Freshly Baked</div><div class="carousel-name">Garlic Naan</div><div class="carousel-desc">Soft naan finished with garlic butter and herbs</div><div class="carousel-footer"><span class="carousel-price">₹ 49</span><button class="carousel-order" onclick="addToCartByName('Garlic Naan')">Book Dish</button></div></div></div>
+      <div class="carousel-slide"><img class="carousel-img" src="assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg" alt="Paneer Tikka"/><div class="carousel-content"><div class="carousel-special">Chef's Favourite</div><div class="carousel-name">Paneer Tikka</div><div class="carousel-desc">Marinated cottage cheese cubes grilled in tandoor</div><div class="carousel-footer"><span class="carousel-price">₹ 239</span><button class="carousel-order" onclick="addToCartByName('Paneer Tikka')">Book Dish</button></div></div></div>
+      <div class="carousel-slide"><img class="carousel-img" src="assets/cinematic-ultra-realistic-food-photography-of-chil.jpeg" alt="Chilli Paneer"/><div class="carousel-content"><div class="carousel-special">Weekend Special</div><div class="carousel-name">Chilli Paneer</div><div class="carousel-desc">Crispy paneer in fiery soy-ginger-chilli sauce</div><div class="carousel-footer"><span class="carousel-price">₹ 199</span><button class="carousel-order" onclick="addToCartByName('Chilli Paneer')">Book Dish</button></div></div></div>
+      <div class="carousel-slide"><img class="carousel-img" src="assets/cinematic-ultra-realistic-food-photography-of-a-re.jpeg" alt="Hara Bhara Kabab"/><div class="carousel-content"><div class="carousel-special">Healthy Pick</div><div class="carousel-name">Hara Bhara Kabab</div><div class="carousel-desc">Green patties of spinach, peas and paneer with mint chutney</div><div class="carousel-footer"><span class="carousel-price">₹ 239</span><button class="carousel-order" onclick="addToCartByName('Hara Bhara Kabab')">Book Dish</button></div></div></div>
+      <!-- duplicates -->
+      <div class="carousel-slide"><img class="carousel-img" src="assets/cinematic-ultra-realistic-food-photography-of-dal-.jpeg" alt="Dal Makhani"/><div class="carousel-content"><div class="carousel-special">Today's Special</div><div class="carousel-name">Dal Makhani</div><div class="carousel-desc">Slow-cooked black lentils simmered overnight in buttery tomato gravy</div><div class="carousel-footer"><span class="carousel-price">₹ 179</span><button class="carousel-order" onclick="addToCartByName('Dal Makhani')">Book Dish</button></div></div></div>
+      <div class="carousel-slide"><img class="carousel-img" src="assets/cinematic-ultra-realistic-food-photography-of-roti.jpeg" alt="Garlic Naan"/><div class="carousel-content"><div class="carousel-special">Freshly Baked</div><div class="carousel-name">Garlic Naan</div><div class="carousel-desc">Soft naan finished with garlic butter and herbs</div><div class="carousel-footer"><span class="carousel-price">₹ 49</span><button class="carousel-order" onclick="addToCartByName('Garlic Naan')">Book Dish</button></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- POPULAR ORDER GRID -->
+<section class="food-grid-section">
+  <div style="max-width:1200px;margin:0 auto;padding-top:80px;padding-bottom:40px;text-align:center">
+    <div class="section-eyebrow reveal">Pre-Book Dishes</div>
+    <h2 class="section-title reveal reveal-delay-1">Popular <em>Choices</em></h2>
+    <p class="section-desc reveal reveal-delay-2">Pre-book your favourites and pair them with your seat reservation for a smooth dine-in experience.</p>
+  </div>
+  <div class="food-grid">
+    <div class="food-card reveal"><img class="food-card-img" src="assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg" alt="Paneer Tikka"/><div class="food-card-body"><span class="food-card-name">Paneer Tikka</span><div class="food-order-wrap"><a href="#" class="food-order-btn" onclick="addToCartByName('Paneer Tikka');return false;">Book Dish</a></div></div></div>
+    <div class="food-card reveal reveal-delay-1"><img class="food-card-img" src="assets/cinematic-ultra-realistic-food-photography-of-a-re.jpeg" alt="Hara Bhara Kabab"/><div class="food-card-body"><span class="food-card-name">Hara Bhara Kabab</span><div class="food-order-wrap"><a href="#" class="food-order-btn" onclick="addToCartByName('Hara Bhara Kabab');return false;">Book Dish</a></div></div></div>
+    <div class="food-card reveal reveal-delay-2"><img class="food-card-img" src="assets/cinematic-ultra-realistic-food-photography-of-chil.jpeg" alt="Chilli Paneer"/><div class="food-card-body"><span class="food-card-name">Chilli Paneer</span><div class="food-order-wrap"><a href="#" class="food-order-btn" onclick="addToCartByName('Chilli Paneer');return false;">Book Dish</a></div></div></div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="reserve">
+  <div class="booking-section">
+    <div class="booking-left reveal">
+      <span class="booking-info-tag">Reservations</span>
+      <h2 class="booking-title">Reserve Your<br><em>Perfect Evening</em></h2>
+      <p class="booking-desc">Secure your table for an unforgettable dining experience. Walk-ins welcome, but reservations guarantee your preferred time and setting.</p>
+      <div class="booking-features">
+        <div class="booking-feat"><i class="fas fa-check-circle"></i><span>Instant confirmation via SMS &amp; Email</span></div>
+        <div class="booking-feat"><i class="fas fa-clock"></i><span>Flexible cancellation up to 2 hours before</span></div>
+        <div class="booking-feat"><i class="fas fa-star"></i><span>Priority seating for special occasions</span></div>
+        <div class="booking-feat"><i class="fas fa-phone"></i><span>Concierge: +91 9693210321</span></div>
+      </div>
+    </div>
+    <div class="booking-widget reveal reveal-delay-1">
+      <div class="widget-title">Book a Table</div>
+      <div class="widget-row">
+        <div class="widget-field"><label>Your Name</label><input type="text" id="bookName"/></div>
+        <div class="widget-field"><label>Phone</label><input type="tel" id="bookPhone"/></div>
+      </div>
+      <div class="widget-row">
+        <div class="widget-field"><label>Date</label><input type="date" id="bookDate" onchange="updateTimeSlots()"/></div>
+        <div class="widget-field"><label>Guests</label>
+          <select id="bookGuests">
+            <option value="1">1 person</option>
+            <option value="2" selected>2 people</option>
+            <option value="3">3 people</option>
+            <option value="4">4 people</option>
+            <option value="5">5 people</option>
+            <option value="6+">6+ people</option>
+          </select>
+        </div>
+      </div>
+      <div class="widget-time-label">Select Time Slot</div>
+      <p class="time-slot-hint" id="slotHint">Please select a date first to see available time slots.</p>
+      <div class="time-slots" id="timeSlots" style="display:none"></div>
+      <button class="btn-book" onclick="bookTable()">Confirm Reservation</button>
+      <div class="book-note">No card required · Free cancellation</div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="social-section">
+  <div class="social-header">
+    <div class="section-eyebrow">Guest Experiences</div>
+    <h2 class="section-title" style="font-size:clamp(1.6rem,3vw,2.4rem)">What Our <em>Guests Say</em></h2>
+  </div>
+  <div class="reviews-track-wrap">
+    <div class="reviews-track" id="reviewsTrack">
+      <div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"The Dal Makhani here is hands down the best I've had outside of Punjab. Rich, buttery, absolutely divine."</p><div class="review-author"><div class="review-avatar">RS</div><div><div class="review-name">Rahul Sharma</div><div class="review-via">via Google</div></div></div></div>
+      <div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"Visited with family for a special occasion. The Shahi Paneer was restaurant-quality at its finest."</p><div class="review-author"><div class="review-avatar">PA</div><div><div class="review-name">Priya Agarwal</div><div class="review-via">via Zomato</div></div></div></div>
+      <div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><p class="review-text">"Been a regular for 5 years. The Paneer Tikka never disappoints — perfectly charred every single time."</p><div class="review-author"><div class="review-avatar">AK</div><div><div class="review-name">Amit Kumar</div><div class="review-via">Regular Guest</div></div></div></div>
+      <div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"Online ordering is seamless and food arrives hot and fresh. My go-to restaurant in Ranchi!"</p><div class="review-author"><div class="review-avatar">SM</div><div><div class="review-name">Sunita Mishra</div><div class="review-via">via Swiggy</div></div></div></div>
+      <div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"Amazing Chole Bhature on weekends! Generous portions and very reasonable price."</p><div class="review-author"><div class="review-avatar">DG</div><div><div class="review-name">Deepak Gupta</div><div class="review-via">via Google</div></div></div></div>
+      <div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"As a student, Punjabi Kitchen was my lifeline. Now I bring my family here. Some traditions are worth keeping."</p><div class="review-author"><div class="review-avatar">NK</div><div><div class="review-name">Neha Khanna</div><div class="review-via">Loyal Customer</div></div></div></div>
+      <!-- duplicates for seamless loop -->
+      <div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"The Dal Makhani here is hands down the best I've had outside of Punjab. Rich, buttery, absolutely divine."</p><div class="review-author"><div class="review-avatar">RS</div><div><div class="review-name">Rahul Sharma</div><div class="review-via">via Google</div></div></div></div>
+      <div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"Visited with family for a special occasion. The Shahi Paneer was restaurant-quality at its finest."</p><div class="review-author"><div class="review-avatar">PA</div><div><div class="review-name">Priya Agarwal</div><div class="review-via">via Zomato</div></div></div></div>
+      <div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div><p class="review-text">"Been a regular for 5 years. The Paneer Tikka never disappoints — perfectly charred every single time."</p><div class="review-author"><div class="review-avatar">AK</div><div><div class="review-name">Amit Kumar</div><div class="review-via">Regular Guest</div></div></div></div>
+      <div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"Online ordering is seamless and food arrives hot and fresh. My go-to restaurant in Ranchi!"</p><div class="review-author"><div class="review-avatar">SM</div><div><div class="review-name">Sunita Mishra</div><div class="review-via">via Swiggy</div></div></div></div>
+      <div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"Amazing Chole Bhature on weekends! Generous portions and very reasonable price."</p><div class="review-author"><div class="review-avatar">DG</div><div><div class="review-name">Deepak Gupta</div><div class="review-via">via Google</div></div></div></div>
+      <div class="review-card"><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div><p class="review-text">"As a student, Punjabi Kitchen was my lifeline. Now I bring my family here. Some traditions are worth keeping."</p><div class="review-author"><div class="review-avatar">NK</div><div><div class="review-name">Neha Khanna</div><div class="review-via">Loyal Customer</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section" id="location">
+  <div style="margin-bottom:40px;text-align:center">
+    <div class="section-eyebrow reveal">Find Us</div>
+    <h2 class="section-title reveal reveal-delay-1">Our <em>Location</em></h2>
+  </div>
+  <div class="map-wrapper reveal">
+    <div class="map-info">
+      <div class="map-place-name">Punjabi Kitchen</div>
+      <span class="map-place-tag">Multi Cuisine Family Restaurant</span>
+      <div class="map-detail"><i class="fas fa-map-marker-alt"></i><div class="map-detail-text">Purulia Rd, opposite Kashyap Eye Hospital, Ajit Enclave, New Barhi Toli, Ranchi, Jharkhand 834001</div></div>
+      <div class="map-detail"><i class="fas fa-phone"></i><div class="map-detail-text">+91 9693210321</div></div>
+      <div class="map-detail"><i class="fas fa-envelope"></i><div class="map-detail-text">harsh.khanna0805@gmail.com</div></div>
+      <hr class="map-divider"/>
+      <div class="map-hours-title">Opening Hours</div>
+      <div class="map-hours-row"><span>Mon - Fri</span><span>11:00 AM To 11:00 PM</span></div>
+      <div class="map-hours-row today"><span>Sat - Sun</span><span>11:00 AM To 11:00 PM</span></div>
+    </div>
+    <iframe
+      id="restaurant-map"
+      title="Punjabi Kitchen Location"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps?q=Purulia%20Rd%2C%20opposite%20Kashyap%20Eye%20Hospital%2C%20Ajit%20Enclave%2C%20New%20Barhi%20Toli%2C%20Ranchi%2C%20Jharkhand%20834001&output=embed">
+    </iframe>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand-name">Punjabi Kitchen</div>
+        <p>Serving authentic flavours with love and simplicity since 2009. A home away from home for food lovers in Ranchi.</p>
+        <div class="footer-note"><i class="fas fa-utensils"></i> Dish Booking + Seat Reservation</div>
+        <div class="footer-social">
+          <a href="#" onclick="openSocial('instagram');return false;" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" onclick="openSocial('facebook');return false;" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" onclick="openSocial('twitter');return false;" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+          <a href="#" onclick="openSocial('youtube');return false;" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Navigate</h4><ul><li><a href="#">Home</a></li><li><a href="#about">About Us</a></li><li><a href="#menu">Menu</a></li><li><a href="#specials">Specials</a></li><li><a href="#reserve">Reservations</a></li><li><a href="admin.html">Admin Panel</a></li></ul></div>
+      <div class="footer-col"><h4>Services</h4><ul><li><a href="#">Dine In</a></li><li><a href="#">Dish Pre-Booking</a></li><li><a href="#">Seat Reservation</a></li><li><a href="#">Catering</a></li><li><a href="#">Private Events</a></li></ul></div>
+      <div class="footer-col footer-contact"><h4>Reach Us</h4><ul><li><a href="#location"><i class="fas fa-location-dot"></i><span>Purulia Rd, opposite Kashyap Eye Hospital, Ajit Enclave, New Barhi Toli, Ranchi, Jharkhand 834001</span></a></li><li><a href="tel:+919693210321"><i class="fas fa-phone"></i><span>+91 9693210321</span></a></li><li><a href="mailto:harsh.khanna0805@gmail.com"><i class="fas fa-envelope"></i><span>harsh.khanna0805@gmail.com</span></a></li><li><a href="#location"><i class="fas fa-clock"></i><span>Mon - Sun: 11:00 AM To 11:00 PM</span></a></li></ul></div>
+    </div>
+    <hr class="footer-divider"/>
+    <div class="footer-bottom">
+      <span>© 2026 Punjabi Kitchen, Ranchi. All rights reserved.</span>
+      <span>Made with <i class="fas fa-heart" style="color:var(--gold)"></i> for food lovers</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"><i class="fas fa-check-circle"></i><span id="toastMsg">Done!</span></div>
+
+<script src="assets/menu-data.js"></script>
+<script src="assets/reset-state.js"></script>
+<script src="assets/auth.js"></script>
+<script>
+/* ═══════════════════════════════════════════
+   FULL MENU DATA — from all uploaded images
+═══════════════════════════════════════════ */
+const MENU_LEGACY = [
+  // STARTERS — VEG
+  {cat:'starters',name:'Veg Roll',price:99,veg:true,desc:'Crispy roll stuffed with fresh vegetables',img:'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&h=450&fit=crop'},
+  {cat:'starters',name:'Paneer Roll',price:119,veg:true,desc:'Soft paneer wrapped in a crispy roll',img:'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&h=450&fit=crop'},
+  {cat:'starters',name:'Mushroom Roll',price:119,veg:true,desc:'Sautéed mushroom in a toasted roll',img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&h=450&fit=crop'},
+  {cat:'starters',name:'French Fries',price:139,veg:true,desc:'Golden crispy potato fries',img:'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600&h=450&fit=crop'},
+  {cat:'starters',name:'Paneer Pakora',price:229,veg:true,desc:'Batter-fried cottage cheese fritters',img:'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&h=450&fit=crop'},
+  // STARTERS — NON VEG
+  {cat:'starters',name:'Egg Pakora',price:149,veg:false,desc:'Deep-fried egg pakora — 2 pcs',img:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=450&fit=crop'},
+  {cat:'starters',name:'Omelette',price:89,veg:false,desc:'Classic egg omelette',img:'https://images.unsplash.com/photo-1526367790999-0150786686a2?w=600&h=450&fit=crop'},
+  {cat:'starters',name:'Chicken Roll',price:119,veg:false,desc:'Tender chicken wrapped in a crispy roll',img:'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&h=450&fit=crop'},
+  // SOYA CHAP
+  {cat:'soya',name:'Soya Afghani Chap',price:229,veg:true,desc:'Afghani style marinated soya chap',img:'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&h=450&fit=crop',badge:'Popular'},
+  {cat:'soya',name:'Soya Malai Chap',price:239,veg:true,desc:'Creamy malai marinated soya chap',img:'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&h=450&fit=crop'},
+  {cat:'soya',name:'Soya Achari Chap',price:239,veg:true,desc:'Pickle-spiced soya chap',img:'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&h=450&fit=crop'},
+  {cat:'soya',name:'Soya Butter Masala',price:239,veg:true,desc:'Rich butter-masala soya chap',img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&h=450&fit=crop'},
+  {cat:'soya',name:'Soya Do Pyaza',price:229,veg:true,desc:'Soya chap with double onion preparation',img:'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600&h=450&fit=crop'},
+  {cat:'soya',name:'Soya Masala',price:229,veg:true,desc:'Classic spiced soya masala',img:'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&h=450&fit=crop'},
+  // MAIN COURSE — VEG
+  {cat:'main',name:'Veg Navratan Korma',price:219,veg:true,desc:'Nine-vegetable rich korma',img:'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&h=450&fit=crop'},
+  {cat:'main',name:'Paneer Butter Masala',price:219,veg:true,desc:'Paneer in rich buttery tomato gravy',img:'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&h=450&fit=crop',badge:"Chef's Pick"},
+  {cat:'main',name:'Paneer Tikka Butter Masala',price:369,veg:true,desc:'Tandoor-grilled paneer in butter masala',img:'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&h=450&fit=crop'},
+  {cat:'main',name:'Shahi Paneer',price:249,veg:true,desc:'Royal paneer in cashew-saffron gravy',img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&h=450&fit=crop'},
+  {cat:'main',name:'Paneer Korma',price:239,veg:true,desc:'Delicate paneer in aromatic korma gravy',img:'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600&h=450&fit=crop'},
+  {cat:'main',name:'Paneer Keema',price:229,veg:true,desc:'Crumbled paneer in spiced keema style',img:'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&h=450&fit=crop'},
+  {cat:'main',name:'Palak Paneer',price:229,veg:true,desc:'Creamed spinach with cottage cheese',img:'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&h=450&fit=crop'},
+  {cat:'main',name:'Matar Paneer',price:229,veg:true,desc:'Peas and paneer in spiced tomato gravy',img:'https://images.unsplash.com/photo-1526367790999-0150786686a2?w=600&h=450&fit=crop'},
+  {cat:'main',name:'Kaju Curry',price:309,veg:true,desc:'Rich cashew curry with aromatic spices',img:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=450&fit=crop'},
+  // MAIN — NON VEG
+  {cat:'main',name:'Chicken Curry',price:229,veg:false,desc:'Classic chicken curry — 2 pcs',img:'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&h=450&fit=crop'},
+  {cat:'main',name:'Chicken Butter Masala',price:249,veg:false,desc:'Tender chicken in rich butter masala',img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&h=450&fit=crop',badge:'Popular'},
+  {cat:'main',name:'Chicken Handi',price:339,veg:false,desc:'Slow-cooked chicken in a handi — 4 pcs',img:'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600&h=450&fit=crop'},
+  {cat:'main',name:'Makhani Chicken',price:359,veg:false,desc:'Rich makhani gravy chicken — 4 pcs',img:'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&h=450&fit=crop'},
+  {cat:'main',name:'Punjabi Kitchen Special',price:509,veg:false,desc:'The signature platter — 8 pcs',img:'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&h=450&fit=crop',badge:'Signature'},
+  {cat:'main',name:'Mutton Rogan Josh',price:369,veg:false,desc:'Kashmiri slow-cooked mutton — 4 pcs',img:'https://images.unsplash.com/photo-1526367790999-0150786686a2?w=600&h=450&fit=crop'},
+  // DAL & RICE
+  {cat:'dal',name:'Dal Tadka',price:169,veg:true,desc:'Tempered yellow lentils',img:'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&h=450&fit=crop'},
+  {cat:'dal',name:'Dal Makhani',price:179,veg:true,desc:'Creamy overnight-cooked black lentils',img:'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600&h=450&fit=crop',badge:'Bestseller'},
+  {cat:'dal',name:'Dal Amritsari',price:179,veg:true,desc:'Authentic Amritsari-style dal',img:'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&h=450&fit=crop'},
+  {cat:'dal',name:'Steamed Rice',price:99,veg:true,desc:'Plain basmati steamed rice',img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&h=450&fit=crop'},
+  {cat:'dal',name:'Veg Biryani',price:189,veg:true,desc:'Fragrant vegetable biryani',img:'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&h=450&fit=crop'},
+  {cat:'dal',name:'Chicken Dum Biryani',price:209,veg:false,desc:'Slow-cooked chicken dum biryani',img:'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&h=450&fit=crop',badge:'Must Try'},
+  {cat:'dal',name:'Double Leg Biryani',price:229,veg:false,desc:'Biryani with two full chicken legs',img:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=450&fit=crop'},
+  // CHINESE STARTERS
+  {cat:'chinese',name:'Veg Chilly',price:189,veg:true,desc:'Crispy vegetables in chilli sauce',img:'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&h=450&fit=crop'},
+  {cat:'chinese',name:'Paneer Chilly',price:199,veg:true,desc:'Crispy paneer in Indo-Chinese chilli sauce',img:'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&h=450&fit=crop',badge:'Popular'},
+  {cat:'chinese',name:'Honey Potato Chilly',price:229,veg:true,desc:'Crispy potato in sweet-spicy honey sauce',img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&h=450&fit=crop'},
+  {cat:'chinese',name:'Veg Manchurian',price:199,veg:true,desc:'Veg balls in Manchurian gravy',img:'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600&h=450&fit=crop'},
+  {cat:'chinese',name:'Chicken Chilly (Boneless)',price:229,veg:false,desc:'Boneless chicken in fiery chilli',img:'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&h=450&fit=crop'},
+  {cat:'chinese',name:'Dragon Chicken',price:220,veg:false,desc:'Fiery dragon-style chicken',img:'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&h=450&fit=crop',badge:'Spicy'},
+  {cat:'chinese',name:'Veg Hakka Noodles',price:169,veg:true,desc:'Stir-fried hakka noodles with vegetables',img:'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&h=450&fit=crop'},
+  {cat:'chinese',name:'Chicken Hakka Noodles',price:189,veg:false,desc:'Stir-fried noodles with chicken',img:'https://images.unsplash.com/photo-1526367790999-0150786686a2?w=600&h=450&fit=crop'},
+  // BREADS
+  {cat:'breads',name:'Tandoori Roti',price:23,veg:true,desc:'Classic tandoor-baked roti',img:'assets/cinematic-ultra-realistic-food-photography-of-plai.jpeg'},
+  {cat:'breads',name:'Butter Naan',price:39,veg:true,desc:'Fluffy naan brushed with golden butter',img:'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600&h=450&fit=crop',badge:'Bestseller'},
+  {cat:'breads',name:'Stuffed Kulcha',price:45,veg:true,desc:'Spiced stuffed kulcha',img:'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&h=450&fit=crop'},
+  {cat:'breads',name:'Aloo Paratha',price:45,veg:true,desc:'Potato-stuffed flatbread with butter',img:'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&h=450&fit=crop'},
+  {cat:'breads',name:'Shahi Naan',price:59,veg:true,desc:'Royally flavoured naan',img:'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&h=450&fit=crop'},
+  {cat:'breads',name:'Garlic Naan',price:49,veg:true,desc:'Naan brushed with garlic butter',img:'assets/cinematic-ultra-realistic-food-photography-of-roti.jpeg'},
+  {cat:'breads',name:'Laccha Paratha',price:44,veg:true,desc:'Layered whole-wheat flaky paratha',img:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=450&fit=crop'},
+  // TANDOOR
+  {cat:'tandoor',name:'Veg Hara Bhara Kabab',price:239,veg:true,desc:'Green patties of spinach and peas',img:'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&h=450&fit=crop'},
+  {cat:'tandoor',name:'Malai Paneer Tikka',price:249,veg:true,desc:'Creamy malai-marinated paneer tikka',img:'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&h=450&fit=crop',badge:"Chef's Pick"},
+  {cat:'tandoor',name:'Hariyali Paneer Tikka',price:249,veg:true,desc:'Green-herb marinated paneer tikka',img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&h=450&fit=crop'},
+  {cat:'tandoor',name:'Paneer Tikka',price:239,veg:true,desc:'Classic paneer tikka from the tandoor',img:'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&h=450&fit=crop'},
+  {cat:'tandoor',name:'Tandoori Chicken',price:239,veg:false,desc:'Half tandoori chicken — 239/Full 449',img:'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&h=450&fit=crop',badge:'Classic'},
+  {cat:'tandoor',name:'Reshmi Kabab',price:279,veg:false,desc:'Silky smooth chicken reshmi kabab',img:'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600&h=450&fit=crop'},
+  {cat:'tandoor',name:'Chicken Tikka',price:239,veg:false,desc:'Marinated boneless chicken tikka',img:'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&h=450&fit=crop'},
+  {cat:'tandoor',name:'Chicken Achari Tikka',price:259,veg:false,desc:'Pickle-spiced chicken tikka',img:'https://images.unsplash.com/photo-1526367790999-0150786686a2?w=600&h=450&fit=crop'},
+  // DESSERTS
+  {cat:'desserts',name:'Brownie with Choc Sauce',price:119,veg:true,desc:'Warm chocolate brownie with chocolate sauce',img:'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600&h=450&fit=crop'},
+  {cat:'desserts',name:'Brownie with Ice-cream',price:139,veg:true,desc:'Warm brownie topped with vanilla ice cream',img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&h=450&fit=crop'},
+  {cat:'desserts',name:'Hot Gulab Jamun',price:59,veg:true,desc:'Warm gulab jamun — 2 pcs',img:'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&h=450&fit=crop',badge:'Popular'},
+  {cat:'desserts',name:'Ice-Cream (Two Scoops)',price:100,veg:true,desc:'Two scoops of assorted ice cream',img:'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=600&h=450&fit=crop'},
+  {cat:'desserts',name:'Tutty Fruity',price:129,veg:true,desc:'Colourful tutti frutti dessert',img:'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&h=450&fit=crop'},
+  // BEVERAGES
+  {cat:'beverages',name:'Cold Drinks',price:35,veg:true,desc:'All flavours available',img:'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&h=450&fit=crop'},
+  {cat:'beverages',name:'Masala Cold Drink',price:50,veg:true,desc:'Cold drink with masala twist',img:'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=450&fit=crop'},
+  {cat:'beverages',name:'Fresh Lime Soda',price:50,veg:true,desc:'Sweet or sour — your choice',img:'https://images.unsplash.com/photo-1526367790999-0150786686a2?w=600&h=450&fit=crop'},
+  {cat:'beverages',name:'Strawberry Shake',price:109,veg:true,desc:'Fresh strawberry milkshake',img:'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&h=450&fit=crop'},
+  {cat:'beverages',name:'Chocolate Shake',price:109,veg:true,desc:'Rich chocolate milkshake',img:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&h=450&fit=crop',badge:'Favourite'},
+  {cat:'beverages',name:'Cold Coffee',price:119,veg:true,desc:'Chilled cold coffee',img:'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600&h=450&fit=crop'},
+  {cat:'beverages',name:'Tea',price:60,veg:true,desc:'Hot masala or plain tea',img:'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&h=450&fit=crop'},
+  {cat:'beverages',name:'Coffee',price:70,veg:true,desc:'Hot brewed coffee',img:'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=600&h=450&fit=crop'},
+];
+
+const MENU = window.PK_MENU_ITEMS || MENU_LEGACY;
+
+/* ═══════════════════════════════════════════
+   MENU CAROUSEL ENGINE
+═══════════════════════════════════════════ */
+const CARDS_PER_PAGE = 3;
+let menuCurrentCat = 'all';
+let menuPage = 0;
+let filteredMenu = [];
+
+const menuTrack = document.getElementById('menuTrack');
+const menuDots  = document.getElementById('menuDots');
+const menuSection = document.getElementById('menu');
+const menuViewport = document.getElementById('menuCarouselOuter');
+let menuAutoTimer = null;
+let menuIsVisible = false;
+
+function getCardsPerPage(){
+  if(window.innerWidth <= 600) return 1;
+  if(window.innerWidth <= 900) return 2;
+  if(window.innerWidth <= 1200) return 3;
+  return 4;
+}
+
+function getMenuMaxIndex(){
+  return Math.max(0, filteredMenu.length - getCardsPerPage());
+}
+
+function getMenuStepWidth(){
+  const firstCard = menuTrack.querySelector('.menu-card');
+  if(!firstCard) return 0;
+  const trackStyles = getComputedStyle(menuTrack);
+  const gap = parseFloat(trackStyles.columnGap || trackStyles.gap || '0');
+  return firstCard.getBoundingClientRect().width + gap;
+}
+
+function applyMenuTransform(animate = true){
+  const maxIndex = getMenuMaxIndex();
+  menuPage = Math.max(0, Math.min(menuPage, maxIndex));
+  const step = getMenuStepWidth();
+  if(!step) return;
+  menuTrack.style.transition = animate ? 'transform 0.55s cubic-bezier(.4,0,.2,1)' : 'none';
+  menuTrack.style.transform = `translateX(-${menuPage * step}px)`;
+  updateMenuNav(maxIndex);
+  highlightDot(maxIndex);
+}
+
+function stopMenuAutoScroll(){
+  if(menuAutoTimer){
+    clearInterval(menuAutoTimer);
+    menuAutoTimer = null;
+  }
+}
+
+function startMenuAutoScroll(){
+  if(menuAutoTimer || !menuIsVisible || getMenuMaxIndex() === 0) return;
+  menuAutoTimer = window.setInterval(() => {
+    const maxIndex = getMenuMaxIndex();
+    if(maxIndex === 0){
+      stopMenuAutoScroll();
+      return;
+    }
+    menuPage = menuPage >= maxIndex ? 0 : menuPage + 1;
+    applyMenuTransform(true);
+  }, 2600);
+}
+
+if(menuViewport){
+  menuViewport.addEventListener('mouseenter', stopMenuAutoScroll);
+  menuViewport.addEventListener('mouseleave', startMenuAutoScroll);
+}
+
+if(menuSection && 'IntersectionObserver' in window){
+  const menuObserver = new IntersectionObserver(entries => {
+    const entry = entries[0];
+    menuIsVisible = !!entry && entry.isIntersecting && entry.intersectionRatio >= 0.35;
+    if(menuIsVisible){
+      startMenuAutoScroll();
+    }else{
+      stopMenuAutoScroll();
+    }
+  }, { threshold: [0.35, 0.6] });
+  menuObserver.observe(menuSection);
+}
+
+const CATEGORY_IMAGE_POOL = {
+  starters: [
+    'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=900&h=700&fit=crop&auto=format',
+    'https://images.unsplash.com/photo-1513456852971-30c0b8199d4d?w=900&h=700&fit=crop&auto=format'
+  ],
+  soya: [
+    'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=900&h=700&fit=crop&auto=format',
+    'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=900&h=700&fit=crop&auto=format'
+  ],
+  main: [
+    'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=900&h=700&fit=crop&auto=format',
+    'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=900&h=700&fit=crop&auto=format'
+  ],
+  dal: [
+    'https://images.unsplash.com/photo-1596797038530-2c107aa56a75?w=900&h=700&fit=crop&auto=format',
+    'https://images.unsplash.com/photo-1701579231389-f9f7f5f9eb4d?w=900&h=700&fit=crop&auto=format'
+  ],
+  chinese: [
+    'https://images.unsplash.com/photo-1617622141675-d3005b9067c5?w=900&h=700&fit=crop&auto=format',
+    'https://images.unsplash.com/photo-1512003867696-6d5ce6835040?w=900&h=700&fit=crop&auto=format'
+  ],
+  breads: [
+    'https://images.unsplash.com/photo-1633945274309-2c16c9682a8c?w=900&h=700&fit=crop&auto=format',
+    'https://images.unsplash.com/photo-1604908176997-431f21c34c76?w=900&h=700&fit=crop&auto=format'
+  ],
+  tandoor: [
+    'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=900&h=700&fit=crop&auto=format',
+    'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=900&h=700&fit=crop&auto=format'
+  ],
+  desserts: [
+    'https://images.unsplash.com/photo-1551024601-bec78aea704b?w=900&h=700&fit=crop&auto=format',
+    'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=900&h=700&fit=crop&auto=format'
+  ],
+  beverages: [
+    'https://images.unsplash.com/photo-1544145945-f90425340c7e?w=900&h=700&fit=crop&auto=format',
+    'https://images.unsplash.com/photo-1551024709-8f23befc6cf7?w=900&h=700&fit=crop&auto=format'
+  ]
+};
+
+const GLOBAL_MENU_FALLBACK = 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&h=700&fit=crop&auto=format';
+const CART_KEY = 'pk_cart_v1';
+let authMode = 'login';
+
+function switchAuthMode(mode){
+  authMode = mode;
+  const isLogin = mode === 'login';
+  document.getElementById('switchLogin').classList.toggle('active', isLogin);
+  document.getElementById('switchSignup').classList.toggle('active', !isLogin);
+  document.getElementById('authLoginPanel').style.display = isLogin ? 'grid' : 'none';
+  document.getElementById('authSignupPanel').style.display = isLogin ? 'none' : 'grid';
+  document.getElementById('authMsg').textContent = '';
+}
+
+function openAuthModal(mode = 'login'){
+  switchAuthMode(mode);
+  const modal = document.getElementById('authModal');
+  modal.classList.add('show');
+  modal.setAttribute('aria-hidden', 'false');
+}
+
+function closeAuthModal(){
+  const modal = document.getElementById('authModal');
+  modal.classList.remove('show');
+  modal.setAttribute('aria-hidden', 'true');
+}
+
+function refreshAuthUI(){
+  const user = window.PK_AUTH?.getCurrentUser();
+  const loginBtn = document.getElementById('authLoginBtn');
+  const wrap = document.getElementById('authUserWrap');
+  const name = document.getElementById('authUserName');
+  if(user){
+    loginBtn.style.display = 'none';
+    wrap.style.display = 'inline-flex';
+    name.textContent = user.name ? `Hi, ${user.name.split(' ')[0]}` : 'My Account';
+    const bookName = document.getElementById('bookName');
+    const bookPhone = document.getElementById('bookPhone');
+    if(bookName && !bookName.value) bookName.value = user.name || '';
+    if(bookPhone && !bookPhone.value) bookPhone.value = user.phone || '';
+  }else{
+    loginBtn.style.display = 'inline-flex';
+    wrap.style.display = 'none';
+  }
+}
+
+function setAuthMessage(msg){
+  document.getElementById('authMsg').textContent = msg || '';
+}
+
+function handleSignup(){
+  const payload = {
+    name: document.getElementById('signupName').value,
+    email: document.getElementById('signupEmail').value,
+    phone: document.getElementById('signupPhone').value,
+    password: document.getElementById('signupPassword').value
+  };
+  const result = window.PK_AUTH?.signup(payload);
+  if(!result?.ok){
+    setAuthMessage(result?.message || 'Signup failed.');
+    return;
+  }
+  closeAuthModal();
+  refreshAuthUI();
+  showToast('Account created. You can now track bookings and orders.');
+}
+
+function handleLogin(){
+  const result = window.PK_AUTH?.login({
+    email: document.getElementById('loginEmail').value,
+    password: document.getElementById('loginPassword').value
+  });
+  if(!result?.ok){
+    setAuthMessage(result?.message || 'Login failed.');
+    return;
+  }
+  closeAuthModal();
+  refreshAuthUI();
+  showToast('Welcome back.');
+}
+
+function logoutUser(){
+  window.PK_AUTH?.logout();
+  refreshAuthUI();
+  showToast('Logged out successfully.');
+}
+
+window.addEventListener('click', (e) => {
+  const modal = document.getElementById('authModal');
+  if(e.target === modal) closeAuthModal();
+});
+
+window.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape') closeAuthModal();
+});
+const LEGACY_DISH_IMAGES = {
+  'Veg Roll': 'assets/cinematic-ultra-realistic-food-photography-of-veg-.jpeg',
+  'Paneer Roll': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Mushroom Roll': 'assets/cinematic-ultra-realistic-food-photography-of-a-re.jpeg',
+  'French Fries': 'assets/cinematic-ultra-realistic-food-photography-of-a-re (1).jpeg',
+  'Paneer Pakora': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Egg Pakora': 'assets/cinematic-ultra-realistic-food-photography-of-a-re (1).jpeg',
+  'Omelette': 'assets/cinematic-ultra-realistic-food-photography-of-a-re.jpeg',
+  'Chicken Roll': 'assets/cinematic-ultra-realistic-food-photography-of-chic.jpeg',
+  'Soya Afghani Chap': 'assets/cinematic-ultra-realistic-food-photography-of-soya.jpeg',
+  'Soya Malai Chap': 'assets/cinematic-ultra-realistic-food-photography-of-soya (1).jpeg',
+  'Soya Achari Chap': 'assets/cinematic-ultra-realistic-food-photography-of-soya (1).jpeg',
+  'Soya Butter Masala': 'assets/cinematic-ultra-realistic-food-photography-of-soya.jpeg',
+  'Soya Do Pyaza': 'assets/cinematic-ultra-realistic-food-photography-of-soya (1).jpeg',
+  'Soya Masala': 'assets/cinematic-ultra-realistic-food-photography-of-soya.jpeg',
+  'Veg Navratan Korma': 'assets/cinematic-ultra-realistic-food-photography-of-veg-.jpeg',
+  'Paneer Butter Masala': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Paneer Tikka Butter Masala': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Shahi Paneer': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Paneer Korma': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Paneer Keema': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Palak Paneer': 'assets/cinematic-ultra-realistic-food-photography-of-veg-.jpeg',
+  'Matar Paneer': 'assets/cinematic-ultra-realistic-food-photography-of-veg-.jpeg',
+  'Kaju Curry': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Chicken Curry': 'assets/cinematic-ultra-realistic-food-photography-of-chic.jpeg',
+  'Chicken Butter Masala': 'assets/cinematic-ultra-realistic-food-photography-of-chic (1).jpeg',
+  'Chicken Handi': 'assets/cinematic-ultra-realistic-food-photography-of-chic (2).jpeg',
+  'Makhani Chicken': 'assets/cinematic-ultra-realistic-food-photography-of-chic.jpeg',
+  'Punjabi Kitchen Special': 'assets/cinematic-ultra-realistic-food-photography-of-chic (2).jpeg',
+  'Mutton Rogan Josh': 'assets/cinematic-ultra-realistic-food-photography-of-chic.jpeg',
+  'Dal Tadka': 'assets/cinematic-ultra-realistic-food-photography-of-dal- (1).jpeg',
+  'Dal Makhani': 'assets/cinematic-ultra-realistic-food-photography-of-dal-.jpeg',
+  'Dal Amritsari': 'assets/cinematic-ultra-realistic-food-photography-of-dal- (1).jpeg',
+  'Steamed Rice': 'assets/cinematic-ultra-realistic-food-photography-of-basm.jpeg',
+  'Veg Biryani': 'assets/cinematic-ultra-realistic-food-photography-of-biry.jpeg',
+  'Chicken Dum Biryani': 'assets/cinematic-ultra-realistic-food-photography-of-biry.jpeg',
+  'Double Leg Biryani': 'assets/cinematic-ultra-realistic-food-photography-of-biry.jpeg',
+  'Veg Chilly': 'assets/cinematic-ultra-realistic-food-photography-of-chil.jpeg',
+  'Paneer Chilly': 'assets/cinematic-ultra-realistic-food-photography-of-chil.jpeg',
+  'Honey Potato Chilly': 'assets/cinematic-ultra-realistic-food-photography-of-veg-.jpeg',
+  'Veg Manchurian': 'assets/cinematic-ultra-realistic-food-photography-of-veg-.jpeg',
+  'Chicken Chilly (Boneless)': 'assets/cinematic-ultra-realistic-food-photography-of-chic.jpeg',
+  'Dragon Chicken': 'assets/cinematic-ultra-realistic-food-photography-of-chic (1).jpeg',
+  'Veg Hakka Noodles': 'assets/cinematic-ultra-realistic-food-photography-of-veg-.jpeg',
+  'Chicken Hakka Noodles': 'assets/cinematic-ultra-realistic-food-photography-of-chic (2).jpeg',
+  'Tandoori Roti': 'assets/cinematic-ultra-realistic-food-photography-of-plai.jpeg',
+  'Butter Naan': 'assets/cinematic-ultra-realistic-food-photography-of-butt.jpeg',
+  'Stuffed Kulcha': 'assets/cinematic-ultra-realistic-food-photography-of-kulc.jpeg',
+  'Aloo Paratha': 'assets/cinematic-ultra-realistic-food-photography-of-plai.jpeg',
+  'Shahi Naan': 'assets/cinematic-ultra-realistic-food-photography-of-butt.jpeg',
+  'Garlic Naan': 'assets/cinematic-ultra-realistic-food-photography-of-roti.jpeg',
+  'Laccha Paratha': 'assets/cinematic-ultra-realistic-food-photography-of-plai.jpeg',
+  'Veg Hara Bhara Kabab': 'assets/cinematic-ultra-realistic-food-photography-of-a-re.jpeg',
+  'Malai Paneer Tikka': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Hariyali Paneer Tikka': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Paneer Tikka': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Tandoori Chicken': 'assets/cinematic-ultra-realistic-food-photography-of-tand.jpeg',
+  'Reshmi Kabab': 'assets/cinematic-ultra-realistic-food-photography-of-chic.jpeg',
+  'Chicken Tikka': 'assets/cinematic-ultra-realistic-food-photography-of-chic.jpeg',
+  'Chicken Achari Tikka': 'assets/cinematic-ultra-realistic-food-photography-of-chic (1).jpeg',
+  'Brownie with Choc Sauce': 'assets/cinematic-ultra-realistic-food-photography-of-khee.jpeg',
+  'Brownie with Ice-cream': 'assets/cinematic-ultra-realistic-food-photography-of-khee.jpeg',
+  'Hot Gulab Jamun': 'assets/cinematic-ultra-realistic-food-photography-of-gula.jpeg',
+  'Ice-Cream (Two Scoops)': 'assets/cinematic-ultra-realistic-food-photography-of-khee.jpeg',
+  'Tutty Fruity': 'assets/cinematic-ultra-realistic-food-photography-of-khee.jpeg',
+  'Cold Drinks': 'assets/cinematic-ultra-realistic-food-photography-of-chai.jpeg',
+  'Masala Cold Drink': 'assets/cinematic-ultra-realistic-food-photography-of-chai.jpeg',
+  'Fresh Lime Soda': 'assets/cinematic-ultra-realistic-food-photography-of-lass.jpeg',
+  'Strawberry Shake': 'assets/cinematic-ultra-realistic-food-photography-of-mang.jpeg',
+  'Chocolate Shake': 'assets/cinematic-ultra-realistic-food-photography-of-chai.jpeg',
+  'Cold Coffee': 'assets/cinematic-ultra-realistic-food-photography-of-chai.jpeg',
+  'Tea': 'assets/cinematic-ultra-realistic-food-photography-of-chai.jpeg',
+  'Coffee': 'assets/cinematic-ultra-realistic-food-photography-of-chai.jpeg',
+  'Paneer Tikka': 'assets/cinematic-ultra-realistic-food-photography-of-pane.jpeg',
+  'Hara Bhara Kabab': 'assets/cinematic-ultra-realistic-food-photography-of-a-re.jpeg',
+  'Chilli Paneer': 'assets/cinematic-ultra-realistic-food-photography-of-chil.jpeg',
+  'Dal Makhani': 'assets/cinematic-ultra-realistic-food-photography-of-dal-.jpeg',
+  'Butter Naan': 'assets/cinematic-ultra-realistic-food-photography-of-butt.jpeg'
+};
+
+const LOCAL_DISH_IMAGES = window.PK_MENU_IMAGE_MAP || LEGACY_DISH_IMAGES;
+
+function hashText(text){
+  let hash = 0;
+  for(let i = 0; i < text.length; i++) hash = ((hash << 5) - hash) + text.charCodeAt(i);
+  return Math.abs(hash);
+}
+
+function getDishImageUrl(dish){
+  if(LOCAL_DISH_IMAGES[dish.name]) return LOCAL_DISH_IMAGES[dish.name];
+  if(dish.img && dish.img.startsWith('http')) return dish.img;
+  const pool = CATEGORY_IMAGE_POOL[dish.cat] || [GLOBAL_MENU_FALLBACK];
+  return pool[hashText(dish.name) % pool.length];
+}
+
+function getDishFallbackImage(dish){
+  const pool = CATEGORY_IMAGE_POOL[dish.cat] || [GLOBAL_MENU_FALLBACK];
+  return pool[(hashText(dish.name) + 1) % pool.length] || GLOBAL_MENU_FALLBACK;
+}
+
+function loadCart(){
+  try{ return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); }
+  catch{ return []; }
+}
+
+function saveCart(items){
+  localStorage.setItem(CART_KEY, JSON.stringify(items));
+  updateCartBadge();
+}
+
+function updateCartBadge(){
+  const badge = document.getElementById('cartCount');
+  if(!badge) return;
+  const qty = loadCart().reduce((sum, item) => sum + item.qty, 0);
+  badge.textContent = String(qty);
+}
+
+function syncHomepageDishImages(){
+  document.querySelectorAll('.carousel-slide img, .food-card-img').forEach(img => {
+    const key = img.alt && img.alt.trim();
+    const localSrc = key ? LOCAL_DISH_IMAGES[key] : null;
+    if(localSrc){
+      img.src = localSrc;
+      img.onerror = () => { img.onerror = null; img.src = GLOBAL_MENU_FALLBACK; };
+    }
+  });
+}
+
+function addToCartByName(name){
+  const dish = MENU.find(item => item.name === name);
+  if(!dish){ showToast('Dish not found.'); return; }
+  const items = loadCart();
+  const existing = items.find(item => item.name === dish.name);
+  if(existing) existing.qty += 1;
+  else items.push({
+    name: dish.name,
+    price: dish.price,
+    img: dish.img,
+    veg: dish.veg,
+    qty: 1,
+    desc: dish.desc
+  });
+  saveCart(items);
+  showToast(`${dish.name} added to cart.`);
+}
+
+function buildMenuCards(){
+  filteredMenu = menuCurrentCat === 'all' ? [...MENU] : MENU.filter(d => d.cat === menuCurrentCat);
+  menuPage = 0;
+  renderMenuPage();
+  buildMenuDots();
+}
+
+function renderMenuPage(){
+  menuTrack.innerHTML = '';
+  filteredMenu.forEach((dish, i) => {
+    const card = document.createElement('div');
+    card.className = 'menu-card';
+    card.style.animationDelay = `${i * 0.08}s`;
+    card.innerHTML = `
+      <img class="menu-card-img" src="${getDishImageUrl(dish)}" alt="${dish.name}" loading="lazy" onerror="this.onerror=null;this.src='${getDishFallbackImage(dish)}'"/>
+      <div class="menu-card-overlay"></div>
+      ${dish.badge ? `<div class="menu-badge">${dish.badge}</div>` : ''}
+      <div class="menu-card-body">
+        <div class="menu-card-cat" style="display:flex;align-items:center;gap:6px">
+          <span class="veg-dot ${dish.veg ? 'veg' : 'nonveg'}"></span>
+          ${dish.cat.charAt(0).toUpperCase() + dish.cat.slice(1)}
+        </div>
+        <div class="menu-card-name">${dish.name}</div>
+        <div class="menu-card-desc">${dish.desc}</div>
+        <div class="menu-card-footer">
+          <div class="menu-card-price">₹ ${dish.price}</div>
+          <button class="menu-card-btn" onclick='addToCartByName(${JSON.stringify(dish.name)})'>Book Dish</button>
+        </div>
+      </div>`;
+
+    // 3D tilt
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top)  / r.height - 0.5;
+      card.style.transform = `perspective(900px) rotateY(${x*14}deg) rotateX(${-y*10}deg) translateZ(10px) translateY(-6px)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+
+    menuTrack.appendChild(card);
+  });
+
+  applyMenuTransform(false);
+  startMenuAutoScroll();
+}
+
+function buildMenuDots(){
+  const totalPages = getMenuMaxIndex() + 1;
+  menuDots.innerHTML = '';
+  if(totalPages > 12){
+    return;
+  }
+  for(let i = 0; i < totalPages; i++){
+    const dot = document.createElement('div');
+    dot.className = 'menu-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => {
+      menuPage = i;
+      applyMenuTransform(true);
+      stopMenuAutoScroll();
+      startMenuAutoScroll();
+    };
+    menuDots.appendChild(dot);
+  }
+}
+
+function updateMenuNav(maxIndex){
+  document.getElementById('menuPrev').disabled = menuPage === 0;
+  document.getElementById('menuNext').disabled = menuPage >= maxIndex;
+}
+
+function highlightDot(totalPages){
+  const dots = menuDots.querySelectorAll('.menu-dot');
+  dots.forEach((d, i) => d.classList.toggle('active', i === menuPage));
+}
+
+function slideMenu(dir){
+  const maxIndex = getMenuMaxIndex();
+  menuPage = Math.max(0, Math.min(menuPage + dir, maxIndex));
+  applyMenuTransform(true);
+  stopMenuAutoScroll();
+  startMenuAutoScroll();
+}
+
+// Category tab clicks
+document.getElementById('menuTabs').addEventListener('click', e => {
+  const tab = e.target.closest('.menu-tab');
+  if(!tab) return;
+  document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  menuCurrentCat = tab.dataset.cat;
+  const labels = {all:'All Dishes',starters:'Starters',soya:'Soya Chap',main:'Main Course',dal:'Dal & Rice',chinese:'Chinese',breads:'Breads',tandoor:'Tandoor',desserts:'Desserts',beverages:'Beverages'};
+  document.getElementById('menuCatLabel').textContent = labels[menuCurrentCat] || 'All Dishes';
+  buildMenuCards();
+});
+
+window.addEventListener('resize', () => {
+  buildMenuCards();
+  applyMenuTransform(false);
+});
+
+buildMenuCards();
+updateCartBadge();
+syncHomepageDishImages();
+refreshAuthUI();
+window.addEventListener('storage', updateCartBadge);
+
+/* ═══════════════════════════════════════════
+   CHEF CAROUSEL
+═══════════════════════════════════════════ */
+let chefIdx = 0;
+const chefTrack = document.getElementById('chefTrack');
+const chefViewport = document.getElementById('chefViewport');
+const chefPrevBtn = document.getElementById('chefPrev');
+const chefNextBtn = document.getElementById('chefNext');
+
+function getChefStepWidth(){
+  const firstSlide = chefTrack.querySelector('.carousel-slide');
+  if(!firstSlide) return 0;
+  const trackStyles = getComputedStyle(chefTrack);
+  const gap = parseFloat(trackStyles.columnGap || trackStyles.gap || '0');
+  return firstSlide.getBoundingClientRect().width + gap;
+}
+
+function getChefMaxIndex(){
+  const step = getChefStepWidth();
+  if(!step || !chefViewport) return 0;
+  const maxTranslate = Math.max(0, chefTrack.scrollWidth - chefViewport.clientWidth);
+  return Math.max(0, Math.ceil(maxTranslate / step));
+}
+
+function applyChefTransform(){
+  const step = getChefStepWidth();
+  const maxIdx = getChefMaxIndex();
+  chefIdx = Math.max(0, Math.min(chefIdx, maxIdx));
+  chefTrack.style.transform = `translateX(-${chefIdx * step}px)`;
+  if(chefPrevBtn) chefPrevBtn.disabled = chefIdx === 0;
+  if(chefNextBtn) chefNextBtn.disabled = chefIdx >= maxIdx;
+}
+
+function slideChef(dir){
+  const maxIdx = getChefMaxIndex();
+  chefIdx = Math.max(0, Math.min(chefIdx + dir, maxIdx));
+  applyChefTransform();
+}
+
+window.addEventListener('resize', applyChefTransform);
+window.addEventListener('load', applyChefTransform);
+
+/* ═══════════════════════════════════════════
+   GOLD PARTICLES
+═══════════════════════════════════════════ */
+const pCanvas = document.getElementById('particleCanvas');
+const pCtx = pCanvas.getContext('2d');
+let pW, pH;
+const gParts = [];
+function resizePC(){ pW = pCanvas.width = window.innerWidth; pH = pCanvas.height = window.innerHeight; }
+resizePC(); window.addEventListener('resize', resizePC);
+class GP{ constructor(){this.reset()} reset(){this.x=Math.random()*pW;this.y=Math.random()*pH;this.size=Math.random()*2+0.5;this.vx=(Math.random()-.5)*.3;this.vy=-Math.random()*.5-.2;this.alpha=Math.random()*.4+.1;this.life=1;this.decay=Math.random()*.003+.001} update(){this.x+=this.vx;this.y+=this.vy;this.life-=this.decay;if(this.life<=0||this.y<-10)this.reset()} draw(){pCtx.beginPath();pCtx.arc(this.x,this.y,this.size,0,Math.PI*2);pCtx.fillStyle=`rgba(201,168,76,${this.alpha*this.life})`;pCtx.fill()} }
+for(let i=0;i<80;i++) gParts.push(new GP());
+function animP(){ pCtx.clearRect(0,0,pW,pH); gParts.forEach(p=>{p.update();p.draw()}); requestAnimationFrame(animP); }
+animP();
+
+/* ═══════════════════════════════════════════
+   SCOOTER — SCROLL-TRIGGERED (IntersectionObserver)
+═══════════════════════════════════════════ */
+const boy = document.getElementById('dv-boy');
+const sec  = document.getElementById('statsSection');
+const xCanvas = document.getElementById('exhaustCanvas');
+const xCtx = xCanvas.getContext('2d');
+const statItems = document.querySelectorAll('.stat-item');
+
+let exParticles=[], animPhase='idle', currentBoyX=-220, boyFacing=1;
+let scooterStarted = false;
+
+function resizeXC(){ xCanvas.width = sec.offsetWidth; xCanvas.height = sec.offsetHeight; }
+resizeXC(); window.addEventListener('resize', resizeXC);
+
+class Puff{
+  constructor(x,y,right){ this.x=x;this.y=y;this.vx=right?(-1.2-Math.random()*1.4):(1.2+Math.random()*1.4);this.vy=-(0.4+Math.random()*.7);this.r=4+Math.random()*7;this.alpha=.55+Math.random()*.25;this.grow=.18+Math.random()*.2;this.decay=.012+Math.random()*.01;const c=Math.floor(180+Math.random()*60);this.color=`rgb(${c},${c},${c})` }
+  update(){this.x+=this.vx;this.y+=this.vy;this.vy*=.97;this.vx*=.95;this.r+=this.grow;this.alpha-=this.decay}
+  draw(){if(this.alpha<=0)return;xCtx.beginPath();xCtx.arc(this.x,this.y,this.r,0,Math.PI*2);xCtx.fillStyle=this.color;xCtx.globalAlpha=Math.max(0,this.alpha);xCtx.fill();xCtx.globalAlpha=1}
+  isDead(){return this.alpha<=0}
+}
+
+function emitExhaust(){
+  const bW = boy.getBoundingClientRect().width||165;
+  const pY = sec.offsetHeight - 55 - bW*.18;
+  const pX = boyFacing===1 ? currentBoyX+bW*.08 : currentBoyX+bW*.92;
+  const cnt = animPhase==='parked' ? (Math.random()<.04?1:0) : 2;
+  for(let i=0;i<cnt;i++) exParticles.push(new Puff(pX+(Math.random()-.5)*6, pY+(Math.random()-.5)*4, boyFacing===1));
+}
+
+function xRenderLoop(){
+  xCtx.clearRect(0,0,xCanvas.width,xCanvas.height);
+  if(animPhase!=='done') emitExhaust();
+  exParticles = exParticles.filter(p=>!p.isDead());
+  exParticles.forEach(p=>{p.update();p.draw()});
+  requestAnimationFrame(xRenderLoop);
+}
+xRenderLoop();
+
+function easeIO(t){ return t<.5 ? 2*t*t : -1+(4-2*t)*t; }
+function animPos(dur,onU,onD){
+  const t0=performance.now();
+  (function step(now){const p=Math.min((now-t0)/dur,1);onU(easeIO(p));if(p<1)requestAnimationFrame(step);else if(onD)onD()})(t0);
+}
+function revealStats(){ statItems.forEach(el=>el.classList.add('visible')); }
+
+function runScooter(){
+  if(scooterStarted) return;
+  scooterStarted = true;
+  const sW = sec.offsetWidth, bW = boy.offsetWidth||165;
+  const startX = -bW, endX = sW+20, parkX = 18;
+  currentBoyX=startX; boyFacing=1; animPhase='right';
+  boy.style.left = startX+'px';
+  boy.style.transform = 'scaleX(1)';
+  boy.style.filter = 'drop-shadow(5px 3px 10px rgba(201,168,76,0.5)) drop-shadow(0 5px 14px rgba(0,0,0,0.6))';
+
+  animPos(1700, t=>{ currentBoyX=startX+(endX-startX)*t; boy.style.left=currentBoyX+'px'; }, ()=>{
+    boyFacing=-1; animPhase='left';
+    boy.style.transform='scaleX(-1)';
+    boy.style.filter='drop-shadow(-5px 3px 10px rgba(201,168,76,0.5)) drop-shadow(0 5px 14px rgba(0,0,0,0.6))';
+    animPos(1900, t=>{ currentBoyX=endX+(parkX-endX)*t; boy.style.left=currentBoyX+'px'; }, ()=>{
+      boyFacing=1; animPhase='parked';
+      boy.style.transform='scaleX(1)';
+      boy.style.filter='drop-shadow(3px 3px 8px rgba(201,168,76,0.3)) drop-shadow(0 4px 10px rgba(0,0,0,0.4))';
+      setTimeout(()=>{ animPhase='done'; revealStats(); }, 200);
+    });
+  });
+}
+
+/* Trigger scooter when statsSection enters viewport */
+const scooterIO = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) runScooter(); });
+}, { threshold: 0.3 });
+scooterIO.observe(sec);
+
+/* ═══════════════════════════════════════════
+   TIME SLOTS — only show after date selected
+═══════════════════════════════════════════ */
+const ALL_SLOTS = ['12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','7:00 PM','7:30 PM','8:00 PM','8:30 PM','9:00 PM'];
+/* Slots that are "busy" on specific days — simulate: Sat/Sun 1:30 PM and 7:00 PM unavailable */
+function updateTimeSlots(){
+  const dateVal = document.getElementById('bookDate').value;
+  const hint = document.getElementById('slotHint');
+  const slotsEl = document.getElementById('timeSlots');
+  if(!dateVal){ slotsEl.style.display='none'; hint.style.display='block'; return; }
+  hint.style.display = 'none';
+  slotsEl.style.display = 'flex';
+  slotsEl.innerHTML = '';
+  const d = new Date(dateVal);
+  const day = d.getDay(); // 0=Sun, 6=Sat
+  const unavailable = (day===0||day===6) ? ['1:30 PM','7:00 PM'] : ['1:30 PM'];
+  ALL_SLOTS.forEach(slot=>{
+    const el = document.createElement('div');
+    el.className = 'time-slot' + (unavailable.includes(slot) ? ' unavailable' : '');
+    el.textContent = slot;
+    if(!unavailable.includes(slot)) el.onclick = ()=>selectSlot(el);
+    slotsEl.appendChild(el);
+  });
+}
+
+function selectSlot(el){
+  document.querySelectorAll('.time-slot').forEach(s=>s.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function bookTable(){
+  const name = document.getElementById('bookName').value.trim();
+  const phone = document.getElementById('bookPhone').value.trim();
+  const date = document.getElementById('bookDate').value;
+  const guests = document.getElementById('bookGuests').value;
+  const slot = document.querySelector('.time-slot.selected');
+  if(!name||!phone||!date||!slot){ showToast('Please fill all fields and select a time slot.'); return; }
+  const params = new URLSearchParams({
+    name,
+    phone,
+    date,
+    time: slot.textContent,
+    guests
+  });
+  window.location.href = `payment.html?${params.toString()}`;
+}
+document.getElementById('bookDate').min = new Date().toISOString().split('T')[0];
+
+/* ═══════════════════════════════════════════
+   NAVBAR + MOBILE MENU
+═══════════════════════════════════════════ */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll',()=>{ navbar.classList.toggle('scrolled', window.scrollY>80); });
+function toggleMenu(){ document.getElementById('navLinks').classList.toggle('open'); }
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════ */
+const revIO = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); revIO.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el=>revIO.observe(el));
+
+/* ═══════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════ */
+let toastTimer;
+function showToast(msg){
+  clearTimeout(toastTimer);
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.classList.add('show');
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 3500);
+}
+
+/* ═══════════════════════════════════════════
+   SOCIAL REDIRECTION LOGIC
+═══════════════════════════════════════════ */
+const SOCIAL_LINKS = {
+  website: 'https://punjabikitchenranchi.com/',
+  instagram: 'https://www.instagram.com/punjabikitchen_ranchi/',
+  facebook: 'https://www.facebook.com/punjabikitchenranchi/',
+  twitter: '',
+  youtube: ''
+};
+
+function openSocial(platform){
+  const link = SOCIAL_LINKS[platform];
+  if(link){
+    window.open(link, '_blank', 'noopener,noreferrer');
+    return;
+  }
+  showToast(`Official ${platform === 'twitter' ? 'X' : 'YouTube'} profile coming soon. Redirecting to website.`);
+  setTimeout(() => {
+    window.open(SOCIAL_LINKS.website, '_blank', 'noopener,noreferrer');
+  }, 350);
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Punjabi Kitchen | Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root{
+  --gold:#c9a84c;--gold-light:#e8c97a;--gold-dim:#8a6d2f;
+  --charcoal:#0d0d0d;--charcoal2:#171717;--charcoal3:#232323;
+  --glass:rgba(255,255,255,0.06);--glass-border:rgba(201,168,76,0.25);
+  --text:#f5f0e8;--text-dim:#b0a898;--green:#2d7a3a;--red:#c0392b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Inter',sans-serif;color:var(--text);min-height:100vh;padding:20px;
+  background:
+    radial-gradient(1100px 620px at 12% -10%,rgba(201,168,76,0.18),transparent 70%),
+    radial-gradient(900px 520px at 96% 0%,rgba(201,168,76,0.1),transparent 70%),
+    linear-gradient(180deg,var(--charcoal),var(--charcoal2));
+}
+html{scrollbar-width:thin;scrollbar-color:#c9a84c #000}
+*::-webkit-scrollbar{width:12px;height:12px}
+*::-webkit-scrollbar-track{background:#000;border-radius:999px;box-shadow:inset 0 0 10px rgba(0,0,0,0.85)}
+*::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#e8c97a 0%,#c9a84c 55%,#8a6d2f 100%);border-radius:999px;border:3px solid #000;box-shadow:0 0 12px rgba(201,168,76,0.35), inset 0 0 4px rgba(255,255,255,0.18)}
+*::-webkit-scrollbar-thumb:hover{background:linear-gradient(180deg,#f4d98f 0%,#d8b95e 55%,#a07b2c 100%)}
+.page{max-width:1320px;margin:0 auto}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}
+.brand{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--gold-light)}
+.top-actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn-link{border:0.5px solid var(--glass-border);background:rgba(255,255,255,0.03);color:var(--text-dim);border-radius:10px;padding:9px 12px;font-size:0.76rem;letter-spacing:1px;text-transform:uppercase;text-decoration:none;cursor:pointer}
+.btn-link:hover{border-color:var(--gold);color:var(--gold-light);background:rgba(201,168,76,0.1)}
+.hero{background:var(--glass);border:0.5px solid var(--glass-border);border-radius:18px;padding:20px 22px;margin-bottom:14px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-120px;right:-120px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,0.25),rgba(201,168,76,0));pointer-events:none}
+.hero .eyebrow{font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.3rem);line-height:1.2;margin-bottom:6px}
+.hero p{color:var(--text-dim);font-size:0.92rem;max-width:760px;line-height:1.65}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.kpi{background:var(--glass);border:0.5px solid var(--glass-border);border-radius:14px;padding:14px 14px 12px}
+.kpi .label{font-size:0.66rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim)}
+.kpi .value{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--gold-light);margin:6px 0 4px}
+.kpi .delta{font-size:0.78rem}
+.delta.up{color:#8dd59a}
+.delta.down{color:#d8917c}
+.main-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:12px}
+.card{background:var(--glass);border:0.5px solid var(--glass-border);border-radius:16px;padding:16px}
+.card h2{font-family:'Playfair Display',serif;font-size:1.25rem;margin-bottom:6px}
+.sub{font-size:0.82rem;color:var(--text-dim);margin-bottom:12px}
+.chart-wrap{background:rgba(255,255,255,0.02);border:0.5px solid var(--glass-border);border-radius:12px;padding:10px}
+canvas{width:100%;height:260px;display:block}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border-radius:999px;border:0.5px solid var(--glass-border);font-size:0.76rem;color:var(--text-dim);background:rgba(255,255,255,0.03)}
+.mini{background:rgba(255,255,255,0.02);border:0.5px solid var(--glass-border);border-radius:12px;padding:12px}
+.mini h3{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.table{width:100%;border-collapse:collapse;font-size:0.82rem}
+.table th,.table td{padding:10px 8px;border-bottom:0.5px solid rgba(201,168,76,0.18);text-align:left}
+.table th{color:var(--gold-light);font-weight:600;letter-spacing:0.4px}
+.badge{padding:4px 8px;border-radius:999px;font-size:0.7rem;display:inline-block;border:0.5px solid}
+.badge.new{color:#8dd59a;border-color:rgba(141,213,154,0.4);background:rgba(141,213,154,0.12)}
+.badge.return{color:#9ac2ff;border-color:rgba(154,194,255,0.4);background:rgba(154,194,255,0.12)}
+.badge.vip{color:var(--gold-light);border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.12)}
+.funnel{display:grid;gap:8px}
+.f-step{background:rgba(255,255,255,0.03);border:0.5px solid var(--glass-border);border-radius:10px;padding:10px 12px}
+.f-top{display:flex;justify-content:space-between;font-size:0.82rem;color:var(--text-dim);margin-bottom:6px}
+.f-bar{height:8px;background:rgba(255,255,255,0.08);border-radius:999px;overflow:hidden}
+.f-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-dim))}
+.live-list{display:grid;gap:8px}
+.live-row{display:flex;justify-content:space-between;gap:8px;font-size:0.82rem;color:var(--text-dim);padding:7px 0;border-bottom:0.5px solid rgba(201,168,76,0.16)}
+.live-row:last-child{border-bottom:none}
+.analytics-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.heatmap-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.hm-cell{border:0.5px solid var(--glass-border);border-radius:10px;padding:9px 8px;text-align:center;background:rgba(255,255,255,0.03)}
+.hm-cell .h{font-size:0.72rem;color:var(--text-dim)}
+.hm-cell .v{font-family:'Playfair Display',serif;font-size:1rem;color:var(--gold-light)}
+.chip-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stat-chip{padding:10px;border-radius:10px;border:0.5px solid var(--glass-border);background:rgba(255,255,255,0.03)}
+.stat-chip .l{font-size:0.66rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim)}
+.stat-chip .v{font-size:1.05rem;font-family:'Playfair Display',serif;color:var(--gold-light);margin-top:4px}
+.split-3{grid-template-columns:repeat(3,1fr)}
+.meter{height:7px;border-radius:999px;background:rgba(255,255,255,0.08);overflow:hidden;margin-top:6px}
+.meter > span{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-dim))}
+.alert-row{display:flex;gap:8px;align-items:flex-start;color:var(--text-dim);font-size:0.8rem;line-height:1.5;padding:8px 0;border-bottom:0.5px solid rgba(201,168,76,0.16)}
+.alert-row:last-child{border-bottom:none}
+.alert-row i{margin-top:3px}
+.alert-row.warn i{color:#d8917c}
+.alert-row.good i{color:#8dd59a}
+.alert-row.info i{color:#9ac2ff}
+.auth-overlay{position:fixed;inset:0;z-index:99999;background:rgba(6,6,6,0.86);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:16px}
+.auth-card{width:min(460px,95vw);background:var(--glass);border:0.5px solid var(--glass-border);border-radius:18px;padding:24px}
+.auth-card h2{font-family:'Playfair Display',serif;font-size:1.7rem;margin:6px 0 10px}
+.auth-card p{font-size:0.9rem;color:var(--text-dim);line-height:1.6;margin-bottom:14px}
+.auth-field{display:flex;gap:8px}
+.auth-field input{flex:1;background:rgba(255,255,255,0.04);border:0.5px solid rgba(201,168,76,0.3);border-radius:10px;padding:12px 14px;color:var(--text);outline:none}
+.auth-field button{border:none;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold-dim));color:#171717;padding:0 16px;font-weight:700;cursor:pointer}
+.auth-help{font-size:0.76rem;color:var(--text-dim);margin-top:10px}
+.auth-error{font-size:0.82rem;color:#d8917c;margin-top:8px;min-height:18px}
+.hidden{display:none !important}
+.tab-nav{display:flex;gap:2px;border-bottom:0.5px solid var(--glass-border);margin:20px 0 24px;padding-bottom:0}
+.tab-btn{background:transparent;border:none;color:var(--text-dim);padding:12px 20px;cursor:pointer;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;font-weight:500;transition:all 0.3s;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+.tab-content{animation:fadeIn 0.3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.tabs-container{display:grid;gap:16px}
+@media(max-width:1100px){.kpi-grid{grid-template-columns:repeat(3,1fr)}.main-grid{grid-template-columns:1fr}.analytics-grid{grid-template-columns:1fr}.split-3{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){body{padding:12px}.kpi-grid{grid-template-columns:1fr 1fr}.split{grid-template-columns:1fr}.chip-grid{grid-template-columns:1fr}.heatmap-grid{grid-template-columns:repeat(3,1fr)}.split-3{grid-template-columns:1fr}.topbar{flex-direction:column;align-items:flex-start}.tab-nav{overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}.tab-btn{padding:10px 14px;font-size:0.75rem}}
+
+</style>
+</head>
+<body>
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+      <div class="pill"><i class="fas fa-shield-halved"></i> Restricted Access</div>
+      <a href="index.html" class="btn-link" style="font-size:0.7rem"><i class="fas fa-arrow-left"></i> Back</a>
+    </div>
+    <h2>Admin Login</h2>
+    <p>Enter the admin password to unlock live user stats and reservation analytics.</p>
+    <div class="auth-field">
+      <input id="adminPassword" type="password" placeholder="Enter admin password"/>
+      <button onclick="attemptLogin()">Unlock</button>
+    </div>
+    <div class="auth-error" id="authError"></div>
+    <div class="auth-help">Authorized admin access only.</div>
+  </div>
+</div>
+
+<div class="page hidden" id="adminApp">
+  <div class="topbar">
+    <div class="brand">Punjabi Kitchen Admin</div>
+    <div class="top-actions">
+      <a href="index.html" class="btn-link"><i class="fas fa-house"></i> Website</a>
+      <a href="cart.html" class="btn-link"><i class="fas fa-basket-shopping"></i> Cart</a>
+      <button class="btn-link" onclick="refreshDemo()"><i class="fas fa-rotate"></i> Refresh Demo</button>
+      <button class="btn-link" onclick="lockPanel()"><i class="fas fa-right-from-bracket"></i> Logout</button>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="eyebrow">Admin Control Center</div>
+    <h1>Real-time User & Reservation Insights</h1>
+    <p>Unified dashboard for user behavior, seat reservation patterns, and dish pre-booking trends. Includes sample data plus live cart snapshot from local storage for quick testing.</p>
+  </section>
+
+  <section class="kpi-grid" id="kpiGrid"></section>
+
+  <!-- TAB NAVIGATION -->
+  <nav class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('dashboard')"><i class="fas fa-chart-line" style="margin-right:6px"></i>Dashboard</button>
+    <button class="tab-btn" onclick="switchTab('orders')"><i class="fas fa-utensils" style="margin-right:6px"></i>Orders & Bookings</button>
+    <button class="tab-btn" onclick="switchTab('operations')"><i class="fas fa-bell" style="margin-right:6px"></i>Operations</button>
+    <button class="tab-btn" onclick="switchTab('analytics')"><i class="fas fa-chart-area" style="margin-right:6px"></i>Analytics</button>
+    <button class="tab-btn" onclick="switchTab('insights')"><i class="fas fa-lightbulb" style="margin-right:6px"></i>Insights</button>
+  </nav>
+
+  <!-- TAB: DASHBOARD -->
+  <section class="tab-content" id="tab-dashboard">
+    <section class="main-grid">
+      <div class="card">
+        <h2>Weekly Users vs Reservations</h2>
+        <p class="sub">Sample analytics data for admin preview.</p>
+        <div class="chart-wrap"><canvas id="trendChart" width="900" height="260"></canvas></div>
+        <div class="split">
+          <div class="mini">
+            <h3>Top Performing Dishes</h3>
+            <div class="live-list" id="topDishes"></div>
+          </div>
+          <div class="mini">
+            <h3>Live Session Cart Snapshot</h3>
+            <div class="live-list" id="liveCart"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;gap:12px">
+        <div class="card">
+          <h2>Booking Funnel</h2>
+          <p class="sub">User journey from visit to confirmed seat.</p>
+          <div class="funnel" id="funnel"></div>
+        </div>
+
+        <div class="card">
+          <h2>Recent Users</h2>
+          <p class="sub">Example user stats with session quality segments.</p>
+          <table class="table">
+            <thead>
+              <tr><th>User</th><th>Bookings</th><th>Segment</th></tr>
+            </thead>
+            <tbody id="usersBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- TAB: ORDERS & BOOKINGS -->
+  <section class="tab-content hidden" id="tab-orders">
+    <!-- ORDERS & BOOKINGS METRICS -->
+    <section class="main-grid">
+      <div class="card">
+        <h2>Orders & Bookings Overview</h2>
+        <p class="sub">Key metrics for today's bookings and orders.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="stat-chip">
+            <div class="l">Today's Total Orders</div>
+            <div class="v">157</div>
+          </div>
+          <div class="stat-chip">
+            <div class="l">Active Bookings</div>
+            <div class="v">34</div>
+          </div>
+          <div class="stat-chip">
+            <div class="l">Pending Confirmations</div>
+            <div class="v">12</div>
+          </div>
+          <div class="stat-chip">
+            <div class="l">Avg Order Value</div>
+            <div class="v">₹2,340</div>
+          </div>
+          <div class="stat-chip">
+            <div class="l">Completed Today</div>
+            <div class="v">89</div>
+          </div>
+          <div class="stat-chip">
+            <div class="l">Cancellation Rate</div>
+            <div class="v">5.2%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Time Slot Demand</h2>
+        <p class="sub">Bookings distribution by time.</p>
+        <div class="funnel">
+          <div class="f-step"><div class="f-top"><span>12:00 PM Slot</span><strong>8 bookings</strong></div><div class="f-bar"><div class="f-fill" style="width:42%"></div></div></div>
+          <div class="f-step"><div class="f-top"><span>1:00 PM Slot</span><strong>12 bookings</strong></div><div class="f-bar"><div class="f-fill" style="width:63%"></div></div></div>
+          <div class="f-step"><div class="f-top"><span>7:00 PM Slot</span><strong>16 bookings</strong></div><div class="f-bar"><div class="f-fill" style="width:84%"></div></div></div>
+          <div class="f-step"><div class="f-top"><span>8:00 PM Slot</span><strong>19 bookings</strong></div><div class="f-bar"><div class="f-fill" style="width:100%"></div></div></div>
+          <div class="f-step"><div class="f-top"><span>9:00 PM Slot</span><strong>14 bookings</strong></div><div class="f-bar"><div class="f-fill" style="width:74%"></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DETAILED ORDERS TABLE -->
+    <div class="card" style="margin-top:24px">
+      <h2>Detailed Orders Log</h2>
+      <p class="sub">Complete order history with guest info, items, amounts, and timestamps.</p>
+      <table class="table" style="font-size:0.78rem">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Guest Name</th>
+            <th>Phone</th>
+            <th>Dishes (Qty)</th>
+            <th>Order Value</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Payment</th>
+          </tr>
+        </thead>
+        <tbody id="detailedOrdersBody"></tbody>
+      </table>
+    </div>
+
+    <!-- DETAILED BOOKINGS TABLE -->
+    <div class="card" style="margin-top:24px">
+      <h2>Detailed Bookings Log</h2>
+      <p class="sub">Complete reservation records with guest preferences, special requests, and confirmation status.</p>
+      <table class="table" style="font-size:0.78rem">
+        <thead>
+          <tr>
+            <th>Booking ID</th>
+            <th>Guest Name</th>
+            <th>Phone</th>
+            <th>Date & Time</th>
+            <th>Guests</th>
+            <th>Special Requests</th>
+            <th>Status</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody id="detailedBookingsBody"></tbody>
+      </table>
+    </div>
+
+    <!-- GUEST INSIGHTS -->
+    <section class="main-grid" style="margin-top:24px">
+      <div class="card">
+        <h2>Top Guests Today</h2>
+        <p class="sub">Repeat customers and VIP guests.</p>
+        <table class="table" style="font-size:0.78rem">
+          <thead>
+            <tr><th>Guest Name</th><th>Total Orders</th><th>Total Spent</th><th>Frequency</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Vikram Patel</strong></td>
+              <td>12</td>
+              <td>₹28,080</td>
+              <td>2x/month</td>
+              <td><span class="badge vip">VIP</span></td>
+            </tr>
+            <tr>
+              <td><strong>Priya Agrawal</strong></td>
+              <td>8</td>
+              <td>₹18,720</td>
+              <td>1x/month</td>
+              <td><span class="badge return">Loyal</span></td>
+            </tr>
+            <tr>
+              <td><strong>Rahul Sharma</strong></td>
+              <td>5</td>
+              <td>₹11,700</td>
+              <td>1x/2weeks</td>
+              <td><span class="badge return">Regular</span></td>
+            </tr>
+            <tr>
+              <td><strong>Anjali Singh</strong></td>
+              <td>3</td>
+              <td>₹7,020</td>
+              <td>2x/month</td>
+              <td><span class="badge new">New</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Order Status Summary</h2>
+        <p class="sub">Current state distribution of all orders.</p>
+        <div class="live-list" style="padding:0">
+          <div class="live-row"><span>✓ Completed</span><strong style="color:#8dd59a">89 orders</strong></div>
+          <div class="live-row"><span>🔄 In Preparation</span><strong style="color:#d8917c">24 orders</strong></div>
+          <div class="live-row"><span>⏳ Pending Confirmation</span><strong style="color:#9ac2ff">12 orders</strong></div>
+          <div class="live-row"><span>Cancelled</span><strong style="color:#d8917c">8 orders</strong></div>
+          <div class="live-row"><span>🪑 Ready for Pickup</span><strong style="color:#e8c97a">18 orders</strong></div>
+          <div class="live-row"><span>⭐ Delayed (>30min)</span><strong style="color:#d8917c">6 orders</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVENUE & DISH INSIGHTS -->
+    <section class="main-grid" style="margin-top:24px">
+      <div class="card">
+        <h2>Revenue Breakdown</h2>
+        <p class="sub">Order value distribution by category.</p>
+        <div class="live-list" style="padding:0">
+          <div class="live-row"><span>Pre-Bookings Total</span><strong style="color:var(--gold-light)">₹67,890</strong></div>
+          <div class="live-row"><span>Deposits Collected</span><strong style="color:var(--gold-light)">₹18,340</strong></div>
+          <div class="live-row"><span>Pending on Arrival</span><strong style="color:var(--gold-light)">₹49,550</strong></div>
+          <div class="live-row"><span>Avg Per Person</span><strong style="color:var(--gold-light)">₹1,840</strong></div>
+          <div class="live-row"><span>Largest Order</span><strong style="color:var(--gold-light)">₹12,450 (8 ppl)</strong></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Most Popular Combinations</h2>
+        <p class="sub">Top dish pairings from today's orders.</p>
+        <div class="live-list" style="padding:0">
+          <div class="live-row"><span>#1 Paneer Tikka + Dal Makhani</span><strong>23 orders</strong></div>
+          <div class="live-row"><span>#2 Butter Naan + Paneer Chilly</span><strong>18 orders</strong></div>
+          <div class="live-row"><span>#3 Hara Bhara + Basmati Rice</span><strong>14 orders</strong></div>
+          <div class="live-row"><span>#4 Chicken Tikka + Butter Masala</span><strong>12 orders</strong></div>
+          <div class="live-row"><span>#5 Combo Platter (3 dishes)</span><strong>11 orders</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPECIAL REQUESTS & NOTES -->
+    <div class="card" style="margin-top:24px">
+      <h2>Special Requests & Guest Notes</h2>
+      <p class="sub">Important requirements to track for today's guests.</p>
+      <table class="table" style="font-size:0.78rem">
+        <thead>
+          <tr>
+            <th>Booking ID</th>
+            <th>Guest</th>
+            <th>Request</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span style="font-family:monospace;color:var(--gold)">BK-5615</span></td>
+            <td>Divya Nair</td>
+            <td>Birthday celebration - Need decorations at table</td>
+            <td><span class="badge" style="border-color:#e8c97a40;color:#e8c97a;background:#e8c97a15">High</span></td>
+          </tr>
+          <tr>
+            <td><span style="font-family:monospace;color:var(--gold)">BK-5616</span></td>
+            <td>Karan Malhotra</td>
+            <td>Severe peanut allergy - No cross-contamination</td>
+            <td><span class="badge" style="border-color:#d8917c40;color:#d8917c;background:#d8917c15">Critical</span></td>
+          </tr>
+          <tr>
+            <td><span style="font-family:monospace;color:var(--gold)">BK-5617</span></td>
+            <td>Pooja Verma</td>
+            <td>Prefer window seating - Low spice dishes</td>
+            <td><span class="badge" style="border-color:#9ac2ff40;color:#9ac2ff;background:#9ac2ff15">Medium</span></td>
+          </tr>
+          <tr>
+            <td><span style="font-family:monospace;color:var(--gold)">BK-5618</span></td>
+            <td>Arjun Das</td>
+            <td>Vegetarian group - All dishes must be veg</td>
+            <td><span class="badge" style="border-color:#8dd59a40;color:#8dd59a;background:#8dd59a15">Medium</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CANCELLATIONS & NO-SHOWS -->
+    <section class="main-grid" style="margin-top:24px">
+      <div class="card">
+        <h2>Cancellations Today</h2>
+        <p class="sub">Booking cancellations and reasons.</p>
+        <table class="table" style="font-size:0.78rem">
+          <thead>
+            <tr><th>Booking ID</th><th>Guest Name</th><th>Reason</th><th>Time</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span style="font-family:monospace;color:var(--gold)">BK-5600</span></td>
+              <td>Suresh Kumar</td>
+              <td>Emergency meeting came up</td>
+              <td>2:15 PM</td>
+            </tr>
+            <tr>
+              <td><span style="font-family:monospace;color:var(--gold)">BK-5602</span></td>
+              <td>Neha Gupta</td>
+              <td>Traffic delays - Unable to make it</td>
+              <td>1:50 PM</td>
+            </tr>
+            <tr>
+              <td><span style="font-family:monospace;color:var(--gold)">BK-5605</span></td>
+              <td>Amit Patel</td>
+              <td>Table size changed - Need larger table</td>
+              <td>3:30 PM</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>No-Shows & Late Arrivals</h2>
+        <p class="sub">Guests who didn't show up or arrived late.</p>
+        <table class="table" style="font-size:0.78rem">
+          <thead>
+            <tr><th>Booking ID</th><th>Guest Name</th><th>Type</th><th>Time Delta</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span style="font-family:monospace;color:var(--gold)">BK-5590</span></td>
+              <td>Rohit Sharma</td>
+              <td>No-Show</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><span style="font-family:monospace;color:var(--gold)">BK-5595</span></td>
+              <td>Priya Kapoor</td>
+              <td>Late Arrival</td>
+              <td>+28 min</td>
+            </tr>
+            <tr>
+              <td><span style="font-family:monospace;color:var(--gold)">BK-5603</span></td>
+              <td>Farhan Ali</td>
+              <td>Late Arrival</td>
+              <td>+15 min</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+  <section class="tab-content hidden" id="tab-operations">
+    <section class="main-grid">
+      <div class="card">
+        <h2><i class="fas fa-bell" style="margin-right:8px;color:var(--gold)"></i>Live Orders Queue</h2>
+        <p class="sub">Real-time dish pre-bookings happening right now.</p>
+        <table class="table">
+          <thead>
+            <tr><th>Order ID</th><th>Guest Name</th><th>Dishes</th><th>Time</th><th>Status</th></tr>
+          </thead>
+          <tbody id="liveOrdersBody"></tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2><i class="fas fa-calendar-check" style="margin-right:8px;color:var(--gold)"></i>Active Bookings</h2>
+        <p class="sub">Current and upcoming table reservations.</p>
+        <table class="table">
+          <thead>
+            <tr><th>Booking ID</th><th>Guest Name</th><th>Time</th><th>Guests</th><th>Status</th></tr>
+          </thead>
+          <tbody id="activeBookingsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:24px">
+      <h2><i class="fas fa-chair" style="margin-right:8px;color:var(--gold)"></i>Real-time Seat Availability</h2>
+      <p class="sub">Occupancy tracking across all time slots for today.</p>
+      <div class="analytics-grid">
+        <div id="seatAvailGrid"></div>
+      </div>
+    </section>
+
+    <section class="main-grid" style="margin-top:24px">
+      <div class="card">
+        <h2>Slot Utilization</h2>
+        <p class="sub">Capacity usage by time interval.</p>
+        <div class="live-list" id="slotUtilization"></div>
+      </div>
+
+      <div class="card">
+        <h2>Booking Source Mix</h2>
+        <p class="sub">Where reservations come from.</p>
+        <div class="live-list" id="channelMix"></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- TAB: ANALYTICS -->
+  <section class="tab-content hidden" id="tab-analytics">
+    <section class="main-grid">
+      <div class="card">
+        <h2>Revenue Momentum</h2>
+        <p class="sub">Estimated reservation revenue and growth trend.</p>
+        <div class="chart-wrap"><canvas id="revenueChart" width="900" height="260"></canvas></div>
+      </div>
+
+      <div class="card">
+        <h2>Hourly Demand Heatmap</h2>
+        <p class="sub">Peak booking intensity by operating hour.</p>
+        <div class="heatmap-grid" id="heatmapGrid"></div>
+      </div>
+    </section>
+
+    <section class="main-grid" style="margin-top:24px">
+      <div class="card">
+        <h2>Cohort Retention</h2>
+        <p class="sub">Repeat guest behavior by cohort.</p>
+        <div class="live-list" id="cohortList"></div>
+      </div>
+
+      <div class="card">
+        <h2>Payment Status Stack</h2>
+        <p class="sub">Real-time payment status distribution.</p>
+        <div class="live-list" id="paymentStack"></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- TAB: INSIGHTS -->
+  <section class="tab-content hidden" id="tab-insights">
+    <section class="main-grid">
+      <div class="card">
+        <h2>Kitchen & Table Ops</h2>
+        <p class="sub">Operational efficiency metrics.</p>
+        <div class="chip-grid" id="opsChips"></div>
+      </div>
+
+      <div class="card">
+        <h2>Ops Alerts</h2>
+        <p class="sub">Real-time operational updates.</p>
+        <div id="alertFeed"></div>
+      </div>
+    </section>
+
+    <section class="card" style="margin-top:24px">
+      <h2>Anomaly Watch</h2>
+      <p class="sub">Unusual patterns and insights.</p>
+      <div id="anomalyList"></div>
+    </section>
+  </section>
+</div>
+
+<script src="assets/reset-state.js"></script>
+<script>
+const CART_KEY = 'pk_cart_v1';
+const ADMIN_SESSION_KEY = 'pk_admin_authenticated';
+const ADMIN_PASSWORD = 'abcd';
+
+let currentTab = 'dashboard';
+
+function switchTab(tabName){
+  const tabs = document.querySelectorAll('.tab-content');
+  const btns = document.querySelectorAll('.tab-btn');
+  
+  tabs.forEach(t => t.classList.add('hidden'));
+  btns.forEach(b => b.classList.remove('active'));
+  
+  document.getElementById('tab-' + tabName).classList.remove('hidden');
+  event.target.closest('.tab-btn').classList.add('active');
+  
+  currentTab = tabName;
+  
+  if(tabName === 'analytics' || tabName === 'dashboard'){
+    setTimeout(() => {
+      renderTrendChart();
+      renderRevenueChart();
+    }, 0);
+  }
+}
+
+
+let dashboardData = {
+  weekly: [
+    {day:'Mon', users:86, reservations:34},
+    {day:'Tue', users:92, reservations:39},
+    {day:'Wed', users:103, reservations:46},
+    {day:'Thu', users:117, reservations:53},
+    {day:'Fri', users:151, reservations:74},
+    {day:'Sat', users:198, reservations:101},
+    {day:'Sun', users:176, reservations:88}
+  ],
+  kpis: {
+    totalUsers: 4287,
+    activeToday: 312,
+    reservationsToday: 87,
+    avgBooking: 1349,
+    conversion: 21.3,
+    repeatRate: 48.7,
+    cancellationRate: 5.9,
+    noShowRate: 3.2
+  },
+  funnel: [
+    {label:'Website Visits', value:1280},
+    {label:'Menu Explorers', value:940},
+    {label:'Dish Cart Created', value:410},
+    {label:'Seat Slot Selected', value:232},
+    {label:'Payment Confirmed', value:173}
+  ],
+  users: [
+    {name:'Priya Agrawal', bookings:5, segment:'VIP'},
+    {name:'Rahul Sharma', bookings:2, segment:'Returning'},
+    {name:'Neha Khanna', bookings:1, segment:'New'},
+    {name:'Amit Kumar', bookings:3, segment:'Returning'},
+    {name:'Sunita Mishra', bookings:6, segment:'VIP'}
+  ],
+  topDishes: [
+    {name:'Paneer Tikka', count:62},
+    {name:'Dal Makhani', count:54},
+    {name:'Butter Naan', count:49},
+    {name:'Chicken Butter Masala', count:36},
+    {name:'Paneer Chilly', count:31}
+  ],
+  slotUtilization: [
+    {slot:'12:00 - 2:00 PM', pct:74},
+    {slot:'2:00 - 5:00 PM', pct:41},
+    {slot:'7:00 - 9:00 PM', pct:93},
+    {slot:'9:00 - 11:00 PM', pct:68}
+  ],
+  channels: [
+    {name:'Website Direct', pct:46},
+    {name:'Instagram', pct:24},
+    {name:'Facebook', pct:18},
+    {name:'Walk-in Upsell', pct:12}
+  ],
+  alerts: [
+    {type:'warn', text:'Prime slot 8:00 PM nearly full (92%).'},
+    {type:'good', text:'Repeat bookings up by 13% this week.'},
+    {type:'info', text:'Card payment success rate stable at 98.4%.'}
+  ],
+  revenueWeekly: [
+    {day:'Mon', value:78200},
+    {day:'Tue', value:81600},
+    {day:'Wed', value:90500},
+    {day:'Thu', value:96800},
+    {day:'Fri', value:124700},
+    {day:'Sat', value:162300},
+    {day:'Sun', value:148600}
+  ],
+  paymentStatus: [
+    {label:'Successful', pct:98.4},
+    {label:'Pending', pct:0.9},
+    {label:'Failed', pct:0.7}
+  ],
+  opsStats: [
+    {label:'Avg Prep Time', value:'17 min'},
+    {label:'Table Turn', value:'52 min'},
+    {label:'Avg Waitlist', value:'14 guests'},
+    {label:'Staff On Duty', value:'22'}
+  ],
+  hourlyDemand: [
+    {hour:'11 AM', value:21},
+    {hour:'12 PM', value:42},
+    {hour:'1 PM', value:58},
+    {hour:'2 PM', value:33},
+    {hour:'5 PM', value:19},
+    {hour:'6 PM', value:39},
+    {hour:'7 PM', value:66},
+    {hour:'8 PM', value:74},
+    {hour:'9 PM', value:61},
+    {hour:'10 PM', value:37},
+    {hour:'10:30 PM', value:22},
+    {hour:'11 PM', value:11}
+  ],
+  cohorts: [
+    {name:'First-time (30d)', retention:34},
+    {name:'Returning (60d)', retention:57},
+    {name:'VIP (90d)', retention:82}
+  ],
+  anomalies: [
+    {type:'warn', text:'Saturday 8 PM demand spike +17% vs last week.'},
+    {type:'info', text:'Weekday lunch occupancy softening by 6%.'},
+    {type:'good', text:'Cancellation recovery calls converted 41% today.'}
+  ],
+  liveOrders: [
+    {id:'ORD-2847', guest:'Priya Agrawal', dishes:'Paneer Tikka (2), Dal Makhani (1)', time:'2:34 PM', status:'Preparing'},
+    {id:'ORD-2848', guest:'Rahul Sharma', dishes:'Butter Naan (3), Paneer Chilly (2)', time:'2:28 PM', status:'Placed'},
+    {id:'ORD-2849', guest:'Neha Khanna', dishes:'Hara Bhara Kabab (1)', time:'2:22 PM', status:'Completed'},
+    {id:'ORD-2850', guest:'Amit Kumar', dishes:'Dal Makhani (2), Butter Naan (2)', time:'2:16 PM', status:'Preparing'},
+    {id:'ORD-2851', guest:'Sunita Mishra', dishes:'Chicken Tikka (4), Basmati Rice (2)', time:'2:09 PM', status:'Placed'}
+  ],
+  activeBookings: [
+    {id:'BK-5612', guest:'Vikram Patel', time:'12:30 PM', guests:4, status:'Seated'},
+    {id:'BK-5613', guest:'Anjali Singh', time:'1:00 PM', guests:2, status:'Seated'},
+    {id:'BK-5614', guest:'Rohan Gupta', time:'1:30 PM', guests:6, status:'Confirmed'},
+    {id:'BK-5615', guest:'Divya Nair', time:'7:00 PM', guests:3, status:'Confirmed'},
+    {id:'BK-5616', guest:'Karan Malhotra', time:'8:00 PM', guests:5, status:'Waitlist'},
+    {id:'BK-5617', guest:'Pooja Verma', time:'8:30 PM', guests:2, status:'Confirmed'},
+    {id:'BK-5618', guest:'Arjun Das', time:'9:00 PM', guests:4, status:'Confirmed'}
+  ],
+  seatAvailability: [
+    {slot:'12:00 - 2:00 PM', total:36, occupied:26, available:10, pct:72},
+    {slot:'2:00 - 5:00 PM', total:36, occupied:16, available:20, pct:44},
+    {slot:'5:00 - 7:00 PM', total:36, occupied:8, available:28, pct:22},
+    {slot:'7:00 - 9:00 PM', total:36, occupied:34, available:2, pct:94},
+    {slot:'9:00 - 11:00 PM', total:36, occupied:24, available:12, pct:67}
+  ],
+  detailedOrders: [
+    {id:'ORD-2847', guest:'Priya Agrawal', phone:'+91 9876543210', dishes:'Paneer Tikka (2), Dal Makhani (1)', value:'₹2,340', time:'2:34 PM', status:'Preparing', payment:'Prepaid'},
+    {id:'ORD-2848', guest:'Rahul Sharma', phone:'+91 9876543211', dishes:'Butter Naan (3), Paneer Chilly (2)', value:'₹1,890', time:'2:28 PM', status:'Placed', payment:'Pending'},
+    {id:'ORD-2849', guest:'Neha Khanna', phone:'+91 9876543212', dishes:'Hara Bhara Kabab (1)', value:'₹780', time:'2:22 PM', status:'Completed', payment:'Paid'},
+    {id:'ORD-2850', guest:'Amit Kumar', phone:'+91 9876543213', dishes:'Dal Makhani (2), Butter Naan (2)', value:'₹1,560', time:'2:16 PM', status:'Preparing', payment:'Prepaid'},
+    {id:'ORD-2851', guest:'Sunita Mishra', phone:'+91 9876543214', dishes:'Chicken Tikka (4), Basmati Rice (2)', value:'₹3,120', time:'2:09 PM', status:'Placed', payment:'Pending'},
+    {id:'ORD-2852', guest:'Vikram Patel', phone:'+91 9876543215', dishes:'Tandoori Mix (3), Naan Platter', value:'₹2,850', time:'1:58 PM', status:'Completed', payment:'Paid'},
+    {id:'ORD-2853', guest:'Anjali Singh', phone:'+91 9876543216', dishes:'Paneer Do Pyaza (1)', value:'₹890', time:'1:45 PM', status:'Completed', payment:'Paid'}
+  ],
+  detailedBookings: [
+    {id:'BK-5612', guest:'Vikram Patel', phone:'+91 9876543210', dateTime:'Today, 12:30 PM', guests:4, requests:'Corner table', status:'Seated', amount:'₹9,360'},
+    {id:'BK-5613', guest:'Anjali Singh', phone:'+91 9876543211', dateTime:'Today, 1:00 PM', guests:2, requests:'Window seat', status:'Seated', amount:'₹4,680'},
+    {id:'BK-5614', guest:'Rohan Gupta', phone:'+91 9876543212', dateTime:'Today, 1:30 PM', guests:6, requests:'No preferences', status:'Confirmed', amount:'₹14,040'},
+    {id:'BK-5615', guest:'Divya Nair', phone:'+91 9876543213', dateTime:'Today, 7:00 PM', guests:3, requests:'Birthday celebration', status:'Confirmed', amount:'₹7,020'},
+    {id:'BK-5616', guest:'Karan Malhotra', phone:'+91 9876543214', dateTime:'Today, 8:00 PM', guests:5, requests:'Peanut allergy alert', status:'Waitlist', amount:'₹11,700'},
+    {id:'BK-5617', guest:'Pooja Verma', phone:'+91 9876543215', dateTime:'Today, 8:30 PM', guests:2, requests:'Low spice', status:'Confirmed', amount:'₹4,680'},
+    {id:'BK-5618', guest:'Arjun Das', phone:'+91 9876543216', dateTime:'Today, 9:00 PM', guests:4, requests:'All veg items', status:'Confirmed', amount:'₹9,360'}
+  ]
+};
+
+function unlockPanel(){
+  document.getElementById('authOverlay').classList.add('hidden');
+  document.getElementById('adminApp').classList.remove('hidden');
+}
+
+function lockPanel(){
+  sessionStorage.removeItem(ADMIN_SESSION_KEY);
+  document.getElementById('adminPassword').value = '';
+  document.getElementById('authError').textContent = '';
+  document.getElementById('adminApp').classList.add('hidden');
+  document.getElementById('authOverlay').classList.remove('hidden');
+}
+
+function attemptLogin(){
+  const val = document.getElementById('adminPassword').value;
+  if(val !== ADMIN_PASSWORD){
+    document.getElementById('authError').textContent = 'Incorrect password. Try again.';
+    return;
+  }
+  sessionStorage.setItem(ADMIN_SESSION_KEY, '1');
+  unlockPanel();
+  renderAll();
+}
+
+function formatINR(value){
+  return `INR ${Math.round(value).toLocaleString('en-IN')}`;
+}
+
+function readCart(){
+  try{ return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); }
+  catch{ return []; }
+}
+
+function renderKPIs(){
+  const k = dashboardData.kpis;
+  const cards = [
+    {label:'Total Users', value:k.totalUsers.toLocaleString('en-IN'), delta:'+8.2% this month', cls:'up'},
+    {label:'Active Today', value:k.activeToday.toLocaleString('en-IN'), delta:'+4.6% vs yesterday', cls:'up'},
+    {label:'Reservations Today', value:k.reservationsToday.toLocaleString('en-IN'), delta:'+11.1% weekend trend', cls:'up'},
+    {label:'Avg Booking Value', value:formatINR(k.avgBooking), delta:'-1.4% since last week', cls:'down'},
+    {label:'Visit to Booking', value:`${k.conversion}%`, delta:'+2.1 pt conversion lift', cls:'up'},
+    {label:'Repeat Guest Rate', value:`${k.repeatRate}%`, delta:'+3.0 pt from loyalty', cls:'up'},
+    {label:'Cancellation Rate', value:`${k.cancellationRate}%`, delta:'-0.8 pt vs last month', cls:'up'},
+    {label:'No-show Rate', value:`${k.noShowRate}%`, delta:'-0.3 pt stability', cls:'up'}
+  ];
+
+  document.getElementById('kpiGrid').innerHTML = cards.map(c => `
+    <article class="kpi">
+      <div class="label">${c.label}</div>
+      <div class="value">${c.value}</div>
+      <div class="delta ${c.cls}">${c.delta}</div>
+    </article>`).join('');
+}
+
+function renderTrendChart(){
+  const canvas = document.getElementById('trendChart');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0,0,W,H);
+
+  const pad = {l:56, r:20, t:18, b:38};
+  const cw = W - pad.l - pad.r;
+  const ch = H - pad.t - pad.b;
+  const maxVal = Math.max(...dashboardData.weekly.map(d => Math.max(d.users, d.reservations))) + 20;
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+  ctx.lineWidth = 1;
+  for(let i=0;i<=4;i++){
+    const y = pad.t + (ch/4)*i;
+    ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(W-pad.r,y); ctx.stroke();
+  }
+
+  dashboardData.weekly.forEach((d, i) => {
+    const x = pad.l + (cw / dashboardData.weekly.length) * i + 10;
+    const groupW = 46;
+    const usersH = (d.users / maxVal) * ch;
+    const resH = (d.reservations / maxVal) * ch;
+
+    ctx.fillStyle = 'rgba(201,168,76,0.28)';
+    ctx.fillRect(x, pad.t + ch - usersH, groupW/2 - 4, usersH);
+
+    const grad = ctx.createLinearGradient(0, pad.t + ch - resH, 0, pad.t + ch);
+    grad.addColorStop(0, '#e8c97a');
+    grad.addColorStop(1, '#8a6d2f');
+    ctx.fillStyle = grad;
+    ctx.fillRect(x + groupW/2 + 2, pad.t + ch - resH, groupW/2 - 4, resH);
+
+    ctx.fillStyle = 'rgba(176,168,152,0.9)';
+    ctx.font = '12px Inter';
+    ctx.fillText(d.day, x + 6, H - 14);
+  });
+
+  ctx.fillStyle = '#e8c97a'; ctx.font = '12px Inter';
+  ctx.fillRect(W-190,14,10,10); ctx.fillStyle = '#f5f0e8'; ctx.fillText('Reservations', W-175,24);
+  ctx.fillStyle = 'rgba(201,168,76,0.35)'; ctx.fillRect(W-90,14,10,10); ctx.fillStyle = '#f5f0e8'; ctx.fillText('Users', W-75,24);
+}
+
+function renderRevenueChart(){
+  const canvas = document.getElementById('revenueChart');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0,0,W,H);
+
+  const pad = {l:54, r:20, t:20, b:36};
+  const cw = W - pad.l - pad.r;
+  const ch = H - pad.t - pad.b;
+  const vals = dashboardData.revenueWeekly.map(d => d.value);
+  const maxVal = Math.max(...vals) * 1.1;
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.12)';
+  for(let i=0;i<=4;i++){
+    const y = pad.t + (ch/4)*i;
+    ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(W-pad.r,y); ctx.stroke();
+  }
+
+  const points = dashboardData.revenueWeekly.map((d,i) => {
+    const x = pad.l + (cw/(dashboardData.revenueWeekly.length-1))*i;
+    const y = pad.t + ch - (d.value/maxVal)*ch;
+    return {x,y,day:d.day};
+  });
+
+  ctx.beginPath();
+  points.forEach((p,i) => i ? ctx.lineTo(p.x,p.y) : ctx.moveTo(p.x,p.y));
+  ctx.strokeStyle = '#e8c97a';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, pad.t + ch);
+  points.forEach(p => ctx.lineTo(p.x, p.y));
+  ctx.lineTo(points[points.length-1].x, pad.t + ch);
+  ctx.closePath();
+  const grad = ctx.createLinearGradient(0,pad.t,0,pad.t+ch);
+  grad.addColorStop(0,'rgba(232,201,122,0.28)');
+  grad.addColorStop(1,'rgba(232,201,122,0.02)');
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  ctx.fillStyle = 'rgba(176,168,152,0.9)';
+  ctx.font = '12px Inter';
+  points.forEach(p => ctx.fillText(p.day, p.x - 10, H - 12));
+}
+
+function renderFunnel(){
+  const max = dashboardData.funnel[0].value;
+  document.getElementById('funnel').innerHTML = dashboardData.funnel.map(step => {
+    const width = Math.max(8, (step.value / max) * 100);
+    return `<div class="f-step"><div class="f-top"><span>${step.label}</span><strong>${step.value}</strong></div><div class="f-bar"><div class="f-fill" style="width:${width}%"></div></div></div>`;
+  }).join('');
+}
+
+function renderUsers(){
+  document.getElementById('usersBody').innerHTML = dashboardData.users.map(u => {
+    const cls = u.segment === 'VIP' ? 'vip' : (u.segment === 'New' ? 'new' : 'return');
+    return `<tr><td>${u.name}</td><td>${u.bookings}</td><td><span class="badge ${cls}">${u.segment}</span></td></tr>`;
+  }).join('');
+}
+
+function renderTopDishes(){
+  document.getElementById('topDishes').innerHTML = dashboardData.topDishes.map((d, i) => `
+    <div class="live-row"><span>#${i+1} ${d.name}</span><strong>${d.count} bookings</strong></div>
+  `).join('');
+}
+
+function renderLiveCart(){
+  const cart = readCart();
+  const root = document.getElementById('liveCart');
+  if(!cart.length){
+    root.innerHTML = '<div class="live-row"><span>No active cart items</span><strong>0</strong></div>';
+    return;
+  }
+  root.innerHTML = cart.slice(0,5).map(item => `
+    <div class="live-row"><span>${item.name}</span><strong>x${item.qty}</strong></div>
+  `).join('');
+}
+
+function renderSlotUtilization(){
+  const root = document.getElementById('slotUtilization');
+  root.innerHTML = dashboardData.slotUtilization.map(row => `
+    <div>
+      <div class="live-row"><span>${row.slot}</span><strong>${row.pct}%</strong></div>
+      <div class="meter"><span style="width:${row.pct}%"></span></div>
+    </div>
+  `).join('');
+}
+
+function renderChannelMix(){
+  const root = document.getElementById('channelMix');
+  root.innerHTML = dashboardData.channels.map(ch => `
+    <div>
+      <div class="live-row"><span>${ch.name}</span><strong>${ch.pct}%</strong></div>
+      <div class="meter"><span style="width:${ch.pct}%"></span></div>
+    </div>
+  `).join('');
+}
+
+function renderAlerts(){
+  const root = document.getElementById('alertFeed');
+  root.innerHTML = dashboardData.alerts.map(a => `
+    <div class="alert-row ${a.type}"><i class="fas fa-circle"></i><span>${a.text}</span></div>
+  `).join('');
+}
+
+function renderPaymentStack(){
+  const root = document.getElementById('paymentStack');
+  root.innerHTML = dashboardData.paymentStatus.map(s => `
+    <div>
+      <div class="live-row"><span>${s.label}</span><strong>${s.pct}%</strong></div>
+      <div class="meter"><span style="width:${s.pct}%"></span></div>
+    </div>
+  `).join('');
+}
+
+function renderOpsChips(){
+  const root = document.getElementById('opsChips');
+  root.innerHTML = dashboardData.opsStats.map(s => `
+    <div class="stat-chip"><div class="l">${s.label}</div><div class="v">${s.value}</div></div>
+  `).join('');
+}
+
+function renderHeatmap(){
+  const maxVal = Math.max(...dashboardData.hourlyDemand.map(h => h.value));
+  const root = document.getElementById('heatmapGrid');
+  root.innerHTML = dashboardData.hourlyDemand.map(h => {
+    const a = 0.12 + (h.value / maxVal) * 0.5;
+    return `<div class="hm-cell" style="background:rgba(201,168,76,${a.toFixed(2)})"><div class="h">${h.hour}</div><div class="v">${h.value}</div></div>`;
+  }).join('');
+}
+
+function renderCohorts(){
+  const root = document.getElementById('cohortList');
+  root.innerHTML = dashboardData.cohorts.map(c => `
+    <div>
+      <div class="live-row"><span>${c.name}</span><strong>${c.retention}%</strong></div>
+      <div class="meter"><span style="width:${c.retention}%"></span></div>
+    </div>
+  `).join('');
+}
+
+function renderAnomalies(){
+  const root = document.getElementById('anomalyList');
+  root.innerHTML = dashboardData.anomalies.map(a => `
+    <div class="alert-row ${a.type}"><i class="fas fa-circle"></i><span>${a.text}</span></div>
+  `).join('');
+}
+
+function renderLiveOrders(){
+  const orders = dashboardData.liveOrders || [];
+  const statuses = {
+    'Placed': '#9ac2ff',
+    'Preparing': '#d8917c',
+    'Completed': '#8dd59a'
+  };
+  document.getElementById('liveOrdersBody').innerHTML = orders.map(o => {
+    const color = statuses[o.status] || '#b0a898';
+    return `<tr>
+      <td><span style="font-family:monospace;font-size:0.75rem;color:var(--gold)">${o.id}</span></td>
+      <td>${o.guest}</td>
+      <td><span style="font-size:0.78rem;color:var(--text-dim)">${o.dishes}</span></td>
+      <td>${o.time}</td>
+      <td><span class="badge" style="border-color:${color}40;color:${color};background:${color}15">${o.status}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderActiveBookings(){
+  const bookings = dashboardData.activeBookings || [];
+  const statuses = {
+    'Seated': '#8dd59a',
+    'Confirmed': '#9ac2ff',
+    'Waitlist': '#d8917c'
+  };
+  document.getElementById('activeBookingsBody').innerHTML = bookings.map(b => {
+    const color = statuses[b.status] || '#b0a898';
+    return `<tr>
+      <td><span style="font-family:monospace;font-size:0.75rem;color:var(--gold)">${b.id}</span></td>
+      <td>${b.guest}</td>
+      <td>${b.time}</td>
+      <td><strong>${b.guests}</strong> ${b.guests === 1 ? 'guest' : 'guests'}</td>
+      <td><span class="badge" style="border-color:${color}40;color:${color};background:${color}15">${b.status}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderSeatAvailability(){
+  const slots = dashboardData.seatAvailability || [];
+  document.getElementById('seatAvailGrid').innerHTML = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;width:100%">${
+    slots.map(s => `
+      <div class="mini" style="border-left:3px solid var(--gold);padding:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <h4 style="font-size:0.85rem;font-weight:600;color:var(--text)">${s.slot}</h4>
+          <span style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--gold-light)">${Math.max(0, s.pct)}%</span>
+        </div>
+        <div class="meter"><span style="width:${s.pct}%"></span></div>
+        <div style="display:flex;justify-content:space-between;gap:12px;margin-top:10px;font-size:0.78rem">
+          <div style="flex:1"><span style="color:var(--text-dim);display:block;margin-bottom:3px">Occupied</span><strong style="color:#8dd59a">${s.occupied}/${s.total}</strong></div>
+          <div style="flex:1"><span style="color:var(--text-dim);display:block;margin-bottom:3px">Available</span><strong style="color:#9ac2ff">${s.available}/${s.total}</strong></div>
+        </div>
+      </div>
+    `).join('')}
+  </div>`;
+}
+
+function renderDetailedOrders(){
+  const orders = dashboardData.detailedOrders || [];
+  const statuses = {
+    'Placed': '#9ac2ff',
+    'Preparing': '#d8917c',
+    'Completed': '#8dd59a',
+    'Ready for Pickup': '#e8c97a'
+  };
+  const payments = {
+    'Paid': '#8dd59a',
+    'Prepaid': '#9ac2ff',
+    'Pending': '#d8917c'
+  };
+  document.getElementById('detailedOrdersBody').innerHTML = orders.map(o => {
+    const statusColor = statuses[o.status] || '#b0a898';
+    const payColor = payments[o.payment] || '#b0a898';
+    return `<tr>
+      <td><span style="font-family:monospace;color:var(--gold)">${o.id}</span></td>
+      <td>${o.guest}</td>
+      <td style="font-size:0.75rem;color:var(--text-dim)">${o.phone}</td>
+      <td><span style="font-size:0.75rem;color:var(--text-dim)">${o.dishes}</span></td>
+      <td><strong style="color:var(--gold-light)">${o.value}</strong></td>
+      <td>${o.time}</td>
+      <td><span class="badge" style="border-color:${statusColor}40;color:${statusColor};background:${statusColor}15">${o.status}</span></td>
+      <td><span class="badge" style="border-color:${payColor}40;color:${payColor};background:${payColor}15">${o.payment}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderDetailedBookings(){
+  const bookings = dashboardData.detailedBookings || [];
+  const statuses = {
+    'Seated': '#8dd59a',
+    'Confirmed': '#9ac2ff',
+    'Waitlist': '#d8917c'
+  };
+  document.getElementById('detailedBookingsBody').innerHTML = bookings.map(b => {
+    const color = statuses[b.status] || '#b0a898';
+    return `<tr>
+      <td><span style="font-family:monospace;color:var(--gold)">${b.id}</span></td>
+      <td>${b.guest}</td>
+      <td style="font-size:0.75rem;color:var(--text-dim)">${b.phone}</td>
+      <td style="font-size:0.78rem">${b.dateTime}</td>
+      <td><strong>${b.guests}</strong></td>
+      <td style="font-size:0.75rem;color:var(--text-dim)">${b.requests}</td>
+      <td><span class="badge" style="border-color:${color}40;color:${color};background:${color}15">${b.status}</span></td>
+      <td><strong style="color:var(--gold-light)">${b.amount}</strong></td>
+    </tr>`;
+  }).join('');
+}
+
+function refreshDemo(){
+  dashboardData.weekly = dashboardData.weekly.map(d => ({
+    ...d,
+    users: Math.max(40, d.users + Math.floor((Math.random()-0.5)*20)),
+    reservations: Math.max(12, d.reservations + Math.floor((Math.random()-0.5)*14))
+  }));
+  dashboardData.kpis.activeToday = Math.max(120, dashboardData.kpis.activeToday + Math.floor((Math.random()-0.5)*40));
+  dashboardData.kpis.reservationsToday = Math.max(30, dashboardData.kpis.reservationsToday + Math.floor((Math.random()-0.5)*20));
+  dashboardData.kpis.avgBooking = Math.max(900, dashboardData.kpis.avgBooking + Math.floor((Math.random()-0.5)*80));
+  dashboardData.kpis.conversion = Math.max(8, Math.min(45, +(dashboardData.kpis.conversion + (Math.random()-0.5)*2).toFixed(1)));
+  dashboardData.kpis.repeatRate = Math.max(20, Math.min(90, +(dashboardData.kpis.repeatRate + (Math.random()-0.5)*2).toFixed(1)));
+  dashboardData.kpis.cancellationRate = Math.max(1, Math.min(20, +(dashboardData.kpis.cancellationRate + (Math.random()-0.5)*1).toFixed(1)));
+  dashboardData.kpis.noShowRate = Math.max(0.5, Math.min(12, +(dashboardData.kpis.noShowRate + (Math.random()-0.5)*0.8).toFixed(1)));
+  dashboardData.slotUtilization = dashboardData.slotUtilization.map(s => ({
+    ...s,
+    pct: Math.max(20, Math.min(98, s.pct + Math.floor((Math.random()-0.5)*10)))
+  }));
+  dashboardData.channels = dashboardData.channels.map(c => ({
+    ...c,
+    pct: Math.max(6, Math.min(70, c.pct + Math.floor((Math.random()-0.5)*8)))
+  }));
+  dashboardData.revenueWeekly = dashboardData.revenueWeekly.map(r => ({
+    ...r,
+    value: Math.max(50000, r.value + Math.floor((Math.random()-0.5)*16000))
+  }));
+  dashboardData.hourlyDemand = dashboardData.hourlyDemand.map(h => ({
+    ...h,
+    value: Math.max(5, h.value + Math.floor((Math.random()-0.5)*12))
+  }));
+  dashboardData.cohorts = dashboardData.cohorts.map(c => ({
+    ...c,
+    retention: Math.max(15, Math.min(95, c.retention + Math.floor((Math.random()-0.5)*6)))
+  }));
+
+  dashboardData.seatAvailability = dashboardData.seatAvailability.map(s => ({
+    ...s,
+    pct: Math.max(15, Math.min(99, s.pct + Math.floor((Math.random()-0.5)*12))),
+    occupied: Math.max(2, s.occupied + Math.floor((Math.random()-0.5)*4))
+  })).map(s => ({...s, available: Math.max(0, s.total - s.occupied)}));
+
+  dashboardData.liveOrders = dashboardData.liveOrders.map((o, i) => ({
+    ...o,
+    time: `${2 + Math.floor(i*0.3)}:${String(Math.floor(Math.random()*60)).padStart(2,'0')} PM`
+  }));
+
+  dashboardData.activeBookings = dashboardData.activeBookings.map((b, i) => ({
+    ...b,
+    guests: Math.max(1, Math.min(8, b.guests + Math.floor((Math.random()-0.5)*2)))
+  }));
+
+  renderKPIs();
+  renderTrendChart();
+  renderRevenueChart();
+  renderFunnel();
+  renderUsers();
+  renderTopDishes();
+  renderLiveCart();
+  renderSlotUtilization();
+  renderChannelMix();
+  renderAlerts();
+  renderPaymentStack();
+  renderOpsChips();
+  renderHeatmap();
+  renderCohorts();
+  renderAnomalies();
+  renderLiveOrders();
+  renderActiveBookings();
+  renderSeatAvailability();
+  renderDetailedOrders();
+  renderDetailedBookings();
+}
+
+function renderAll(){
+  renderKPIs();
+  renderTrendChart();
+  renderRevenueChart();
+  renderFunnel();
+  renderUsers();
+  renderTopDishes();
+  renderLiveCart();
+  renderSlotUtilization();
+  renderChannelMix();
+  renderAlerts();
+  renderPaymentStack();
+  renderOpsChips();
+  renderHeatmap();
+  renderCohorts();
+  renderAnomalies();
+  renderLiveOrders();
+  renderActiveBookings();
+  renderSeatAvailability();
+  renderDetailedOrders();
+  renderDetailedBookings();
+}
+
+window.addEventListener('resize', () => { renderTrendChart(); renderRevenueChart(); });
+window.addEventListener('storage', renderLiveCart);
+document.getElementById('adminPassword').addEventListener('keydown', (e) => {
+  if(e.key === 'Enter') attemptLogin();
+});
+
+if(sessionStorage.getItem(ADMIN_SESSION_KEY) === '1'){
+  unlockPanel();
+  renderAll();
+}
+</script>
+</body>
+</html>

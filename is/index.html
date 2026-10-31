@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>For My Dearest Ishu ❤️ | Our Eternal Story</title>
+
+  <!-- Meta & SEO -->
+  <meta name="description"
+    content="A digital love letter and memory journey for Isha from Kiddo. Our story, milestones, and eternal love.">
+  <meta name="theme-color" content="#0B080C">
+
+  <!-- Google Fonts: Cormorant Garamond, Playfair Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Ambient Particle Canvas for Floating Glows & Hearts -->
+  <canvas id="ambient-canvas"></canvas>
+
+  <!-- Floating Romantic Music Player -->
+  <aside class="music-player-widget" id="musicPlayer" aria-label="Romantic Music Player">
+    <div class="music-disc-wrapper" id="musicDiscBtn" title="Click to play / pause romantic melody">
+      <div class="music-disc">
+        <span class="disc-heart">❤️</span>
+        <div class="sound-waves" id="soundWaves">
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="music-label">
+        <span class="music-title">Titli • Chennai Express 🎵</span>
+        <span class="music-status" id="musicStatus">Tap to Play 🎶</span>
+      </div>
+    </div>
+    <audio id="bgAudio" loop preload="auto">
+      <source src="audio/Titli%20Chennai%20Express%20320%20Kbps.mp3" type="audio/mpeg">
+      <source src="audio/Titli Chennai Express 320 Kbps.mp3" type="audio/mpeg">
+    </audio>
+  </aside>
+
+  <!-- ==================== 1. HERO / CINEMATIC OPENING ==================== -->
+  <header class="hero-section" id="hero">
+    <div class="hero-backdrop">
+      <div class="hero-image-container">
+        <!-- Main Portrait of Isha -->
+        <img src="images/IMG_1026.jpg" alt="My Beautiful Ishu" class="hero-portrait">
+        <div class="hero-overlay"></div>
+      </div>
+    </div>
+
+    <div class="hero-content container">
+      <!-- Glowing Portrait Avatar -->
+      <div class="hero-avatar-wrapper">
+        <div class="hero-avatar-ring">
+          <img src="images/IMG_1026.jpg" alt="Ishu Portrait" class="hero-avatar-img">
+        </div>
+        <div class="hero-avatar-badge"><span>❤️ Forever Mine</span></div>
+      </div>
+
+      <p class="hero-subtitle glow-fade">To the girl who made my world beautiful...</p>
+      <h1 class="hero-title">
+        <span class="name-prefix">My Dearest</span>
+        <span class="golden-name shimmer-text">Isha</span>
+        <span class="nickname-tag">(Ishu ❤️)</span>
+      </h1>
+      <p class="hero-tagline">Every heartbeat tells a story, and mine begins and ends with you.</p>
+
+      <div class="hero-actions">
+        <a href="#story" class="btn-romantic glow-btn" id="beginStoryBtn">
+          <span>Begin Our Story</span>
+          <svg class="heart-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="scroll-indicator">
+        <span>Scroll to explore</span>
+        <div class="mouse-wheel"></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==================== 2. OUR STORY (LOVE LETTER INTRO) ==================== -->
+    <section class="section story-section" id="story">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-badge">Chapter One</span>
+          <h2 class="section-title">How My World Changed Forever</h2>
+          <div class="title-divider"><span class="divider-gem">✨</span></div>
+        </div>
+
+        <div class="story-card glass-panel">
+          <div class="story-letter-header">
+            <span class="letter-stamp">❤️ With All My Heart</span>
+            <span class="letter-date">Since 4th October</span>
+          </div>
+
+          <div class="story-prose">
+            <p class="story-paragraph reveal-on-scroll">
+              It all started in our <strong>College Club</strong>—a place where ordinary days turn into memories. But
+              when I met you, it was as if the noise of the entire world quieted down just so I could notice you.
+            </p>
+            <p class="story-paragraph reveal-on-scroll">
+              I still remember our very first message on <strong>20th July</strong>. What seemed like a simple
+              conversation soon turned into late-night calls stretching all the way until <strong>1:16 AM</strong>,
+              where seconds felt like seconds, but hours vanished in a blink.
+            </p>
+            <p class="story-paragraph highlight-quote reveal-on-scroll">
+              <em>"Somewhere along the way, you stopped being just a part of my life and became my absolute favorite
+                part of it."</em>
+            </p>
+            <p class="story-paragraph reveal-on-scroll">
+              From our first date to the warmth of our first hug on <strong>19th September</strong>, and the
+              unforgettable moment on <strong>4th October</strong> when our journey officially began—every single step
+              with you has been my greatest blessing.
+            </p>
+          </div>
+
+          <div class="story-signature">
+            <span>Always & Forever,</span>
+            <span class="script-sig">Kido</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 3. LIVE RELATIONSHIP COUNTER ==================== -->
+    <section class="section counter-section" id="counter">
+      <div class="container">
+        <div class="counter-box glass-panel text-center">
+          <span class="counter-badge">Timeless Love</span>
+          <h2 class="counter-heading">In Love With You For</h2>
+          <p class="counter-sub">Counting every magical second since October 4, 2024</p>
+
+          <div class="timer-grid" id="timerGrid">
+            <div class="timer-unit">
+              <div class="timer-number" id="daysCount">0</div>
+              <div class="timer-label">Days</div>
+            </div>
+            <div class="timer-separator">:</div>
+            <div class="timer-unit">
+              <div class="timer-number" id="hoursCount">00</div>
+              <div class="timer-label">Hours</div>
+            </div>
+            <div class="timer-separator">:</div>
+            <div class="timer-unit">
+              <div class="timer-number" id="minutesCount">00</div>
+              <div class="timer-label">Minutes</div>
+            </div>
+            <div class="timer-separator">:</div>
+            <div class="timer-unit">
+              <div class="timer-number highlight-sec" id="secondsCount">00</div>
+              <div class="timer-label">Seconds</div>
+            </div>
+          </div>
+
+          <div class="anniversary-milestone">
+            <div class="milestone-pill">
+              <span>🌹 2-Year Anniversary Milestone: <strong>4 October 2026</strong></span>
+            </div>
+            <p class="milestone-text" id="milestoneCountdown">Counting down to our special 2-year anniversary
+              celebration! ✨</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 4. INTERACTIVE TIMELINE ==================== -->
+    <section class="section timeline-section" id="timeline">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-badge">Milestones & Memories</span>
+          <h2 class="section-title">Our Romantic Journey</h2>
+          <p class="section-description">Every milestone that brought us closer together</p>
+          <div class="title-divider"><span class="divider-gem">🌹</span></div>
+        </div>
+
+        <div class="timeline-container">
+          <div class="timeline-line"></div>
+
+          <!-- Item 1: College Club -->
+          <div class="timeline-item reveal-on-scroll">
+            <div class="timeline-dot"><span>💬</span></div>
+            <div class="timeline-content glass-panel">
+              <div class="timeline-header">
+                <span class="timeline-date">20 July</span>
+                <span class="timeline-tag">First Message</span>
+              </div>
+              <h3 class="timeline-title">The First Spark</h3>
+              <p class="timeline-desc">
+                From meeting in the College Club to sending our very first message. That single text opened the door to
+                the most beautiful chapter of my life.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 2: Late Night Call -->
+          <div class="timeline-item reveal-on-scroll">
+            <div class="timeline-dot"><span>🌙</span></div>
+            <div class="timeline-content glass-panel">
+              <div class="timeline-header">
+                <span class="timeline-date">2 August • 1:16 AM</span>
+                <span class="timeline-tag">Late Night Talks</span>
+              </div>
+              <h3 class="timeline-title">Conversations Under The Stars</h3>
+              <p class="timeline-desc">
+                Talking on the phone until 1:16 AM, sharing laughter and stories. That night I realized how comforting
+                and sweet your voice is.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 3: First Date -->
+          <div class="timeline-item reveal-on-scroll">
+            <div class="timeline-dot"><span>☕</span></div>
+            <div class="timeline-content glass-panel">
+              <div class="timeline-header">
+                <span class="timeline-date">6 September • 1:24 PM</span>
+                <span class="timeline-tag">First Date</span>
+              </div>
+              <h3 class="timeline-title">Our First Date</h3>
+              <p class="timeline-desc">
+                At 1:24 PM, sitting across from you, seeing your genuine smile up close. My heart knew right then that
+                this was someone truly special.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 4: First Hug -->
+          <div class="timeline-item reveal-on-scroll">
+            <div class="timeline-dot"><span>🤗</span></div>
+            <div class="timeline-content glass-panel">
+              <div class="timeline-header">
+                <span class="timeline-date">19 September</span>
+                <span class="timeline-tag">First Hug</span>
+              </div>
+              <h3 class="timeline-title">The Warmth of Your Hug</h3>
+              <p class="timeline-desc">
+                Our first hug—a feeling so safe, warm, and complete that all the worries of the world just melted away.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 5: Relationship Anniversary -->
+          <div class="timeline-item milestone-special reveal-on-scroll">
+            <div class="timeline-dot gold-glow"><span>💍</span></div>
+            <div class="timeline-content glass-panel gold-border">
+              <div class="timeline-header">
+                <span class="timeline-date highlight-date">4 October 2024</span>
+                <span class="timeline-tag golden-tag">Official Anniversary</span>
+              </div>
+              <h3 class="timeline-title golden-text">The Day You Became Mine ❤️</h3>
+              <p class="timeline-desc">
+                The official start of us. The best decision, the happiest day, and the foundation of our eternal
+                journey.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 6: Winter Picnic -->
+          <div class="timeline-item reveal-on-scroll">
+            <div class="timeline-dot"><span>🧺</span></div>
+            <div class="timeline-content glass-panel">
+              <div class="timeline-header">
+                <span class="timeline-date">20 December</span>
+                <span class="timeline-tag">Winter Picnic</span>
+              </div>
+              <h3 class="timeline-title">Sunshine & Laughter</h3>
+              <p class="timeline-desc">
+                Our winter picnic filled with sweet laughter, delicious food, and peaceful moments spent together in the
+                sun.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 7: Caring When Ill -->
+          <div class="timeline-item reveal-on-scroll">
+            <div class="timeline-dot"><span>🩹</span></div>
+            <div class="timeline-content glass-panel">
+              <div class="timeline-header">
+                <span class="timeline-date">12 February</span>
+                <span class="timeline-tag">Unconditional Care</span>
+              </div>
+              <h3 class="timeline-title">When You Took Care of Me</h3>
+              <p class="timeline-desc">
+                When I fell ill, you ordered medicines and wholesome diet food for me without hesitating. That selfless
+                care showed me how pure your heart is.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 8: Banaras Trip -->
+          <div class="timeline-item reveal-on-scroll">
+            <div class="timeline-dot"><span>🪔</span></div>
+            <div class="timeline-content glass-panel">
+              <div class="timeline-header">
+                <span class="timeline-date">March 2025</span>
+                <span class="timeline-tag">First Trip Together</span>
+              </div>
+              <h3 class="timeline-title">The Magic of Banaras</h3>
+              <p class="timeline-desc">
+                Our very first trip together to Banaras. Sitting by the tranquil ghats, listening to the evening aarti,
+                and feeling your hand in mine.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 9: Vrindavan Janmashtami -->
+          <div class="timeline-item reveal-on-scroll">
+            <div class="timeline-dot"><span>🦚</span></div>
+            <div class="timeline-content glass-panel">
+              <div class="timeline-header">
+                <span class="timeline-date">Janmashtami 2025</span>
+                <span class="timeline-tag">Divine Blessings</span>
+              </div>
+              <h3 class="timeline-title">Vrindavan Under Divine Grace</h3>
+              <p class="timeline-desc">
+                Celebrating Janmashtami in the holy lanes of Vrindavan. Seeking divine blessings for our love and
+                praying for a lifetime of togetherness.
+              </p>
+            </div>
+          </div>
+
+          <!-- Item 10: Vrindavan Again -->
+          <div class="timeline-item reveal-on-scroll">
+            <div class="timeline-dot"><span>🌸</span></div>
+            <div class="timeline-content glass-panel">
+              <div class="timeline-header">
+                <span class="timeline-date">June 2026</span>
+                <span class="timeline-tag">Sacred Return</span>
+              </div>
+              <h3 class="timeline-title">Vrindavan Once Again</h3>
+              <p class="timeline-desc">
+                Returning to Vrindavan with you, reaffirming our bond and creating even more spiritual, unforgettable
+                memories.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 5. PHOTO MEMORIES (GALLERY) ==================== -->
+    <section class="section gallery-section" id="gallery">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-badge">Moments In Time</span>
+          <h2 class="section-title">My Favorite Sight: You ❤️</h2>
+          <p class="section-description">A collection of your most radiant, captivating smiles</p>
+          <div class="title-divider"><span class="divider-gem">📸</span></div>
+        </div>
+
+        <div class="gallery-grid">
+          <!-- Photo 1: Featured Portrait -->
+          <div class="polaroid-card reveal-on-scroll" data-index="0">
+            <div class="polaroid-img-box">
+              <img src="images/IMG_1026.jpg" alt="My Beautiful Ishu" class="gallery-img" loading="lazy">
+              <div class="img-overlay-glow"></div>
+            </div>
+            <div class="polaroid-caption">
+              <span>The captivating gaze that stole my heart forever ✨</span>
+            </div>
+          </div>
+
+          <!-- Photo 2 -->
+          <div class="polaroid-card reveal-on-scroll" data-index="1">
+            <div class="polaroid-img-box">
+              <img src="images/IMG-20260416-WA0752.jpg" alt="Radiant Smile" class="gallery-img" loading="lazy">
+              <div class="img-overlay-glow"></div>
+            </div>
+            <div class="polaroid-caption">
+              <span>The smile that turns ordinary moments into pure magic ❤️</span>
+            </div>
+          </div>
+
+          <!-- Photo 3 -->
+          <div class="polaroid-card reveal-on-scroll" data-index="2">
+            <div class="polaroid-img-box">
+              <img src="images/IMG_1004.jpg" alt="Grace and Elegance" class="gallery-img" loading="lazy">
+              <div class="img-overlay-glow"></div>
+            </div>
+            <div class="polaroid-caption">
+              <span>Pure grace, sweetness & angel-like warmth 🌸</span>
+            </div>
+          </div>
+
+          <!-- Photo 4 -->
+          <div class="polaroid-card reveal-on-scroll" data-index="3">
+            <div class="polaroid-img-box">
+              <img src="images/IMG_1181.jpg" alt="Eternal Love" class="gallery-img" loading="lazy">
+              <div class="img-overlay-glow"></div>
+            </div>
+            <div class="polaroid-caption">
+              <span>Every glance at you feels like a dream come true 💫</span>
+            </div>
+          </div>
+
+          <!-- Photo 5 -->
+          <div class="polaroid-card reveal-on-scroll" data-index="4">
+            <div class="polaroid-img-box">
+              <img src="images/IMG-20260810-WA0003.jpg" alt="Joyful Memories" class="gallery-img" loading="lazy">
+              <div class="img-overlay-glow"></div>
+            </div>
+            <div class="polaroid-caption">
+              <span>Unstoppable laughter, pure happiness & us 🥰</span>
+            </div>
+          </div>
+
+          <!-- Photo 6 -->
+          <div class="polaroid-card reveal-on-scroll" data-index="5">
+            <div class="polaroid-img-box">
+              <img src="images/IMG-20260810-WA0004.jpg" alt="Special Moments" class="gallery-img" loading="lazy">
+              <div class="img-overlay-glow"></div>
+            </div>
+            <div class="polaroid-caption">
+              <span>My favorite person in the entire universe 🌹</span>
+            </div>
+          </div>
+
+          <!-- Photo 7 -->
+          <div class="polaroid-card reveal-on-scroll" data-index="6">
+            <div class="polaroid-img-box">
+              <img src="images/IMG-20260810-WA0006.jpg" alt="Endless Care" class="gallery-img" loading="lazy">
+              <div class="img-overlay-glow"></div>
+            </div>
+            <div class="polaroid-caption">
+              <span>A bond woven of deep love and tender care 💖</span>
+            </div>
+          </div>
+
+          <!-- Photo 8 -->
+          <div class="polaroid-card reveal-on-scroll" data-index="7">
+            <div class="polaroid-img-box">
+              <img src="images/IMG-20260810-WA0015.jpg" alt="Precious Gaze" class="gallery-img" loading="lazy">
+              <div class="img-overlay-glow"></div>
+            </div>
+            <div class="polaroid-caption">
+              <span>In your eyes, I found my safest home 🕊️</span>
+            </div>
+          </div>
+
+          <!-- Photo 9 -->
+          <div class="polaroid-card reveal-on-scroll" data-index="8">
+            <div class="polaroid-img-box">
+              <img src="images/IMG-20260810-WA0019.jpg" alt="Cherished Times" class="gallery-img" loading="lazy">
+              <div class="img-overlay-glow"></div>
+            </div>
+            <div class="polaroid-caption">
+              <span>Every single second with you is a cherished gift 👑</span>
+            </div>
+          </div>
+
+          <!-- Photo 10 -->
+          <div class="polaroid-card reveal-on-scroll" data-index="9">
+            <div class="polaroid-img-box">
+              <img src="images/Snapchat-388990187.jpg" alt="Playful Moments" class="gallery-img" loading="lazy">
+              <div class="img-overlay-glow"></div>
+            </div>
+            <div class="polaroid-caption">
+              <span>Playful smiles, glowing warmth & eternal love 🦋</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox Modal for Fullscreen Photos with Slideshow Navigation -->
+    <div id="imageLightbox" class="lightbox-modal" aria-hidden="true">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close Lightbox">&times;</button>
+      <button class="lightbox-nav-btn lightbox-prev" id="lightboxPrev" aria-label="Previous Photo">&#10094;</button>
+      <button class="lightbox-nav-btn lightbox-next" id="lightboxNext" aria-label="Next Photo">&#10095;</button>
+
+      <div class="lightbox-content">
+        <div class="lightbox-img-wrapper">
+          <img id="lightboxImg" src="" alt="Enlarged photo">
+        </div>
+        <div class="lightbox-meta">
+          <span id="lightboxCounter" class="lightbox-counter">1 / 10</span>
+          <p id="lightboxCaption" class="lightbox-caption-text"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 6. REASONS WHY I LOVE HER ==================== -->
+    <section class="section reasons-section" id="reasons">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-badge">From My Heart</span>
+          <h2 class="section-title">5 Reasons Why I Love You</h2>
+          <p class="section-description">Tap each card to reveal the deepest truths of my heart</p>
+          <div class="title-divider"><span class="divider-gem">💖</span></div>
+        </div>
+
+        <div class="reasons-grid">
+          <!-- Reason 1 -->
+          <div class="reason-card glass-panel reveal-on-scroll" tabindex="0">
+            <div class="reason-number">01</div>
+            <div class="reason-icon">✨</div>
+            <h3 class="reason-heading">Your Radiant Smile</h3>
+            <p class="reason-text">
+              I love you because your smile can make even my worst days feel a little brighter and full of hope.
+            </p>
+          </div>
+
+          <!-- Reason 2 -->
+          <div class="reason-card glass-panel reveal-on-scroll" tabindex="0">
+            <div class="reason-number">02</div>
+            <div class="reason-icon">🛡️</div>
+            <h3 class="reason-heading">Safe & Understood</h3>
+            <p class="reason-text">
+              I love the way you make me feel understood, safe, and genuinely happy just by being there with me.
+            </p>
+          </div>
+
+          <!-- Reason 3 -->
+          <div class="reason-card glass-panel reveal-on-scroll" tabindex="0">
+            <div class="reason-number">03</div>
+            <div class="reason-icon">🌸</div>
+            <h3 class="reason-heading">The Little Things</h3>
+            <p class="reason-text">
+              I love you for all the little things you do that you probably don't even realize mean so much to me.
+            </p>
+          </div>
+
+          <!-- Reason 4 -->
+          <div class="reason-card glass-panel reveal-on-scroll" tabindex="0">
+            <div class="reason-number">04</div>
+            <div class="reason-icon">🕊️</div>
+            <h3 class="reason-heading">Who I Am With You</h3>
+            <p class="reason-text">
+              I love the person I become when I'm with you — happier, calmer, and more complete in every way.
+            </p>
+          </div>
+
+          <!-- Reason 5 (Highlighted) -->
+          <div class="reason-card glass-panel reason-featured reveal-on-scroll" tabindex="0">
+            <div class="reason-number">05</div>
+            <div class="reason-icon">👑</div>
+            <h3 class="reason-heading">My Favorite Part of Life</h3>
+            <p class="reason-text">
+              Most of all, I love you because somewhere along the way, you stopped being just a part of my life and
+              became my absolute favorite part of it.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 7. INTERACTIVE LOVE LETTERS ==================== -->
+    <section class="section letters-section" id="letters">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-badge">Secret Envelopes</span>
+          <h2 class="section-title">Love Letters For Ishu 💌</h2>
+          <p class="section-description">Click any envelope to break the seal and read my words</p>
+          <div class="title-divider"><span class="divider-gem">✉️</span></div>
+        </div>
+
+        <div class="envelopes-grid">
+          <!-- Letter 1 -->
+          <div class="envelope-card glass-panel reveal-on-scroll" data-letter-id="letter1">
+            <div class="envelope-preview">
+              <div class="wax-seal">💌</div>
+              <h3 class="envelope-title">When You Took Care of Me</h3>
+              <p class="envelope-subtitle">A memory from February 12th</p>
+              <button class="btn-open-letter">Open Letter <span>→</span></button>
+            </div>
+          </div>
+
+          <!-- Letter 2 -->
+          <div class="envelope-card glass-panel reveal-on-scroll" data-letter-id="letter2">
+            <div class="envelope-preview">
+              <div class="wax-seal">🌹</div>
+              <h3 class="envelope-title">Banaras & Vrindavan</h3>
+              <p class="envelope-subtitle">Our sacred journeys together</p>
+              <button class="btn-open-letter">Open Letter <span>→</span></button>
+            </div>
+          </div>
+
+          <!-- Letter 3 -->
+          <div class="envelope-card glass-panel reveal-on-scroll" data-letter-id="letter3">
+            <div class="envelope-preview">
+              <div class="wax-seal">💫</div>
+              <h3 class="envelope-title">Kido's Eternal Promise</h3>
+              <p class="envelope-subtitle">My vow to you for all lifetimes</p>
+              <button class="btn-open-letter">Open Letter <span>→</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Letter Popup Modal -->
+    <div id="letterModal" class="letter-modal" aria-hidden="true">
+      <div class="letter-modal-backdrop" id="letterModalBackdrop"></div>
+      <div class="letter-paper-wrapper">
+        <button class="letter-modal-close" id="letterCloseBtn" aria-label="Close Letter">&times;</button>
+        <div class="letter-paper" id="letterContent">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 8. PERSONAL PROMISE & CLOSING ==================== -->
+    <section class="section promise-section" id="promise">
+      <div class="container">
+        <div class="promise-box glass-panel text-center reveal-on-scroll">
+          <span class="promise-badge">My Sacred Vow</span>
+          <h2 class="promise-title">Kido's Promise To Isha</h2>
+          <div class="title-divider"><span class="divider-gem">💍</span></div>
+
+          <div class="promise-text">
+            <p class="promise-line">
+              "I promise to stand by your side through the beautiful days and the difficult ones."
+            </p>
+            <p class="promise-line">
+              "I promise to listen when you need to be heard, to hold your hand when things get hard, and to celebrate
+              every little happiness with you."
+            </p>
+            <p class="promise-line">
+              "I can't promise that life will always be perfect, but I can promise that I'll always try to make you feel
+              loved, valued, and never alone."
+            </p>
+            <p class="promise-line">
+              "No matter how much time passes, I want to keep making memories with you, keep choosing you, and keep
+              falling for you in a thousand different ways."
+            </p>
+          </div>
+
+          <div class="final-climax-quote">
+            <p class="climax-prose">
+              "If I ever get the chance to choose you again, in another life, another world, or another story...
+            </p>
+            <h3 class="climax-bold shimmer-text">
+              I would still choose you. Every single time. ❤️
+            </h3>
+          </div>
+
+          <div class="forever-signoff">
+            <p>Forever Yours,</p>
+            <h4 class="signature-name">Kido</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 9. SPECIAL QUESTION FOR ISHU ==================== -->
+    <section class="section question-section" id="forever-question">
+      <div class="container text-center">
+        <div class="question-card glass-panel reveal-on-scroll">
+          <div class="question-gem-icon">💍</div>
+          <span class="section-badge">From Kido's Heart</span>
+          <h2 class="question-main-heading">One question for my Ishu ❤️</h2>
+          <p class="question-quote">"Will you hold my hand forever and walk with me through all of life's journeys?"</p>
+
+          <div class="question-buttons-container" id="questionBtnGroup">
+            <button class="btn-question-yes" id="btnQuestionYes">
+              <span>Yes, Forever & Always! 💍❤️</span>
+            </button>
+            <button class="btn-question-no" id="btnQuestionNo">
+              <span>No 🙈</span>
+            </button>
+          </div>
+
+          <!-- Grand Romantic Celebration on YES -->
+          <div class="question-success-box" id="questionSuccessBox" style="display: none;">
+            <div class="celebration-emojis">🌹💍✨💖🥰</div>
+            <h3 class="celebration-title shimmer-text">You Just Made Kido The Happiest Person Alive! ❤️</h3>
+            <p class="celebration-message">
+              "With you, every second is a blessing and every dream is complete. I promise to never let go of your hand,
+              Ishu. Happy 2-Year Anniversary in advance! 🌹"
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Floating Interactive "Heart Shower" Trigger -->
+    <div class="interactive-heart-trigger" id="heartShowerBtn" title="Send Love to Ishu">
+      <span>💖 Shower Love</span>
+    </div>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="romantic-footer">
+    <div class="container text-center">
+      <p class="footer-heart">Crafted with infinite love for <strong>Isha (Ishu)</strong></p>
+      <p class="footer-sub">Celebrating our 2-Year Anniversary on October 4th, 2026 and forever after.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+
+</html>

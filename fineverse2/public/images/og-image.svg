@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" fill="none">
+  <defs>
+    <radialGradient id="ogBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#140f2b" />
+      <stop offset="60%" stop-color="#070911" />
+      <stop offset="100%" stop-color="#030407" />
+    </radialGradient>
+    <linearGradient id="neonText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#CCFF00" />
+      <stop offset="50%" stop-color="#00F0FF" />
+      <stop offset="100%" stop-color="#8B5CF6" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#ogBg)" />
+
+  <!-- Stars & Halftone Grid -->
+  <g opacity="0.3">
+    <circle cx="150" cy="120" r="3" fill="#CCFF00" />
+    <circle cx="950" cy="180" r="4" fill="#00F0FF" />
+    <circle cx="1100" cy="450" r="2.5" fill="#FFFFFF" />
+    <circle cx="200" cy="500" r="3" fill="#8B5CF6" />
+  </g>
+
+  <!-- Planet Icon Emblem -->
+  <g transform="translate(600, 240)">
+    <circle cx="0" cy="0" r="110" fill="#090E1A" stroke="#CCFF00" stroke-width="3" />
+    <ellipse cx="0" cy="0" rx="220" ry="65" transform="rotate(-24)" stroke="#00F0FF" stroke-width="5" fill="none" />
+    <circle cx="-50" cy="-40" r="18" fill="#CCFF00" />
+  </g>
+
+  <!-- Title & Branding -->
+  <text x="600" y="440" text-anchor="middle" font-family="'Space Grotesk', 'Impact', sans-serif" font-weight="900" font-size="64" letter-spacing="12" fill="#FFFFFF">
+    FINEVERSE
+  </text>
+  
+  <text x="600" y="490" text-anchor="middle" font-family="monospace" font-weight="700" font-size="20" letter-spacing="8" fill="#CCFF00">
+    WEAR THE UNIVERSE // DROP 04 LIVE
+  </text>
+
+  <text x="600" y="540" text-anchor="middle" font-family="sans-serif" font-weight="500" font-size="16" letter-spacing="4" fill="#A4B4DE">
+    240 GSM HEAVYWEIGHT TEES • 420 GSM FRENCH TERRY HOODIES • CRAFTED IN INDIA
+  </text>
+</svg>
